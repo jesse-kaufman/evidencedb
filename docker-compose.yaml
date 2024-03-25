@@ -5,12 +5,21 @@ services:
   mongo:
     image: mongo
     hostname: mongo
+    read_only: true
     volumes:
-      - ./data:/data
+      - ./data/db:/data/db
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
+      - /run:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
+      - /var/cache/nginx:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
     restart: always
     ports:
       - 27017:27017
+    user: ${PUID}:${PGID}
     environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INIT_ROOT_PASS}
 
@@ -19,7 +28,12 @@ services:
     restart: always
     ports:
       - 8081:8081
+    read_only: true
+    user: ${PUID}:${PGID}
     environment:
+      TZ: ${TZ}
+      PUID: ${PUID}
+      PGID: ${PGID}
       ME_CONFIG_MONGODB_ENABLE_ADMIN: true
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INIT_ROOT_PASS}
