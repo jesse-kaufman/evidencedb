@@ -13,9 +13,9 @@ services:
       - /run:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
       - /var/cache/nginx:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
     restart: always
+    user: ${PUID}:${PGID}
     ports:
       - 27017:27017
-    user: ${PUID}:${PGID}
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
