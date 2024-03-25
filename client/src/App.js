@@ -1,4 +1,3 @@
-import './styles/App.css';
 import ContactList from './components/ContactList'
 import { useState, useEffect } from "react";
 import Axios from "axios";
