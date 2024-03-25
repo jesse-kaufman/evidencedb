@@ -6,11 +6,16 @@ services:
     image: mongo
     hostname: mongo
     volumes:
-      - ./data:/data
+      - ./data/db:/data/db
+      - ./data/configdb:/data/configdb
     restart: always
+    user: ${PUID}:${PGID}
     ports:
       - 27017:27017
     environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INIT_ROOT_PASS}
 
