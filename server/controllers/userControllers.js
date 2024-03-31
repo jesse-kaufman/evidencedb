@@ -2,14 +2,21 @@
 
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
-const { generateToken } = require("../middleware/auth");
+//const { generateToken } = require("../middleware/auth");
 
 exports.registerUser = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const hash = await bcrypt.hash(password, 10);
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ error: "Username already exists." });
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
     await User.create({ username, password: hash });
+
     res.status(201).send({ message: "User registered successfully" });
   } catch (error) {
     console.log(error);

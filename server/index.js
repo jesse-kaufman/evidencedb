@@ -39,9 +39,11 @@ app.use("/public", express.static("public"));
 
 // User routes
 const userRoutes = require("./routes/userRoutes");
-app.use("/", userRoutes);
+app.use("/api/routes", userRoutes);
+
+// Contact routes
 const contactRoutes = require("./routes/contactRoutes");
-app.use("/", contactRoutes);
+app.use("/api/contacts", contactRoutes);
 
 // Start the server
 const server = app.listen(8080, () => {
