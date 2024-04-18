@@ -1,11 +1,7 @@
 @use "sass:color";
-$video-color: rgba(233, 30, 99);
-$voicemail-color: rgba(131, 83, 209);
-$email-color: rgba(2, 136, 209);
-$sent-color: rgb(139, 195, 74);
-$received-color: rgb(128, 128, 128);
+@use "colors" as *;
 
-.contactList {
+.evidenceList {
   margin: 120px 8px 8px 8px;
 }
 
