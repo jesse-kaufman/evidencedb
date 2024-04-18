@@ -1,0 +1,43 @@
+@use "colors" as *;
+
+#search {
+  background: rgb(108, 108, 108);
+  padding: 0.5em 1em 1em 1em;
+  padding-left: 250px;
+  font-size: 0.85em;
+  line-height: 1.3em;
+  box-sizing: border-box;
+  width: 100%;
+  position: fixed;
+  height: 115px;
+  z-index: 999999;
+  top: 0;
+  @media (max-width: 794px) {
+    padding-left: 1em;
+  }
+  form {
+    margin: 0;
+    display: flex;
+  }
+  div.field {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    margin-right: 1.5em;
+    display: inline-block;
+  }
+  select,
+  input[type="submit"] {
+    background: #333;
+    color: white;
+    border: 1px solid white;
+    border-radius: 1.2em;
+    padding: 0.25em 1em;
+  }
+  input[type="submit"] {
+    background: $email-color;
+  }
+  input[type="text"],
+  select {
+    font-size: 1em;
+  }
+}

@@ -4,7 +4,7 @@
 require("dotenv").config();
 
 // MongoDB connection
-const connectDB = require("./utils/db");
+const { connectDB } = require("./utils/db");
 connectDB();
 
 // Setup Express
@@ -31,19 +31,16 @@ app.use(express.urlencoded({ extended: true }));
 const cors = require("cors");
 app.use(cors());
 
-// Models
-const Contacts = require("./models/contactModel");
-
 // Static routes
 app.use("/public", express.static("public"));
 
 // User routes
 const userRoutes = require("./routes/userRoutes");
-app.use("/api/routes", userRoutes);
+app.use("/api/users", userRoutes);
 
-// Contact routes
-const contactRoutes = require("./routes/contactRoutes");
-app.use("/api/contacts", contactRoutes);
+// EvidenceItem routes
+const evidenceRoutes = require("./routes/evidenceRoutes");
+app.use("/api/evidence", evidenceRoutes);
 
 // Start the server
 const server = app.listen(8080, () => {

@@ -11,4 +11,26 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+const setupQuery = (req) => {
+  var query = {};
+
+  if (req.query.query) {
+    query.$text = { $search: `\"${req.query.query}\"` };
+  }
+  if (req.query.date) {
+    query.date_sent = req.query.date;
+  }
+  if (req.query.victim) {
+    query.victim = req.query.victim;
+  }
+  if (req.query.number) {
+    query.from = req.query.number;
+  }
+  if (req.query.include) {
+    query.type = { $in: req.query.include };
+  }
+
+  return query;
+};
+
+module.exports = { connectDB, setupQuery };

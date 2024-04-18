@@ -13,7 +13,7 @@ const AttachmentSchema = new mongoose.Schema({
   },
 });
 
-const ContactSchema = new mongoose.Schema({
+const EvidenceItemSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
@@ -42,5 +42,6 @@ const ContactSchema = new mongoose.Schema({
   attachments: [AttachmentSchema],
 });
 
-const ContactModel = new mongoose.model("Contact", ContactSchema);
-module.exports = ContactModel;
+const EvidenceItemModel = new mongoose.model("Item", EvidenceItemSchema);
+
+module.exports = EvidenceItemModel;
