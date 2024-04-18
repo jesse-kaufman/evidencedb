@@ -2,37 +2,62 @@ version: "3"
 name: abusedb
 
 services:
-  mongo:
+  abusedb-mongo:
     image: mongo
+    container_name: abusedb-mongo
     hostname: mongo
     volumes:
       - ./data/db:/data/db
       - ./data/configdb:/data/configdb
     restart: always
     user: ${PUID}:${PGID}
-    ports:
-      - 27017:27017
+    expose:
+      - 27017
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
       TZ: ${TZ}
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INIT_ROOT_PASS}
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    deploy:
+      resources:
+        limits:
+          cpus: 2
+          pids: 500
+          memory: 400M
+    security_opt:
+      - no-new-privileges:true
 
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ENABLE_ADMIN: true
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INIT_ROOT_PASS}
-      ME_CONFIG_MONGODB_URL: mongodb://root:${MONGO_INIT_ROOT_PASS}@mongo:27017/
-      ME_CONFIG_BASICAUTH_USERNAME: "glandix"
-      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASS}
-    depends_on:
-      - mongo
+  # mongo-express:
+  #   image: mongo-express
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_ENABLE_ADMIN: true
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INIT_ROOT_PASS}
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:${MONGO_INIT_ROOT_PASS}@mongo:27017/
+  #     ME_CONFIG_BASICAUTH_USERNAME: "glandix"
+  #     ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASS}
+  #   ulimits:
+  #     nproc: 65535
+  #     nofile:
+  #       soft: 20000
+  #       hard: 40000
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: 1
+  #         pids: 500
+  #         memory: 500M
+  #   security_opt:
+  #     - no-new-privileges:true
 
 networks:
   public:
