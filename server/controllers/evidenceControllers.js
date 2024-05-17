@@ -15,12 +15,15 @@ exports.getEvidenceItems = async (req, res) => {
 };
 
 // View a particular evidence item
-exports.getEvidenceItem = (req, res) => {
+exports.getEvidenceItem = async (req, res) => {
+  let evidenceItem = null;
   try {
-    console.log("sending evidence item " + req.params.evidenceItemID);
-    res.json(res.evidenceItem);
+    evidenceItem = await EvidenceItem.findById(req.params.id);
+    if (evidenceItem === null) {
+      return res.status(404).json({ message: "Unable to find item." });
+    }
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({ message: err.message });
   }
 };
 

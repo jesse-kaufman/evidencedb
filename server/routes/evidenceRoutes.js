@@ -12,7 +12,6 @@ router.get("/", evidenceControllers.getEvidenceItems);
 router.get(
   "/view/:id",
   //verifyToken,
-  getEvidenceItem,
   evidenceControllers.getEvidenceItem
 );
 
