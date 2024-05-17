@@ -11,8 +11,7 @@ function EvidenceList({ items }) {
   var prev_phone = "";
 
   const [evidenceItems, setEvidenceItems] = useState([]);
-  const [numbers, setNumbers] = useState([]);
-
+  const [stats, setStats] = useState([]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(document.location.search);
