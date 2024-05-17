@@ -1,0 +1,326 @@
+body {
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4em;
+  position: relative;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.nowrap {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+form {
+  margin: 0;
+  display: inline-block;
+}
+
+#stats {
+  z-index: 9999999;
+  font-size: 1.1em;
+  display: inline-block;
+  position: fixed;
+  padding: 0.5em 1.2em;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0.5em;
+  background: #333;
+  color: white;
+}
+@media (max-width: 794px) {
+  #stats {
+    border-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    top: revert;
+    bottom: 0;
+    right: 0.5em;
+    left: revert;
+  }
+}
+#stats table {
+  border-spacing: 0;
+}
+#stats table td,
+#stats table th {
+  padding: 0.01rem 0.5rem;
+}
+#stats table thead th {
+  font-size: 0.6em;
+  text-align: right;
+  line-height: 1em;
+}
+#stats table tr.total th,
+#stats table tr.total td {
+  border-top: 0.5px solid white;
+  font-size: 1.1rem;
+  padding-top: 0.1em;
+  text-align: right;
+}
+#stats table tr.total th {
+  font-size: 1em;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.2em;
+  text-align: right;
+  font-weight: bold;
+}
+#stats hr {
+  height: 0px;
+  border: 0;
+  border-top: 0.5px solid white;
+  margin: 0.25em 0;
+}
+#stats .subtotal {
+  font-size: 0.65em;
+  line-height: 1em;
+}
+#stats .subtotal .count,
+#stats .subtotal th {
+  font-size: 1em;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.2em;
+  text-align: right;
+}
+
+.date_divider,
+.email_divider,
+.number_divider {
+  position: sticky;
+  z-index: 9999999;
+  top: 120px;
+  font-size: 0.85em;
+  background: rgb(131, 83, 209);
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0.5em 1.5em;
+  margin-bottom: 0.5em;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-left: -1em;
+}
+@media (max-width: 794px) {
+  .date_divider,
+  .email_divider,
+  .number_divider {
+    top: 125px;
+  }
+}
+
+.email_divider {
+  left: 115px;
+  border-radius: 20px;
+}
+
+.date_divider {
+  border-radius: 20px;
+  background: #333;
+  top: 120px;
+  left: 100%;
+  width: 90px;
+  text-align: center;
+}
+
+#search {
+  background: rgb(108, 108, 108);
+  padding: 0.5em 1em 1em 1em;
+  padding-left: 250px;
+  font-size: 0.85em;
+  line-height: 1.3em;
+  box-sizing: border-box;
+  width: 100%;
+  position: fixed;
+  height: 115px;
+  z-index: 999999;
+  top: 0;
+}
+@media (max-width: 794px) {
+  #search {
+    padding-left: 1em;
+  }
+}
+#search div.nowrap {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  margin-right: 1.5em;
+}
+#search select,
+#search input[type=submit] {
+  background: #333;
+  color: white;
+  border: 1px solid white;
+  border-radius: 1.2em;
+  padding: 0.25em 1em;
+}
+#search input[type=submit] {
+  background: rgb(2, 136, 209);
+}
+#search input[type=text],
+#search #search select {
+  font-size: 1em;
+}
+
+#message_list {
+  margin: 120px 8px 8px 8px;
+}
+
+.message {
+  margin: 0.5em 0;
+  border: 0.75px solid gray;
+  border-radius: 20px;
+  background: rgba(128, 128, 128, 0.18);
+  max-width: 70%;
+  width: fit-content;
+  overflow: hidden;
+}
+@media (max-width: 794px) {
+  .message {
+    max-width: 90%;
+  }
+}
+.message .meta {
+  padding: 4px 1em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  font-style: italic;
+  background: rgba(128, 128, 128, 0.25);
+  font-size: 0.9em;
+  display: flex;
+}
+.message .meta .info {
+  vertical-align: middle;
+  line-height: 1.5em;
+}
+.message .meta span.icon {
+  margin-right: 0.5em;
+  font-size: 1.5em;
+  font-style: normal;
+}
+.message .meta strong.jesse,
+.message .meta strong.shannon {
+  display: inline-block;
+}
+.message .body {
+  padding: 0.75em 1em 1em 1em;
+}
+.message .body .transcript {
+  font-size: 0.8em;
+  line-height: 1.2em;
+  color: #444;
+  font-style: italic;
+  margin-top: 1em;
+}
+.message .body .transcript h1 {
+  font-size: 1em;
+}
+.message .body video {
+  max-width: 400px;
+}
+.message .body img {
+  display: inline-block;
+  margin: 0.1em 0.1em 0.1em 0;
+  max-width: 300px;
+}
+.message .body .duration {
+  margin-top: 0em;
+}
+.message .footer {
+  text-align: center;
+  font-size: 0.7em;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  background: rgba(128, 128, 128, 0.25);
+}
+.message .footer span {
+  opacity: 0.4;
+}
+.message.email {
+  border: 4px solid rgba(2, 136, 209, 0.95);
+  border-bottom: 0;
+  background: rgba(2, 136, 209, 0.41);
+  border-radius: 0 !important;
+}
+.message.email .meta {
+  background: rgba(2, 136, 209, 0.25);
+}
+.message.email .footer {
+  background: rgba(2, 136, 209, 0.95);
+  color: white;
+}
+.message.video {
+  background: rgba(233, 30, 99, 0.18);
+}
+.message.video .footer,
+.message.video .meta {
+  background: rgba(233, 30, 99, 0.3);
+}
+.message.video .body > h1 {
+  font-size: 1.4em;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.message.voicemail {
+  background: rgba(131, 83, 209, 0.18);
+  border-radius: 0 !important;
+}
+.message.voicemail .meta {
+  background: rgba(131, 83, 209, 0.25);
+}
+.message.voicemail .footer {
+  background: rgba(131, 83, 209, 0.95);
+  color: white;
+}
+.message.brian .meta strong.shannon {
+  border: 0.75px solid #333;
+  border-radius: 1em;
+  padding: 0 0.5em;
+  background-color: rgb(139, 195, 74);
+}
+.message.brian .meta strong.jesse {
+  border: 0.75px solid #333;
+  border-radius: 1em;
+  padding: 0 0.5em;
+  background-color: rgb(2, 136, 209);
+  color: white;
+}
+.message.jesse, .message.shannon {
+  background: rgba(139, 195, 74, 0.9);
+  margin-left: auto;
+}
+.message.jesse .meta,
+.message.jesse .footer, .message.shannon .meta,
+.message.shannon .footer {
+  background: rgb(139, 195, 74);
+}
+.message.jesse {
+  background: rgba(2, 136, 209, 0.9);
+  margin-left: auto;
+  color: white;
+}
+.message.jesse .meta,
+.message.jesse .footer {
+  background: rgb(2, 136, 209);
+}
+
+span.time {
+  opacity: 0.56;
+  padding-right: 0.5em;
+}
+
+mark {
+  background-color: yellow;
+  font-weight: bold;
+}
