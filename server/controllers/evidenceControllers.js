@@ -24,7 +24,7 @@ exports.getEvidenceItem = (req, res) => {
   }
 };
 
-exports.getNumbers = async (req, res) => {
+exports.getStats = async (req, res) => {
   try {
     var query = {
       type: {

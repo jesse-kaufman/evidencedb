@@ -17,9 +17,9 @@ router.get(
 );
 
 router.get(
-  "/get_numbers/",
+  "/get_stats/",
   // verifyToken,
-  evidenceControllers.getNumbers
+  evidenceControllers.getStats
 );
 
 router.get(
