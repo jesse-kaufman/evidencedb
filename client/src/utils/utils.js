@@ -12,7 +12,13 @@ export const nl2br = (str, is_xhtml) => {
 };
 
 export const format_phone = (phone) => {
-  return phone.substr(0, 3) + "-" + phone.substr(3, 3) + "-" + phone.substr(6);
+  return (
+    phone.substring(0, 3) +
+    "-" +
+    phone.substring(3, 6) +
+    "-" +
+    phone.substring(6)
+  );
 };
 
 export const get_email = (from) => {

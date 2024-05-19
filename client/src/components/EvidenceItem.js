@@ -140,7 +140,7 @@ function From({ type, direction, from, victim }) {
     from_name = "Brian Tiemeyer";
   } else {
     name_class = victim;
-    from_name = victim.substr(0, 1).toUpperCase() + victim.substr(1);
+    from_name = victim.substring(0, 1).toUpperCase() + victim.substring(1);
   }
 
   // Format "From" address / number
