@@ -1,9 +1,10 @@
-p hi
-
-p #{mystats}
-
-p Here are the stats: #{mystats}
-
-each value in mystats
-    h1 hello
-    p= value.type + ": " + value.count
+doctype html
+html
+    head
+        title Harassment from Brian Tiemeyer
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" type="text/css" href="public/css/style.css")
+    body
+        include _stats
+        include _search

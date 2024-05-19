@@ -1,0 +1,9 @@
+if numbers
+    .nowrap
+        strong= "Brian's #: "
+        select(name=from_address)
+            option(value="") All numbers
+            each value in numbers
+                - var number=   value._id.substring(0, 3) + "-" + value._id.substring(3, 6) + "-" + value._id.substring(6) + " (" + value.in + ")";
+                option(value=value._id)= number
+

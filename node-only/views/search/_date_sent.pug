@@ -1,0 +1,8 @@
+.nowrap
+    strong= "Date: "
+    select(name="date_sent_date")
+        option(value="") All dates
+        each value in dates
+            - var label= value._id + " (" + value.in + " rcvd / " + value.out + " sent)"
+            - var selected= get.date_sent_date === value._id ? true : false
+            option(value=value._id selected=selected)= label

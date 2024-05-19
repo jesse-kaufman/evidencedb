@@ -1,17 +1,27 @@
 // EvidenceItem controller
 const EvidenceItem = require("../models/evidenceItemModel");
-const { setupQuery } = require("../utils/db");
-const { getStats } = require("../utils/evidenceUtils");
+const { getQuery } = require("../utils/queryUtils");
+const { getStats, getDates, getNumbers } = require("../utils/evidenceUtils");
 
-// List all evidence items
+// List evidence items
 exports.printEvidence = async function (req, res) {
-  let query = setupQuery(req);
-  let stats = await getStats(query);
+  let numbers = null;
+  let query = getQuery(req);
+  let stats = await getStats(req.query.include, query);
   let evidenceItems = await EvidenceItem.find(query).sort({ date_sent: 1 });
+  let dates = await getDates(req.query.include);
+
+  if (!req.query.include) {
+    numbers = await getNumbers();
+    console.log("here");
+  }
+  console.log(numbers);
 
   await res.render("index", {
-    title: "Evidence",
     evidenceItems: evidenceItems,
-    mystats: stats,
+    stats: stats,
+    get: req.query,
+    dates: dates,
+    numbers: numbers,
   });
 };

@@ -1,0 +1,8 @@
+.nowrap
+    - var jesse_selected = get.victim === "jesse" ? "" : false
+    - var shannon_selected = get.victim === "shannon"? true : false
+    strong= "Jesse/Shannon: "
+    select(name="victim")
+        option(value="") Both
+        option(value="shannon" selected=shannon_selected) Shannon
+        option(value="jesse" selected=jesse_selected) Jesse

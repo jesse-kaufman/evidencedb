@@ -1,0 +1,18 @@
+#stats
+    table
+        thead
+            tr
+                th(colspan="2") RCVD 
+                th SENT
+        tbody
+        each value in stats
+            if value.type !== "total"
+                tr.subtotal
+                    th= value.type.toUpperCase() + "S:"
+                    td.count= value.count_in
+                    td.count= value.count_out
+            else
+                tr.total
+                    th= "TOTAL:"
+                    td.count= value.count_in
+                    td.count= value.count_out
