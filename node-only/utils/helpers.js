@@ -1,3 +1,9 @@
+Object.defineProperty(String.prototype, "toTitle", {
+  value() {
+    return this.substring(0, 1).toUpperCase() + this.substring(1);
+  },
+});
+
 exports.formatPhone = (number) =>
   number.substring(0, 3) +
   "-" +
