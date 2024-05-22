@@ -2,6 +2,11 @@
 const EvidenceItem = require("../models/evidenceItemModel");
 const { getQuery } = require("../utils/queryUtils");
 const { getStats, getDates, getNumbers } = require("../utils/evidenceUtils");
+const {
+  formatPhone,
+  formatVideoTranscript,
+  formatDuration,
+} = require("../utils/helpers");
 
 // List evidence items
 exports.printEvidence = async function (req, res) {
@@ -44,5 +49,9 @@ exports.printEvidence = async function (req, res) {
     get: req.query,
     dates: dates,
     numbers: numbers,
+    cdn_url: process.env.CDN,
+    formatPhone: formatPhone,
+    formatVideoTranscript: formatVideoTranscript,
+    formatDuration: formatDuration,
   });
 };
