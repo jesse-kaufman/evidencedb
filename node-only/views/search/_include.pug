@@ -1,22 +1,13 @@
 .nowrap
-    strong= "Show: "
+    strong Show: 
     input#display_texts(type="checkbox" name="include[]" value="text" checked=get.include && get.include.includes("text"))
-    label(for="display_texts")
-        |
-        | Texts
-        |
+    label(for="display_texts")  Texts 
+
     input#display_emails(type="checkbox" name="include[]" value="email" checked=get.include && get.include.includes("email"))
-    label(for="display_emails")
-        |
-        | Emails
-        |
+    label(for="display_emails")  Emails 
+
     input#display_voicemails(type="checkbox" name="include[]" value="voicemail" checked=get.include && get.include.includes("voicemail"))
-    label(for="display_voicemails")
-        |
-        | Voicemails
-        |
+    label(for="display_voicemails")  Voicemails 
+
     input#display_videos(type="checkbox" name="include[]" value="video" checked=get.include && get.include.includes("video"))
-    label(for="display_videos")
-        |
-        | Videos
-        |
+    label(for="display_videos")  Videos 
