@@ -1,0 +1,6 @@
+if item.type === "text" || item.type === "voicemail"
+    - var number = formatPhone(item.from)
+
+    if last_number !== number
+        .number_divider= number
+        - var last_number = number

@@ -1,0 +1,6 @@
+if item.type === "email"
+    - var email= item.from.trim().match(/(?:<(.+)>)/)[1]
+
+    if lastEmail !== email
+        .email_divider= email
+        - var lastEmail= email
