@@ -1,0 +1,19 @@
+- var messageClass = item.direction === 'OUT' ? item.victim : 'brian'
+
+.message(class=item.type + ' ' + messageClass)
+    .meta
+        include message/_icon
+        include message/_info
+
+    .body
+        if item.type === 'video'
+            include message/_video
+        if item.type === 'text'
+            include message/_text
+        if item.type === 'email'
+            include message/_email
+        if item.type === 'voicemail'
+            include message/_voicemail
+
+    .footer
+        span= item.type === 'text' ? 'text message' : item.type

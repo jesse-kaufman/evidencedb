@@ -1,0 +1,5 @@
+div !{item.body}
+
+if item.attachments
+    each attachment in item.attachments
+        img(src=cdn_url + attachment.filename alt=attachment.filename)

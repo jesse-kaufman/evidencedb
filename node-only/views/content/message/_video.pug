@@ -1,0 +1,14 @@
+
+div 
+    strong Original Title: 
+    | #{item.title}
+div
+    strong Duration: 
+    | #{formatDuration(item.duration)}
+
+video(preload="none" controls=true)
+    source(src=cdn_url + 'videos/' + item.filename type="video/mp4")
+
+.transcript
+    h1 Auto-transcription:
+    div !{formatVideoTranscript(item.body, item.duration)}

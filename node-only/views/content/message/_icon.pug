@@ -1,0 +1,11 @@
+case item.type
+    when 'text'
+        - var icon = '💬'
+    when 'video'
+        - var icon = '🎞️'
+    when 'voicemail'
+        - var icon = '📞'
+    when 'email'
+        - var icon = '📫'
+
+span.icon #{icon}

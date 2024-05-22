@@ -1,0 +1,7 @@
+- var body = item.body_html ? item.body_html : item.body.replace(/\n/g, '<br/>')
+
+div !{body}
+
+if item.attachments
+    each attachment in item.attachments
+        img(src=cdn_url + attachment.attachment_id + '/' + attachment.filename alt=attachment.filename)
