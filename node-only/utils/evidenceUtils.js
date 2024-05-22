@@ -2,9 +2,10 @@ const EvidenceItem = require("../models/evidenceItemModel");
 const { validTypes, getStatsQuery } = require("../utils/queryUtils");
 const { formatPhone } = require("../utils/helpers");
 
-exports.getStats = async (include, query) => {
+exports.getStats = async (include, core_query) => {
   let stats = [];
   let types = null;
+  let query = Object.assign({}, core_query);
 
   // Default to all types if none are specified
   if (!include || !include[0]) {

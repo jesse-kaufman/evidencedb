@@ -24,7 +24,7 @@ exports.getQuery = (req) => {
   }
 
   // Filter based on evidence item type
-  if (req.query.include && req.query.include.count > 0) {
+  if (req.query.include && req.query.include.length > 0) {
     query.type = { $in: req.query.include };
   }
 
