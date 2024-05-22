@@ -39,9 +39,7 @@ exports.printEvidence = async function (req, res) {
 
   if (!req.query.include) {
     numbers = await getNumbers();
-    console.log("here");
   }
-  console.log(numbers);
 
   await res.render("index", {
     evidenceItems: evidenceItems,
