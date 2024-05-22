@@ -2,18 +2,18 @@
 
 .message(class=item.type + ' ' + messageClass)
     .meta
-        include message/_icon
-        include message/_info
+        include evidenceItem/header/_icon
+        include evidenceItem/header/_info
 
     .body
         if item.type === 'video'
-            include message/_video
+            include evidenceItem/_video
         if item.type === 'text'
-            include message/_text
+            include evidenceItem/_text
         if item.type === 'email'
-            include message/_email
+            include evidenceItem/_email
         if item.type === 'voicemail'
-            include message/_voicemail
+            include evidenceItem/_voicemail
 
     .footer
         span= item.type === 'text' ? 'text message' : item.type

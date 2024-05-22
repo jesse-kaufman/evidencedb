@@ -1,7 +1,12 @@
+// 
+// Evidence Item - Addresses
+// 
+
+// Display "from" information for incoming items
 if item.direction === 'IN'
     if item.type === 'text' || item.type === 'voicemail'
         - var from = formatPhone(item.from)
-    else if item.type === 'voicemail'
+    else if item.type === 'email'
         - var from = item.from.trim().match(/(?:<(.+)>)/)[1]
     else if item.type === 'video'
         - var from = 'YouTube'
@@ -11,9 +16,10 @@ if item.direction === 'IN'
         | (#{from}) 
         strong to 
 
+// Display "victim" information for incoming and outgoing items
 if item.victim === 'both'
     strong.jesse Jesse 
     | , 
     strong.shannon Shannon
 else
-    strong(class=item.victim) #{item.victim.substring(0,1).toUpperCase()}#{item.victim.substring(1)}
+    strong(class=item.victim) #{item.victim.toTitle()}
