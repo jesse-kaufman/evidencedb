@@ -242,6 +242,13 @@ form {
     .duration {
       margin-top: 0em;
     }
+    blockquote {
+      font-style: italic;
+      color: #666;
+      opacity: 0.9;
+      border-left: 2px solid #666 !important;
+      margin-top: 0.25em !important;
+    }
   }
   .footer {
     text-align: center;
