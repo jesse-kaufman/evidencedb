@@ -1,3 +1,5 @@
+// NOTES: pre commit hook is created by running npm install
+
 const gulp = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
 const guppy = require("git-guppy")(gulp);
