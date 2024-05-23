@@ -1,3 +1,10 @@
+/**
+ * Evidence utils
+ *
+ * @module utils/evidenceUtils
+ * @author Jesse Kaufman <jesse@jessekaufman.com>
+ */
+
 const EvidenceItem = require("../models/evidenceItemModel");
 const { validTypes, getStatsQuery } = require("../utils/queryUtils");
 
@@ -25,8 +32,8 @@ exports.getStats = async (include, core_query) => {
   //
   for (let i = 0; i < types.length; i++) {
     if (types[i] !== "total") {
-      validTypes.push("");
       // If type is not "total", search evidence items of that type
+      validTypes.push("");
       if (!validTypes.includes(types[i])) {
         throw new Error("Invalid evidence type");
       }
@@ -56,6 +63,12 @@ exports.getStats = async (include, core_query) => {
   return stats;
 };
 
+/**
+ * Get list of dates with in/out counts.
+ *
+ * @param {Array} include - An array of types to include.
+ * @returns {Promise<Array>} - An array of date objects containing date, count_in, and count_out.
+ */
 exports.getDates = async (include) => {
   // Default to all types if none are specified
   match = {};
@@ -63,6 +76,7 @@ exports.getDates = async (include) => {
     match = { type: { $in: include } };
   }
 
+  // Get list of dates with in/out counts
   let dates = await EvidenceItem.aggregate([
     { $match: match },
     {
@@ -98,6 +112,12 @@ exports.getDates = async (include) => {
   return dates;
 };
 
+/**
+ * Get list of phone numbers with in counts.
+ *
+ * @param {Array} include - An array of types to include.
+ * @returns {Promise<Array>} - An array of objects containing phone number and count of items.
+ */
 exports.getNumbers = async () => {
   let numbers = await EvidenceItem.aggregate([
     {

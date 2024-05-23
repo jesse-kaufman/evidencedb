@@ -1,4 +1,10 @@
-// EvidenceItem controller
+/**
+ * EvidenceItem controller
+ *
+ * @module controllers/evidenceControllers
+ * @author Jesse Kaufman <jesse@jessekaufman.com>
+ */
+
 const EvidenceItem = require("../models/evidenceItemModel");
 const { getQuery } = require("../utils/queryUtils");
 const { getStats, getDates, getNumbers } = require("../utils/evidenceUtils");
@@ -8,13 +14,22 @@ const {
   formatDuration,
 } = require("../utils/helpers");
 
-// List evidence items
+/**
+ * Lists evidence items
+ *
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ */
 exports.printEvidence = async function (req, res) {
   let numbers = null;
+
+  // Build the query from the request object
   let query = getQuery(req);
 
   // Get stats for the query to display on frontend
   let stats = await getStats(req.query.include, query);
+
+  // Get matching evidence items for the query
   let evidenceItems = await EvidenceItem.aggregate([{ $match: query }])
     .sort({
       date_sent: 1,
@@ -39,10 +54,12 @@ exports.printEvidence = async function (req, res) {
     });
   let dates = await getDates(req.query.include);
 
+  // Only get phone number list if req.query.include is unset
   if (!req.query.include) {
     numbers = await getNumbers();
   }
 
+  // Render the index page using pugjs
   await res.render("index", {
     evidenceItems: evidenceItems,
     stats: stats,
