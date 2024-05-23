@@ -1,7 +1,13 @@
 const EvidenceItem = require("../models/evidenceItemModel");
 const { validTypes, getStatsQuery } = require("../utils/queryUtils");
-const { formatPhone } = require("../utils/helpers");
 
+/**
+ * Get statistics for evidence items based on the specified types and query.
+ *
+ * @param {Array.<EvidenceItemType>} include - An array of types to include in the statistics.
+ * @param {Object} core_query - The core query object to filter the evidence items.
+ * @returns {Promise<Array.<Stat>>} - Promise of an array of statistics objects
+ */
 exports.getStats = async (include, core_query) => {
   let stats = [];
   let types = null;

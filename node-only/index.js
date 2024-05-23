@@ -1,5 +1,18 @@
 // Server
 
+/**
+ * @typedef {Object} Stat
+ * @global
+ * @property {string} type - Type of evidence item
+ * @property {number} count_in - Incoming evidence item count
+ * @property {number} count_out - Outgoing evidence item count
+ */
+
+/**
+ * @typedef {('email'|'voicemail'|'video'|'text')} EvidenceItemType
+ * @global
+ */
+
 // Enviroment variables
 require("dotenv").config();
 

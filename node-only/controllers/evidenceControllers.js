@@ -12,6 +12,8 @@ const {
 exports.printEvidence = async function (req, res) {
   let numbers = null;
   let query = getQuery(req);
+
+  // Get stats for the query to display on frontend
   let stats = await getStats(req.query.include, query);
   let evidenceItems = await EvidenceItem.aggregate([{ $match: query }])
     .sort({
