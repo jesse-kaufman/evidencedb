@@ -1,9 +1,15 @@
-Object.defineProperty(String.prototype, "toTitle", {
-  value() {
-    return this.substring(0, 1).toUpperCase() + this.substring(1);
-  },
-});
+/**
+ * Formatting helpers
+ * @module utils/helpers
+ * @author Jesse Kaufman <jesse@jessekaufman.com>
+ */
 
+/**
+ * Formats phone number
+ *
+ * @param {string} number - Phone number to format
+ * @return {string} Formatted phone number
+ */
 exports.formatPhone = (number) =>
   number.substring(0, 3) +
   "-" +
