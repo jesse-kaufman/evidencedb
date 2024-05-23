@@ -13,6 +13,12 @@
  * @global
  */
 
+Object.defineProperty(String.prototype, "toTitle", {
+  value() {
+    return this.substring(0, 1).toUpperCase() + this.substring(1);
+  },
+});
+
 // Enviroment variables
 require("dotenv").config();
 
