@@ -17,19 +17,34 @@ exports.formatPhone = (number) =>
   "-" +
   number.substring(6);
 
-exports.formatVideoTranscript = (body, duration) => {
-  if (!body) {
+/**
+ * Formats video transcript
+ *
+ * Adds styling for timecodes in transcripts and makes them inline
+ *
+ * @param {string} transcript Transcript to format
+ * @param {string} duration - Duration of video
+ * @returns {string} Formatted transcript
+ */
+exports.formatVideoTranscript = (transcript, duration) => {
+  // Default hasHour to false and use var so the scope is the function
+  var hasHour = false;
+
+  // If transcript is undefined, return empty string
+  if (!transcript) {
     return "";
   }
 
-  var hasHour = false;
+  // If item's duration includes an hour, set hasHour = true for later
   if (duration.match(/01:\d\d:\d\d/)) {
     hasHour = true;
   }
 
-  return body.replace(/((\d{1,2}:)+\d\d)/g, (time) => {
+  // Wrap timecodes in span for styling
+  return transcript.replace(/((\d{1,2}:)+\d\d)/g, (time) => {
     let formattedTime = "";
 
+    // Split timecode into seconds, minutes, and optionally hours
     if (time.match(/\d{1,2}:\d\d:\d\d/)) {
       var [h, m, s] = time.split(":");
     } else {
@@ -37,15 +52,26 @@ exports.formatVideoTranscript = (body, duration) => {
     }
 
     if (hasHour) {
-      formattedTime = h !== undefined ? `${h.padStart(2, "0")}:` : "00:";
+      // If undefined use "00:" for hour, otherwise zero-pad hour and add ":"
+      formattedTime = h === undefined ? "00:" : `${h.padStart(2, "0")}:`;
     }
 
+    // Add zero-padded minutes and seconds
     formattedTime += `${m.padStart(2, "0")}:${s.padStart(2, "0")}`;
 
     return `<br/><span class="time">${formattedTime}</span>`;
   });
 };
 
+/**
+ * Formats duration
+ *
+ * Converts string from "[hh:]mm:ss" to a human-readable duration
+ * excluding any hour, minute, or second with a value of 0
+ *
+ * @param {string} duration - The duration to format
+ * @returns {string} The formatted duration
+ */
 exports.formatDuration = (duration) => {
   let formattedDuration = "";
 
