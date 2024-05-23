@@ -10,4 +10,4 @@ audio(preload=none, controls=true, src=process.env.CDN + 'voicemails/' + item.fi
 
 .transcript
     h1 Auto-transcription: 
-    | !{item.body}
+    | !{item.body.replace(/\n/g, '<br/>')}
