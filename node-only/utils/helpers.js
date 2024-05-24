@@ -43,12 +43,15 @@ exports.formatVideoTranscript = (transcript, duration) => {
   // Wrap timecodes in span for styling
   return transcript.replace(/((\d{1,2}:)+\d\d)/g, (time) => {
     let formattedTime = "";
+    var h,
+      m,
+      s = null;
 
     // Split timecode into seconds, minutes, and optionally hours
     if (time.match(/\d{1,2}:\d\d:\d\d/)) {
-      var [h, m, s] = time.split(":");
+      [h, m, s] = time.split(":");
     } else {
-      var [m, s] = time.split(":");
+      [m, s] = time.split(":");
     }
 
     if (hasHour) {
