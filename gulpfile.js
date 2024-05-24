@@ -1,11 +1,9 @@
 const gulp = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
 const guppy = require("git-guppy")(gulp);
+const gulpFilter = require("gulp-filter");
 
-const gulpFilter = async () => {
-  return await import("gulp-filter");
-};
-
+console.error(gulpFilter);
 gulp.task("sass", function (cb) {
   gulp
     .src("src/styles/*.scss")
@@ -23,21 +21,14 @@ gulp.task(
   guppy.src("pre-commit", function (files) {
     const jshint = require("gulp-jshint");
     const stylish = require("jshint-stylish");
-    const filter = gulpFilter(["*.js"], { restore: true });
 
-    const glob = files.length
-      ? files
-      : ["node-only/*.js", "node-only/utils/*.js"];
+    const glob = files.length ? files : ["node-only/**/*"];
 
-    console.log(glob);
-    //     return gulp.src(glob);
-    return (
-      gulp
-        .src(glob)
-        // .pipe(filter)
-        .pipe(jshint())
-        .pipe(jshint.reporter(stylish))
-        .pipe(jshint.reporter("fail"))
-    );
+    return gulp
+      .src(glob)
+      .pipe(gulpFilter(["*.js"], { restore: true }))
+      .pipe(jshint())
+      .pipe(jshint.reporter(stylish))
+      .pipe(jshint.reporter("fail"));
   })
 );
