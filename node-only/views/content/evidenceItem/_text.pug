@@ -6,4 +6,4 @@ div !{item.body}
 
 if item.attachments
     each attachment in item.attachments
-        img(src=cdn_url + attachment.filename alt=attachment.filename)
+        img(src=cdn_url + "opt/attachments/" + attachment.filename alt=attachment.filename)

@@ -8,4 +8,4 @@ div !{body}
 
 if item.attachments
     each attachment in item.attachments
-        img(src=cdn_url + attachment.attachment_id + '/' + attachment.filename alt=attachment.filename)
+        img(src=cdn_url + "opt/attachments/" + attachment.attachment_id + '/' + attachment.filename.replace(/\.(jpg|jpeg|png)/, '.webp') alt=attachment.filename)
