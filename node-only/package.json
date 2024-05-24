@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "node --watch index.js",
-    "start": "node --watch index.js"
+    "start-dev": "NODE_ENV=development node --watch --trace-sync-io index.js",
+    "start": "NODE_ENV=production node index.js"
   },
   "author": "Jesse Kaufman <glandix@lloydnet.org>",
   "license": "ISC",
