@@ -22,11 +22,14 @@ gulp.task(
     const jshint = require("gulp-jshint");
     const stylish = require("jshint-stylish");
 
-    const glob = files.length ? files : ["node-only/**/*"];
+    const glob = files.length
+      ? files
+      : //["node-only/*.js", "node-only/utils/*.js"];
+        ["node-only/**/*"];
 
     return gulp
       .src(glob)
-      .pipe(gulpFilter(["*.js"], { restore: true }))
+      .pipe(gulpFilter(["*.js", "!*node_modules"], { restore: true }))
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
       .pipe(jshint.reporter("fail"));
