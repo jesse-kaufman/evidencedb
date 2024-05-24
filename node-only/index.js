@@ -62,5 +62,9 @@ app.use("/", evidenceRoutes);
 
 // Start the server
 const server = app.listen(8080, () => {
-  console.log(`Express running → PORT ${server.address().port}`);
+  console.log(
+    `Express running → PORT ${server.address().port} in ${
+      process.env.NODE_ENV
+    } mode`
+  );
 });
