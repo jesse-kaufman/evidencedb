@@ -1,17 +1,20 @@
 // 
 // Video Evidence Item
 // 
+- var videoUrl = `${cdn_url}videos/${encodeURIComponent(item.filename)}`
 
-div 
+div
     strong Original Title: 
     | #{item.title}
+    
 div
     strong Duration: 
     | #{formatDuration(item.duration)}
 
-video(preload="none" controls=true)
-    source(src=cdn_url + 'videos/' + item.filename type="video/mp4")
+if item.filename
+    video(preload="none" controls=true poster=`${videoUrl}.webp`)
+        source(src=videoUrl type="video/mp4")
 
 .transcript
-    h1 Auto-transcription:
-    div !{formatVideoTranscript(item.body, item.duration)}
+    h1 #[span(class="hide") Hide]#[span(class="show") Show] Auto-transcription:
+    .content !{formatVideoTranscript(item.body, item.duration)}
