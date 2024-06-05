@@ -3,7 +3,7 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default [
-  { ignores: ["**/node_modules", "**/public/js/*"] },
+  { ignores: ["**/node_modules/*", "**/public/js/*"] },
   {
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
   },
