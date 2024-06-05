@@ -30,13 +30,13 @@ $(function (): void {
   hl_search();
 });
 
-function hl_clear(): void {
-  $("#message_list .message .body").html((i, e): string =>
-    $(e).html().replace("<mark>", "").replace("</mark>", "")
-  );
-  // Setup transcript link events.
-  setupTranscript();
-}
+// function hl_clear(): void {
+//   $("#message_list .message .body").html((i, e): string =>
+//     $(e).html().replace("<mark>", "").replace("</mark>", "")
+//   );
+//   // Setup transcript link events.
+//   setupTranscript();
+// }
 
 /**
  * Searches the message list for the input query and highlights the matching text.

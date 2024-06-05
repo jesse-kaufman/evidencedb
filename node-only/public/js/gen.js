@@ -27,17 +27,18 @@ $(function () {
     // Highlights matching messages based on the input query.
     hl_search();
 });
-function hl_clear() {
-    $("#message_list .message .body").html((i, e) => $(e).html().replace("<mark>", "").replace("</mark>", ""));
-    // Setup transcript link events.
-    setupTranscript();
-}
+// function hl_clear(): void {
+//   $("#message_list .message .body").html((i, e): string =>
+//     $(e).html().replace("<mark>", "").replace("</mark>", "")
+//   );
+//   // Setup transcript link events.
+//   setupTranscript();
+// }
 /**
  * Searches the message list for the input query and highlights the matching text.
  */
 function hl_search() {
-    var _a, _b, _c;
-    const term = (_c = (_b = (_a = $("input[name=query]")) === null || _a === void 0 ? void 0 : _a.val()) === null || _b === void 0 ? void 0 : _b.toString()) !== null && _c !== void 0 ? _c : "";
+    const term = $("input[name=query]")?.val()?.toString() ?? "";
     // Do search if term is set
     if (term !== "") {
         $("#message_list .message")
@@ -49,3 +50,4 @@ function hl_search() {
         setupTranscript();
     }
 }
+export {};
