@@ -8,10 +8,13 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "NODE_ENV=development node --watch index.js",
-    "start-dev-synccheck": "NODE_ENV=production node --watch --trace-sync-io index.js",
-    "start": "NODE_ENV=production node index.js"
+    "dev": "NODE_ENV=development node --watch index.js",
+    "dev-synccheck": "NODE_ENV=production node --watch --trace-sync-io index.js",
+    "start": "NODE_ENV=production node index.js",
+    "lint": "eslint --ext .ts .",
+    "lint:fix": "eslint --fix --ext .ts . && prettier -w .",
+    "test": "prettier --check src && tsc --noEmit && npm run lint",
+    "build": "tsc -p ."
   },
   "author": "Jesse Kaufman <glandix@lloydnet.org>",
   "license": "ISC",
