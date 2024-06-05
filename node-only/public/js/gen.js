@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Sets up the event listeners for the transcript links.
  */
@@ -50,4 +51,3 @@ function hl_search() {
         setupTranscript();
     }
 }
-export {};
