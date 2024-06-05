@@ -324,7 +324,7 @@ form {
   color: white;
 }
 .message.jesse, .message.shannon {
-  background: rgba(139, 195, 74, 0.9);
+  background: rgba(139, 195, 74, 0.6);
   margin-left: auto;
 }
 .message.jesse .meta,
@@ -333,7 +333,7 @@ form {
   background: rgb(139, 195, 74);
 }
 .message.jesse {
-  background: rgba(2, 136, 209, 0.9);
+  background: rgba(2, 136, 209, 0.85);
   margin-left: auto;
   color: white;
 }

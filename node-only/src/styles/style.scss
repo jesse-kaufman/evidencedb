@@ -362,8 +362,8 @@ form {
   ///
   /// Sent messages
   ///
-  @mixin sent-message($color) {
-    background: color.adjust($color, $alpha: -0.1);
+  @mixin sent-message($color, $alpha) {
+    background: color.adjust($color, $alpha: $alpha);
     margin-left: auto;
     .meta,
     .footer {
@@ -372,10 +372,10 @@ form {
   }
   &.jesse,
   &.shannon {
-    @include sent-message($sent-color);
+    @include sent-message($sent-color, -0.4);
   }
   &.jesse {
-    @include sent-message($email-color);
+    @include sent-message($email-color, -0.15);
     color: white;
   }
 }
