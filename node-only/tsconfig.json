@@ -4,9 +4,9 @@
     "target": "ES2022",
     "module": "Node16",
     "moduleResolution": "Node16",
-    "declaration": true,
+    "declaration": false,
     //"composite": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "outDir": "public",
     "rootDir": "src",
     "types": ["node", "jquery"],
@@ -14,13 +14,13 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "strict": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "noEmit": false
   },
   "ts-node": {
     "esm": true,
     "transpileOnly": true,
-    "files": true,
+    "files": false,
     "experimentalResolver": true
   }
 }
