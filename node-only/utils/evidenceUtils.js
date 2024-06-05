@@ -6,7 +6,8 @@
  */
 
 import EvidenceItem from "../models/evidenceItemModel.js";
-import { validTypes, getStatsQuery } from "../utils/queryUtils.js";
+import { getStatsQuery } from "../utils/queryUtils.js";
+import { validTypes } from "../models/evidenceItemModel.js";
 
 /**
  * Get statistics for evidence items based on the specified types and query.
@@ -22,7 +23,7 @@ export async function getStats(include, core_query) {
 
   // Default to all types if none are specified
   if (!include || !include[0]) {
-    types = ["text", "email", "voicemail", "video", "total"];
+    types = [...validTypes, "total"];
   } else {
     types = [...include, "total"];
   }

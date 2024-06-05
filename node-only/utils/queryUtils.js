@@ -1,4 +1,3 @@
-export const validTypes = ["text", "email", "voicemail", "video"];
 
 export function getQuery(req) {
   var query = {};

@@ -1,6 +1,7 @@
 // Contact model
 
 import mongoose from "mongoose";
+export const validTypes = ["text", "email", "voicemail", "video", "social"];
 
 const AttachmentSchema = new mongoose.Schema({
   filename: {
@@ -16,7 +17,7 @@ const AttachmentSchema = new mongoose.Schema({
 const EvidenceItemSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ["text", "voicemail", "email", "video"],
+    enum: validTypes,
     required: true,
   },
   date_sent: {
