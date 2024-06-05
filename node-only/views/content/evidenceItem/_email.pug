@@ -4,7 +4,7 @@
 
 - var body = item.body_html ? item.body_html.replace(/font-size:\s?\d\dp[x|t];?/g, '') : item.body.replace(/\n/g, '<br/>')
 
-div !{body}
+div !{body.replace(/\d+ E \dth [A-Z]+[a-z]+/, '[JESSE\'S ADDRESS REDACTED]')}
 
 if item.attachments
     each attachment in item.attachments
