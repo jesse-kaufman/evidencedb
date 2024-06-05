@@ -221,18 +221,42 @@ form {
   .body {
     padding: 0.75em 1em 1em 1em;
     .transcript {
-      font-size: 0.8em;
-      line-height: 1.2em;
       color: #444;
       font-style: italic;
       margin-top: 1em;
 
       h1 {
+        .show {
+          display: inline;
+        }
+        .hide {
+          display: none;
+        }
         font-size: 1em;
+      }
+
+      .content {
+        font-size: 0.8em;
+        line-height: 1.2em;
+        display: none;
+      }
+
+      &.show {
+        h1 .show {
+          display: none;
+        }
+        h1 .hide {
+          display: inline;
+        }
+        .content {
+          display: block;
+        }
       }
     }
     video {
-      max-width: 400px;
+      width: 100%;
+      max-width: 50i0px;
+      max-height: 400px;
     }
     img {
       display: inline-block;
