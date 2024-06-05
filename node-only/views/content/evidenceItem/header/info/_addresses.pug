@@ -4,16 +4,17 @@
 
 // Display "from" information for incoming items
 if item.direction === 'IN'
-    if item.type === 'text' || item.type === 'voicemail'
-        - var from = formatPhone(item.from)
-    else if item.type === 'email'
-        - var from = item.from.trim().match(/(?:<(.+)>)/)[1]
-    else if item.type === 'video'
-        - var from = 'YouTube'
 
     span.number
         strong Brian Tiemeyer 
-        | (#{from}) 
+        if item.type === 'email'
+            - var from = item.from.trim().match(/(?:<(.+)>)/)[1]
+            | &lt;<a href="mailto:#{from}">#{from}</a>&gt; 
+        else if item.type === 'video'
+            | &lt;YouTube&gt; 
+        else
+            - var from = formatPhone(item.from)
+            | &lt;<a href="tel:+1#{item.from}">#{from}</a>&gt; 
         strong to 
 
 // Display "victim" information for incoming and outgoing items
