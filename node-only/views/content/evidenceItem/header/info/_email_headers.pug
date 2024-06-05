@@ -4,7 +4,7 @@
 
 br
 strong To: 
-| [email redacted]
+| !{item.to.replace(/<.*?>/g, "&lt;<a href=\"mailto:redacted@redacted.com\">email_redacted</a>&gt;")}
 br
 strong Subject: 
 | #{item.subject}
