@@ -1,41 +1,46 @@
 // NOTES: pre commit hook is created by running npm install
 
-const gulp = require("gulp");
-const sass = require("gulp-sass")(require("sass"));
-const guppy = require("git-guppy")(gulp);
+import gulp, { task, src, dest, watch, parallel } from "gulp";
+import gulpSass from "gulp-sass";
+import * as dartSass from "sass";
+import gitGuppy from "git-guppy";
+import gulpFilter from "gulp-filter";
+import jshint from "gulp-jshint";
+import stylish from "jshint-stylish";
+import ts from "gulp-typescript";
 
-const gulpFilter = async () => {
-  const test = await import("gulp-filter");
-  return test;
-};
+const sass = gulpSass(dartSass);
+const guppy = gitGuppy(gulp);
 
-gulp.task("sass", function (cb) {
-  gulp
-    .src("src/styles/*.scss")
+task("sass", function (cb) {
+  src("src/styles/*.scss")
     .pipe(sass().on("error", sass.logError))
-    .pipe(gulp.dest("public/css"));
+    .pipe(dest("public/css"));
   cb();
 });
 
-gulp.task("default", function () {
-  gulp.watch("src/styles/*", gulp.parallel("sass"));
+task("ts", function (cb) {
+  src("src/js/*.ts")
+    .pipe(ts({ noImplicitAny: true, target: "ES6" }))
+    .pipe(dest("public/js"));
+  cb();
 });
 
-gulp.task(
+task("default", function () {
+  watch("src/styles/*.scss", parallel("sass"));
+  watch("src/js/*.ts", parallel("ts"));
+});
+
+task(
   "pre-commit",
   guppy.src("pre-commit", function (files) {
-    const jshint = require("gulp-jshint");
-    const stylish = require("jshint-stylish");
     const filter = gulpFilter(["*.js"]);
     const glob = files.length ? files : ["*.js", "utils/*.js"];
     console.log(glob);
-    return (
-      gulp
-        .src(glob)
-        // .pipe(filter)
-        .pipe(jshint())
-        .pipe(jshint.reporter(stylish))
-        .pipe(jshint.reporter("fail"))
-    );
+    return src(glob)
+      .pipe(filter)
+      .pipe(jshint())
+      .pipe(jshint.reporter(stylish))
+      .pipe(jshint.reporter("fail"));
   })
 );
