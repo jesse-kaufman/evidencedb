@@ -29,7 +29,11 @@ gulp.task(
 
     gulp
       .src(glob)
-      .pipe(gulpFilter(["*.js", "!*node_modules"], { restore: true }))
+      .pipe(
+        gulpFilter(["*.js", "!node-only/public/**", "!*node_modules"], {
+          restore: true,
+        })
+      )
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
       .pipe(jshint.reporter("fail"));

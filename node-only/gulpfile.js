@@ -34,14 +34,14 @@ task("default", function () {
 task("pre-commit", () => {
   return guppy.src("pre-commit", async (files, cb) => {
     const filter = gulpFilter(["*.js$"], { restore: true });
-    const glob = files.length ? files : ["*.js", "utils/*.js"];
+    const glob = files.length
+      ? files
+      : ["*.js", "!*public/js", "!*node_modules"];
     src(glob)
       .pipe(filter)
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
-      .pipe(jshint.reporter("fail"))
-      .pipe(filter.restore)
-      .pipe(dest("."));
+      .pipe(jshint.reporter("fail"));
     cb();
   });
 });
