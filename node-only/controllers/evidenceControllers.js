@@ -5,22 +5,23 @@
  * @author Jesse Kaufman <jesse@jessekaufman.com>
  */
 
-const EvidenceItem = require("../models/evidenceItemModel");
-const { getQuery } = require("../utils/queryUtils");
-const { getStats, getDates, getNumbers } = require("../utils/evidenceUtils");
-const {
+import EvidenceItem from "../models/evidenceItemModel.js";
+import { getQuery } from "../utils/queryUtils.js";
+import { getStats, getDates, getNumbers } from "../utils/evidenceUtils.js";
+import {
   formatPhone,
   formatVideoTranscript,
   formatDuration,
-} = require("../utils/helpers");
+} from "../utils/helpers.js";
 
 /**
+ *
  * Lists evidence items
  *
  * @param {Object} req Request object
  * @param {Object} res Response object
  */
-exports.printEvidence = async function (req, res) {
+export async function printEvidence(req, res) {
   let numbers = null;
 
   // Build the query from the request object
@@ -71,4 +72,4 @@ exports.printEvidence = async function (req, res) {
     formatVideoTranscript: formatVideoTranscript,
     formatDuration: formatDuration,
   });
-};
+}

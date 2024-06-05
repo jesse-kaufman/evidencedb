@@ -1,11 +1,11 @@
-exports.validTypes = ["text", "email", "voicemail", "video"];
+export const validTypes = ["text", "email", "voicemail", "video"];
 
-exports.getQuery = (req) => {
+export function getQuery(req) {
   var query = {};
 
   // Filter based on evidence item body
   if (req.query.query) {
-    query.$text = { $search: `\"${req.query.query}\"` };
+    query.$text = { $search: `"${req.query.query}"` };
   }
 
   // Filter based on date
@@ -29,9 +29,9 @@ exports.getQuery = (req) => {
   }
 
   return query;
-};
+}
 
-exports.getStatsQuery = (query) => {
+export function getStatsQuery(query) {
   return [
     { $match: query },
     {
@@ -58,4 +58,4 @@ exports.getStatsQuery = (query) => {
       },
     },
   ];
-};
+}

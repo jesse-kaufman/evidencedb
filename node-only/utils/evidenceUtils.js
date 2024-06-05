@@ -5,8 +5,8 @@
  * @author Jesse Kaufman <jesse@jessekaufman.com>
  */
 
-const EvidenceItem = require("../models/evidenceItemModel");
-const { validTypes, getStatsQuery } = require("../utils/queryUtils");
+import EvidenceItem from "../models/evidenceItemModel.js";
+import { validTypes, getStatsQuery } from "../utils/queryUtils.js";
 
 /**
  * Get statistics for evidence items based on the specified types and query.
@@ -15,7 +15,7 @@ const { validTypes, getStatsQuery } = require("../utils/queryUtils");
  * @param {Object} core_query - The core query object to filter the evidence items.
  * @returns {Promise<Array.<Stat>>} - Promise of an array of statistics objects
  */
-exports.getStats = async (include, core_query) => {
+export async function getStats(include, core_query) {
   let stats = [];
   let types = null;
   let query = Object.assign({}, core_query);
@@ -61,7 +61,7 @@ exports.getStats = async (include, core_query) => {
   }
 
   return stats;
-};
+}
 
 /**
  * Get list of dates with in/out counts.
@@ -69,9 +69,9 @@ exports.getStats = async (include, core_query) => {
  * @param {Array} include - An array of types to include.
  * @returns {Promise<Array>} - An array of date objects containing date, count_in, and count_out.
  */
-exports.getDates = async (include) => {
+export async function getDates(include) {
   // Default to all types if none are specified
-  match = {};
+  let match = {};
   if (include && include[0]) {
     match = { type: { $in: include } };
   }
@@ -110,7 +110,7 @@ exports.getDates = async (include) => {
   ]);
 
   return dates;
-};
+}
 
 /**
  * Get list of phone numbers with in counts.
@@ -118,7 +118,7 @@ exports.getDates = async (include) => {
  * @param {Array} include - An array of types to include.
  * @returns {Promise<Array>} - An array of objects containing phone number and count of items.
  */
-exports.getNumbers = async () => {
+export async function getNumbers() {
   let numbers = await EvidenceItem.aggregate([
     {
       $match: {
@@ -147,4 +147,4 @@ exports.getNumbers = async () => {
   ]);
 
   return numbers;
-};
+}

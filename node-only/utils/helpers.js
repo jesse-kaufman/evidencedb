@@ -10,12 +10,15 @@
  * @param {string} number - Phone number to format
  * @return {string} Formatted phone number
  */
-exports.formatPhone = (number) =>
-  number.substring(0, 3) +
-  "-" +
-  number.substring(3, 6) +
-  "-" +
-  number.substring(6);
+export function formatPhone(number) {
+  return (
+    number.substring(0, 3) +
+    "-" +
+    number.substring(3, 6) +
+    "-" +
+    number.substring(6)
+  );
+}
 
 /**
  * Formats video transcript
@@ -26,7 +29,7 @@ exports.formatPhone = (number) =>
  * @param {string} duration - Duration of video
  * @returns {string} Formatted transcript
  */
-exports.formatVideoTranscript = (transcript, duration) => {
+export function formatVideoTranscript(transcript, duration) {
   // Default hasHour to false and use var so the scope is the function
   var hasHour = false;
 
@@ -64,7 +67,7 @@ exports.formatVideoTranscript = (transcript, duration) => {
 
     return `<br/><span class="time">${formattedTime}</span>`;
   });
-};
+}
 
 /**
  * Formats duration
@@ -75,7 +78,7 @@ exports.formatVideoTranscript = (transcript, duration) => {
  * @param {string} duration - The duration to format
  * @returns {string} The formatted duration
  */
-exports.formatDuration = (duration) => {
+export function formatDuration(duration) {
   let formattedDuration = "";
 
   const [hours, minutes, seconds] = duration.split(":");
@@ -91,4 +94,4 @@ exports.formatDuration = (duration) => {
   }
 
   return formattedDuration;
-};
+}

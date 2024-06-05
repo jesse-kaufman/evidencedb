@@ -20,34 +20,29 @@ Object.defineProperty(String.prototype, "toTitle", {
 });
 
 // Enviroment variables
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 // MongoDB connection
-const { connectDB } = require("./utils/db");
+import connectDB from "./utils/db.js";
 connectDB();
 
 // Setup Express
-const express = require("express");
+import express from "express";
 const app = express();
 
 // Cookie parser
-const cookieParser = require("cookie-parser");
+import cookieParser from "cookie-parser";
 app.use(cookieParser());
 
-// Express Validator
-//const { check } = require('express-validator');
-
 // Enable compression
-const compression = require("compression");
+import compression from "compression";
 app.use(compression());
-
-// Interpret responses as JSON
-// app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
 // Use CORS
-const cors = require("cors");
+import cors from "cors";
 app.use(cors());
 
 app.set("views", "./views");
@@ -57,7 +52,7 @@ app.set("view engine", "pug");
 app.use("/public", express.static("public"));
 
 // EvidenceItem routes
-const evidenceRoutes = require("./routes/evidenceRoutes");
+import evidenceRoutes from "./routes/evidenceRoutes.js";
 app.use("/", evidenceRoutes);
 
 // Start the server

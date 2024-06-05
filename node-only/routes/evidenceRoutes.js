@@ -1,8 +1,8 @@
 // User routes
-const express = require("express");
+import express from "express";
+import { printEvidence } from "../controllers/evidenceControllers.js";
+
 const router = express.Router();
-const evidenceControllers = require("../controllers/evidenceControllers");
+router.get("/", printEvidence);
 
-router.get("/", evidenceControllers.printEvidence);
-
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
 // Contact model
 
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const AttachmentSchema = new mongoose.Schema({
   filename: {
@@ -46,4 +46,4 @@ const EvidenceItemSchema = new mongoose.Schema({
 
 const EvidenceItemModel = new mongoose.model("Item", EvidenceItemSchema);
 
-module.exports = EvidenceItemModel;
+export default EvidenceItemModel;
