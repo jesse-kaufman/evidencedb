@@ -18,7 +18,7 @@ gulp.task("default", function () {
 
 gulp.task(
   "pre-commit",
-  guppy.src("pre-commit", function (files) {
+  guppy.src("pre-commit", function (files, cb) {
     const jshint = require("gulp-jshint");
     const stylish = require("jshint-stylish");
 
@@ -27,11 +27,12 @@ gulp.task(
       : //["node-only/*.js", "node-only/utils/*.js"];
         ["node-only/**/*"];
 
-    return gulp
+    gulp
       .src(glob)
       .pipe(gulpFilter(["*.js", "!*node_modules"], { restore: true }))
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
       .pipe(jshint.reporter("fail"));
+    cb();
   })
 );

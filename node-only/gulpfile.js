@@ -31,17 +31,17 @@ task("default", function () {
   watch("src/js/*.ts", parallel("ts"));
 });
 
-// task("pre-commit", (cb) => {
-//   return guppy.src("pre-commit", async (files, cb) => {
-//     const filter = gulpFilter(["*.js$"], { restore: true });
-//     const glob = files.length ? files : ["*.js", "utils/*.js"];
-//     src(glob)
-//       .pipe(filter)
-//       .pipe(jshint())
-//       .pipe(jshint.reporter(stylish))
-//       .pipe(jshint.reporter("fail"))
-//       .pipe(filter.restore)
-//       .pipe(dest("."));
-//     cb();
-//   });
-// });
+task("pre-commit", () => {
+  return guppy.src("pre-commit", async (files, cb) => {
+    const filter = gulpFilter(["*.js$"], { restore: true });
+    const glob = files.length ? files : ["*.js", "utils/*.js"];
+    src(glob)
+      .pipe(filter)
+      .pipe(jshint())
+      .pipe(jshint.reporter(stylish))
+      .pipe(jshint.reporter("fail"))
+      .pipe(filter.restore)
+      .pipe(dest("."));
+    cb();
+  });
+});
