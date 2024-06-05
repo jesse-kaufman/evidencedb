@@ -217,8 +217,6 @@ form {
   padding: 0.75em 1em 1em 1em;
 }
 .message .body .transcript {
-  font-size: 0.8em;
-  line-height: 1.2em;
   color: #444;
   font-style: italic;
   margin-top: 1em;
@@ -226,8 +224,30 @@ form {
 .message .body .transcript h1 {
   font-size: 1em;
 }
+.message .body .transcript h1 .show {
+  display: inline;
+}
+.message .body .transcript h1 .hide {
+  display: none;
+}
+.message .body .transcript .content {
+  font-size: 0.8em;
+  line-height: 1.2em;
+  display: none;
+}
+.message .body .transcript.show h1 .show {
+  display: none;
+}
+.message .body .transcript.show h1 .hide {
+  display: inline;
+}
+.message .body .transcript.show .content {
+  display: block;
+}
 .message .body video {
-  max-width: 400px;
+  width: 100%;
+  max-width: 50i0px;
+  max-height: 400px;
 }
 .message .body img {
   display: inline-block;
