@@ -20,9 +20,9 @@ task("sass", function (cb) {
 });
 
 task("ts", function (cb) {
-  src("src/js/*.ts")
-    .pipe(ts({ noImplicitAny: true, target: "ES6" }))
-    .pipe(dest("public/js"));
+  let tsProject = ts.createProject("tsconfig.json");
+
+  src("src/js/*.ts").pipe(tsProject()).pipe(dest("public/js"));
   cb();
 });
 
