@@ -39,7 +39,7 @@ task("sass", function () {
 task("ts", function () {
   return gulp
     .src(".")
-    .pipe(exec((file) => `tsc -p ${file.path}`, execOptions))
+    .pipe(exec(() => `tsc -p .`, execOptions))
     .pipe(exec.reporter(execReportOptions));
 });
 
