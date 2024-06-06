@@ -41,6 +41,7 @@
     "git-guppy": "^2.1.0",
     "globals": "^15.3.0",
     "gulp": "^5.0.0",
+    "gulp-exec": "^5.0.0",
     "gulp-filter": "^9.0.1",
     "gulp-jshint": "^2.1.0",
     "gulp-typescript": "^6.0.0-alpha.1",
