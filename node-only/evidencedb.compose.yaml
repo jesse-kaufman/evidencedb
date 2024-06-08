@@ -11,6 +11,10 @@ services:
       - evidencedb
     environment:
       - TZ=${TZ}
+      - MONGO_URL=${MONGO_URL}
+      - CDN=${CDN}
+      - NODE_PORT=${NODE_PORT}
+      - CSS_VER=${CSS_VER}
     tmpfs:
       - /tmp:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
     logging:
