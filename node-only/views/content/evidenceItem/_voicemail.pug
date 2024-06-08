@@ -6,7 +6,7 @@ p.duration
     strong Duration: 
     |  #{formatDuration(item.duration)}
 
-audio(preload=none, controls=true, src=process.env.CDN + 'voicemails/' + item.filename type="audio/mp3")
+audio(preload=none, controls=true, src=`${process.env.CDN}voicemails/${item.filename}` type="audio/mp3")
 
 .transcript
     h1 #[span(class="hide") ➖ Hide]#[span(class="show") ➕ Show] Auto-transcription
