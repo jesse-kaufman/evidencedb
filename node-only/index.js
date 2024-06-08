@@ -54,6 +54,7 @@ app.set("view engine", "pug");
 
 // Static routes
 app.use("/public", express.static("public"));
+app.use("/libs/lightbox2", express.static("node_modules/lightbox2/dist"));
 
 // EvidenceItem routes
 import evidenceRoutes from "./routes/evidenceRoutes.js";
