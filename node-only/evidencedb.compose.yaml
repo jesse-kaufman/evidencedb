@@ -1,0 +1,65 @@
+services:
+  evidencedb:
+    container_name: evidencedb
+    read_only: true
+    build:
+      context: .
+      target: production
+    restart: always
+    user: ${PUID}:${PGID}
+    networks:
+      - evidencedb
+    environment:
+      - TZ=${TZ}
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
+    logging:
+      driver: syslog
+      options:
+        syslog-address: udp://192.168.22.11:514
+        tag: texts-nginx
+        syslog-format: rfc5424
+    deploy:
+      resources:
+        limits:
+          cpus: "8"
+          pids: 300
+          memory: 600M
+    security_opt:
+      - no-new-privileges=true
+
+  evidencedb-dev:
+    container_name: evidencedb-dev
+    read_only: true
+    build:
+      context: ./
+      target: development
+      args:
+        - NODE_ENV=development
+    restart: always
+    user: ${PUID}:${PGID}
+    networks:
+      - evidencedb
+    expose:
+      - ${NODE_PORT}
+    environment:
+      - NODE_PORT=${NODE_PORT}
+      - TZ=${TZ}
+    volumes:
+      - ./:/app
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
+    logging:
+      driver: syslog
+      options:
+        syslog-address: udp://192.168.22.11:514
+        tag: texts-nginx
+        syslog-format: rfc5424
+    deploy:
+      resources:
+        limits:
+          cpus: "8"
+          pids: 300
+          memory: 600M
+    security_opt:
+      - no-new-privileges=true

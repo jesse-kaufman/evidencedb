@@ -8,6 +8,7 @@ import gulpFilter from "gulp-filter";
 import jshint from "gulp-jshint";
 import stylish from "jshint-stylish";
 import exec from "gulp-exec";
+import nodemon from "gulp-nodemon";
 
 const sass = gulpSass(dartSass);
 const guppy = gitGuppy(gulp);
@@ -22,30 +23,47 @@ const execReportOptions = {
   stdout: true, // default = true, false means don't write stdout
 };
 
-// task("sass", function (cb) {
-//   src("src/styles/*.scss")
-//     .pipe(sass().on("error", sass.logError))
-//     .pipe(dest("public/css"));
-//   cb();
-// });
-
-task("sass", function () {
-  return gulp
-    .src(".")
-    .pipe(exec((file) => `sass ${file.path}`, execOptions))
-    .pipe(exec.reporter(execReportOptions));
+task("sass", function (cb) {
+  src("src/styles/*.scss")
+    .pipe(sass().on("error", sass.logError))
+    .pipe(dest("public/styles"));
+  cb();
 });
 
 task("ts", function () {
-  return gulp
-    .src(".")
+  return src(".")
     .pipe(exec(() => `tsc -p .`, execOptions))
     .pipe(exec.reporter(execReportOptions));
 });
 
-task("default", function () {
-  watch("src/styles/*.scss", parallel("sass"));
+gulp.task("start-dev", function () {
+  let nodemonOptions = {
+    script: "index.js",
+    ext: "js",
+    env: { NODE_ENV: "development" },
+    verbose: false,
+    ignore: [],
+    watch: [
+      "index.js",
+      "routes/*",
+      "utils/",
+      "models/*",
+      "views/*",
+      "controllers/*",
+    ],
+  };
+
+  nodemon(nodemonOptions).on("restart", function () {
+    console.log("restarted!");
+  });
+
   watch("src/js/*.ts", parallel("ts"));
+  watch("src/styles/*.scss", parallel("sass"));
+});
+
+task("default", function () {
+  watch("src/js/*.tc", parallel("start-dev"), parallel("ts"));
+  watch("src/styles/*.scss", parallel("start-dev"), parallel("sass"));
 });
 
 task("pre-commit", () => {
