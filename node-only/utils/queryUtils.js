@@ -1,4 +1,3 @@
-
 export function getQuery(req) {
   var query = {};
 
