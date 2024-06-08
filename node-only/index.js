@@ -56,7 +56,7 @@ import evidenceRoutes from "./routes/evidenceRoutes.js";
 app.use("/", evidenceRoutes);
 
 // Start the server
-const server = app.listen(8080, () => {
+const server = app.listen(process.env.NODE_PORT, () => {
   console.log(
     `Express running → PORT ${server.address().port} in ${
       process.env.NODE_ENV
