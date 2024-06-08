@@ -1,6 +1,37 @@
 import EvidenceItem from "../models/evidenceItemModel.js";
-import { getStatsQuery } from "../utils/queryUtils.js";
 import { validTypes } from "../models/evidenceItemModel.js";
+
+export function getStatsQuery(query) {
+  const inCount = {
+    $sum: {
+      $cond: {
+        if: { $eq: ["$direction", "IN"] },
+        then: 1,
+        else: 0,
+      },
+    },
+  };
+
+  const outCount = {
+    $sum: {
+      $cond: {
+        if: { $eq: ["$direction", "OUT"] },
+        then: 1,
+        else: 0,
+      },
+    },
+  };
+
+  const group = {
+    $group: {
+      _id: null,
+      in: inCount,
+      out: outCount,
+    },
+  };
+
+  return [{ $match: query }, group];
+}
 
 /**
  * Get statistics for evidence items based on the specified types and query.

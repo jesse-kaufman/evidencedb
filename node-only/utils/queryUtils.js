@@ -26,32 +26,3 @@ export function getQuery(req) {
 
   return query;
 }
-
-export function getStatsQuery(query) {
-  return [
-    { $match: query },
-    {
-      $group: {
-        _id: null,
-        in: {
-          $sum: {
-            $cond: {
-              if: { $eq: ["$direction", "IN"] },
-              then: 1,
-              else: 0,
-            },
-          },
-        },
-        out: {
-          $sum: {
-            $cond: {
-              if: { $eq: ["$direction", "OUT"] },
-              then: 1,
-              else: 0,
-            },
-          },
-        },
-      },
-    },
-  ];
-}
