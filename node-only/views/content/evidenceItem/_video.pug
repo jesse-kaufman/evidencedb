@@ -3,11 +3,11 @@
 // 
 - var videoUrl = `${cdn_url}videos/${encodeURIComponent(item.filename)}`
 
-div
+.title
     strong Original Title: 
-    | #{item.title}
+    | #[em #{item.title}]
     
-div
+.duration
     strong Duration: 
     | #{formatDuration(item.duration)}
 
