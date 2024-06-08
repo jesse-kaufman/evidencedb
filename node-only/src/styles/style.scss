@@ -28,10 +28,6 @@ body {
   padding: 0;
   margin: 0;
 }
-.nowrap {
-  white-space: nowrap;
-  display: inline-block;
-}
 form {
   margin: 0;
   display: inline-block;
@@ -173,10 +169,12 @@ a.button {
     padding-left: 1em;
   }
 
-  div.nowrap {
+  div.search_field {
     margin-top: 0.25em;
     margin-bottom: 0.25em;
     margin-right: 1.5em;
+    white-space: nowrap;
+    display: inline-block;
   }
   select,
   input[type="submit"] {
