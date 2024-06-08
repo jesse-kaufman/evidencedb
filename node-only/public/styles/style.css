@@ -12,11 +12,6 @@ body {
   margin: 0;
 }
 
-.nowrap {
-  white-space: nowrap;
-  display: inline-block;
-}
-
 form {
   margin: 0;
   display: inline-block;
@@ -134,7 +129,21 @@ form {
   text-align: center;
 }
 
-#search {
+a.button {
+  background-color: rgb(131, 83, 209);
+  border-radius: 20px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 0.5px solid white;
+  font-size: 0.8em;
+  margin-top: 0.1em;
+  line-height: 1em;
+}
+
+#header {
   background: rgb(108, 108, 108);
   padding: 0.5em 1em 1em 1em;
   padding-left: 250px;
@@ -147,42 +156,34 @@ form {
   z-index: 999999;
   top: 0;
 }
-#search p {
+#header p {
   margin-top: 1em;
 }
-#search a {
-  background-color: rgb(131, 83, 209);
-  border-radius: 20px;
-  padding: 5px 10px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  border: 0.5px solid white;
-}
 @media (max-width: 794px) {
-  #search {
+  #header {
     padding-left: 1em;
   }
 }
-#search div.nowrap {
+#header div.search_field {
   margin-top: 0.25em;
   margin-bottom: 0.25em;
   margin-right: 1.5em;
+  white-space: nowrap;
+  display: inline-block;
 }
-#search select,
-#search input[type=submit] {
+#header select,
+#header input[type=submit] {
   background: #333;
   color: white;
   border: 1px solid white;
   border-radius: 1.2em;
   padding: 0.25em 1em;
 }
-#search input[type=submit] {
+#header input[type=submit] {
   background: rgb(2, 136, 209);
 }
-#search input[type=text],
-#search #search select {
+#header input[type=text],
+#header select {
   font-size: 1em;
 }
 
