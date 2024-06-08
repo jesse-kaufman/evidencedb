@@ -10,6 +10,9 @@ export function getQuery(req) {
   // Filter based on victim
   if (req.query.victim && req.query.victim !== "both") {
     query.victim = { $in: ["both", req.query.victim] };
+    if (req.query.victim === "others") {
+      query.victim = "others";
+    }
   }
 
   // Filter based on phone number
