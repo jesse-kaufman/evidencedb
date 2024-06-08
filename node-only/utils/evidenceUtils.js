@@ -108,6 +108,7 @@ export async function getDates(include) {
         },
       },
     },
+    { $sort: { _id: 1 } },
   ]);
 
   return dates;
@@ -145,6 +146,7 @@ export async function getNumbers() {
         },
       },
     },
+    { $sort: { date_sent: 1 } },
   ]);
 
   return numbers;
