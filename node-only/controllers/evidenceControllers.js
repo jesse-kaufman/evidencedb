@@ -26,9 +26,17 @@ export async function printEvidence(req, res) {
 
   // Build the query from the request object
   let query = getQuery(req);
+  let dateFilter = {};
 
   // Get stats for the query to display on frontend
   let stats = await getStats(req.query.include, query);
+
+  // Filter based on date
+  if (req.query.date_sent_date) {
+    dateFilter = {
+      dateSentDate: req.query.date_sent_date,
+    };
+  }
 
   // Get matching evidence items for the query
   let evidenceItems = await EvidenceItem.aggregate([{ $match: query }])
@@ -48,11 +56,25 @@ export async function printEvidence(req, res) {
       duration: 1,
       filename: 1,
       attachments: 1,
+      screenshots: 1,
       title: 1,
       formattedDate: {
-        $dateToString: { format: "%b %d, %Y", date: "$date_sent" },
+        $dateToString: {
+          format: "%b %d, %Y",
+          date: "$date_sent",
+          timezone: "America/Chicago",
+        },
       },
-    });
+      dateSentDate: {
+        $dateToString: {
+          format: "%Y-%m-%d",
+          date: "$date_sent",
+          timezone: "America/Chicago",
+        },
+      },
+    })
+    .match(dateFilter);
+
   let dates = await getDates(req.query.include);
 
   // Only get phone number list if req.query.include is unset
