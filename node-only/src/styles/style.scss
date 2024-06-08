@@ -203,7 +203,7 @@ form {
   border: 0.75px solid color.adjust($received-color, $alpha: 0.82);
   border-radius: 20px;
   background: color.adjust($received-color, $alpha: -0.82);
-  max-width: 70%;
+  max-width: 500px;
   width: fit-content;
   overflow: hidden;
 
