@@ -9,8 +9,8 @@ p.duration
 audio(preload=none, controls=true, src=process.env.CDN + 'voicemails/' + item.filename type="audio/mp3")
 
 .transcript
-    h1 Auto-transcription: 
-    | !{item.body.replace(/\n/g, '<br/>')}
+    h1 #[span(class="hide") ➖ Hide]#[span(class="show") ➕ Show] Auto-transcription
+    .content !{item.body.replace(/\n/g, '<br/>')}
 
 script(type="application/ld+json").
     {
