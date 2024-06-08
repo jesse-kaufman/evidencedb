@@ -236,12 +236,23 @@ form {
   }
   .body {
     padding: 0.75em 1em 1em 1em;
+    .title {
+      font-size: 1.2em;
+      line-height: 1.2em;
+      margin-bottom: 0.2em;
+    }
+    .duration {
+      margin-bottom: 1em;
+    }
     .transcript {
       color: #444;
       font-style: italic;
       margin-top: 1em;
 
       h1 {
+        font-size: 1em;
+        cursor: pointer;
+
         .show {
           display: inline;
         }
