@@ -15,6 +15,7 @@ services:
       - CDN=${CDN}
       - NODE_PORT=${NODE_PORT}
       - CSS_VER=${CSS_VER}
+      - GTM_ID=${GTM_ID}
     tmpfs:
       - /tmp:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
     logging:
@@ -47,8 +48,12 @@ services:
     expose:
       - ${NODE_PORT}
     environment:
-      - NODE_PORT=${NODE_PORT}
       - TZ=${TZ}
+      - MONGO_URL=${MONGO_URL}
+      - CDN=${CDN}
+      - NODE_PORT=${NODE_PORT}
+      - CSS_VER=${CSS_VER}
+      - GTM_ID=${GTM_ID}
     volumes:
       - ./:/app
     tmpfs:
