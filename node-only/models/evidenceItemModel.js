@@ -43,6 +43,7 @@ const EvidenceItemSchema = new mongoose.Schema({
   duration: Number,
   filename: String,
   attachments: [AttachmentSchema],
+  screenshots: Array,
 });
 
 const EvidenceItemModel = new mongoose.model("Item", EvidenceItemSchema);

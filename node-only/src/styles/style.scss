@@ -273,6 +273,25 @@ form {
       border-left: 2px solid #666 !important;
       margin-top: 0.25em !important;
     }
+    .screenshots,
+    .attachments {
+      margin-top: 2em;
+      font-size: 0.8em;
+      color: #333;
+      line-height: 1em;
+      border-top: 1px solid #999;
+      h1 {
+        margin: 0;
+      }
+      img {
+        margin-right: 1em;
+        max-width: 200px;
+        max-height: 300px;
+      }
+    }
+    .screenshots img {
+      max-width: 40px;
+    }
   }
   .footer {
     text-align: center;
