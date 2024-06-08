@@ -11,3 +11,20 @@ audio(preload=none, controls=true, src=process.env.CDN + 'voicemails/' + item.fi
 .transcript
     h1 Auto-transcription: 
     | !{item.body.replace(/\n/g, '<br/>')}
+
+script(type="application/ld+json").
+    {
+        "@context": "https://schema.org/",
+        "@type": "AudioObject",
+        "contentUrl": "#{process.env.CDN}voicemails/#{item.filename}"
+        "name": "Voicemail from Brian Tiemeyer on #{item.date_sent.toString({ dateStyle: 'full', timeStyle: 'medium', hour12: true })}",
+        "@id": "https://texts.lloydnet.org/evidence-item/#{item._id}",
+        "datePublished": "#{item.date_sent.toISOString()}",
+        "duration": "#{formatDuration(item.duration).toUpperCase().replace(' ', '')}",
+        "encodingFormat": "audio/mpeg",
+        "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ')}",
+        "author": {
+            "@type": "Person",
+            "name": "Brian Tiemeyer"
+        }
+    }

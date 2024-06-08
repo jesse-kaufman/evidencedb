@@ -6,3 +6,22 @@ div !{item.body}
 
 include _attachments
 
+- var from = item.direction === 'IN' ? 'Brian Tiemeyer' : item.victim.toTitle()
+- var to = item.direction === 'IN' ? item.victim.toTitle() : 'Brian Tiemeyer'
+
+script(type="application/ld+json").
+    {
+        "@context": "https://schema.org/",
+        "@type": "Message",
+        "sender": {
+            "@type": "Person",
+            "name": "Brian Tiemeyer",
+            "phone": "#{item.direction === 'IN' ? formatPhone(item.from) : 'REDACTED'}"
+        },
+        "recipient": {
+            "@type": "Person",
+            "name": "#{to}",
+        }
+        "name": "Text message sent from #{from} to #{to} on #{item.date_sent.toString({ dateStyle: 'full', timeStyle: 'medium', hour12: true })}"
+        "datePublished": "#{item.date_sent.toISOString()}",
+    }

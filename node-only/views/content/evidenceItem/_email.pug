@@ -8,3 +8,24 @@ div !{body.replace(/\d+ E \dth [A-Z]+[a-z]+/, '[JESSE\'S ADDRESS REDACTED]')}
 
 include _attachments
 
+script(type="application/ld+json").
+    {
+        "@context": "https://schema.org/",
+        "@type": "EmailMessage",
+        "sender": {
+            "@type": "Person",
+            "name": "Brian Tiemeyer",
+            "email": "#{item.from.trim().match(/(?:<(.+)>)/)[1]}"
+        },
+        "recipient": {
+            "@type": "Person",
+            "name": "#{item.victim.toTitle()}",
+            "email": "redacted@redacted.com"
+        }
+        "about": {
+            "@type": "Thing",
+            "name": "#{item.subject ? item.subject : "(no subject)"}"
+        },
+        "name": "#{item.subject ? item.subject : "(no subject)"}"
+        "datePublished": "#{item.date_sent.toISOString()}",
+    }
