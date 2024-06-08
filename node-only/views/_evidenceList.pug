@@ -1,0 +1,14 @@
+- var last_number = null
+- var last_email = null
+- var lastDate = null
+#message_list
+    each item in evidenceItems
+        if item.direction === "IN"
+            include evidenceList/dividers/_number
+            include evidenceList/dividers/_email
+            include evidenceList/dividers/_date
+
+        include evidenceList/_evidenceItem
+
+
+
