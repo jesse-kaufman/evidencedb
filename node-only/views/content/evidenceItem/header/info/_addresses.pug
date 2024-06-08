@@ -6,15 +6,20 @@
 if item.direction === 'IN'
 
     span.number
-        strong Brian Tiemeyer 
         if item.type === 'email'
-            - var from = item.from.trim().match(/(?:<(.+)>)/)[1]
-            | &lt;<a href="mailto:#{from}">#{from}</a>&gt; 
+            - var email = item.from.trim().match(/(?:<(.+)>)/)[1]
+            - var name = item.from.trim().replace(`<${email}>`, '')
+            | #[strong #{name}] &lt;<a href="mailto:#{email}">#{email}</a>&gt; 
         else if item.type === 'video'
-            | &lt;YouTube&gt; 
-        else
+            | #[strong Brian Tiemeyer] &lt;YouTube&gt; 
+        else if item.type === 'voicemail' || item.type === 'text'
             - var from = formatPhone(item.from)
-            | &lt;<a href="tel:+1#{item.from}">#{from}</a>&gt; 
+            | #[strong Brian Tiemeyer] &lt;<a href="tel:+1#{item.from}">#{from}</a>&gt; 
+        else
+            - var site = item.from.trim().match(/(?:<(.+)>)/)[1]
+            - var name = item.from.trim().replace(`<${site}>`, '')
+            | #[strong #{name}] &lt;#{site}</a>&gt; 
+            
         strong to 
 
 // Display "victim" information for incoming and outgoing items
