@@ -7,7 +7,7 @@
 
 import { getEvidenceItems } from "../models/evidenceItemModel.js";
 import { getQuery } from "../utils/queryUtils.js";
-import { getStats, getDates, getNumbers } from "../utils/evidenceUtils.js";
+import { getStats, getDates } from "../utils/evidenceUtils.js";
 import {
   formatPhone,
   formatVideoTranscript,
@@ -22,8 +22,6 @@ import {
  * @param {Object} res Response object
  */
 export async function printEvidence(req, res) {
-  let numbers = null;
-
   // Build the query from the request object
   let query = getQuery(req);
 
@@ -36,18 +34,12 @@ export async function printEvidence(req, res) {
   // Get dates for dropdown items
   let dates = await getDates(req.query.include);
 
-  // Only get phone number list if req.query.include is unset
-  if (!req.query.include) {
-    numbers = await getNumbers();
-  }
-
   // Render the index page using pugjs
   await res.render("index", {
     evidenceItems: evidenceItems,
     stats: stats,
     get: req.query,
     dates: dates,
-    numbers: numbers,
     cdn_url: process.env.CDN,
     formatPhone: formatPhone,
     formatVideoTranscript: formatVideoTranscript,
