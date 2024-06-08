@@ -1,0 +1,10 @@
+if item.attachments
+
+    .attachments
+        h3 Attachments:
+        each attachment in item.attachments
+            - var attachment_url = ''
+            if item.type === 'email'
+                - var attachment_url = attachment.attachment_id + '/'
+            - var imageUrl = `${cdn_url}opt/attachments/${attachment_url}${attachment.filename.replace(/\.(jpg|jpeg|png)/i, '.webp')}`
+            a(href=imageUrl data-lightbox=item._id) #[img(src=imageUrl alt=attachment.filename)]
