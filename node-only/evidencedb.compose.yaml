@@ -26,7 +26,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "8"
+          cpus: "10"
           pids: 300
           memory: 600M
     security_opt:
@@ -62,7 +62,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "8"
+          cpus: "10"
           pids: 300
           memory: 600M
     security_opt:
