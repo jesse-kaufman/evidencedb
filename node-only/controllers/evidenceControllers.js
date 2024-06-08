@@ -7,7 +7,8 @@
 
 import { getEvidenceItems } from "../models/evidenceItemModel.js";
 import { getQuery } from "../utils/queryUtils.js";
-import { getStats, getDates } from "../utils/evidenceUtils.js";
+import { getStats } from "../models/statsModel.js";
+import { getDates } from "../models/searchModel.js";
 import {
   formatPhone,
   formatVideoTranscript,
@@ -23,7 +24,7 @@ import {
  */
 export async function printEvidence(req, res) {
   // Build the query from the request object
-  let query = getQuery(req);
+  let query = await getQuery(req);
 
   // Get stats for the query to display on frontend
   let stats = await getStats(req.query.include, query);
