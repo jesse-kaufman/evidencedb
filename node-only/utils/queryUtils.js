@@ -7,11 +7,6 @@ export function getQuery(req) {
     query.$text = { $search: `"${req.query.query}"` };
   }
 
-  // Filter based on date
-  if (req.query.date) {
-    query.date_sent = req.query.date;
-  }
-
   // Filter based on victim
   if (req.query.victim && req.query.victim !== "both") {
     query.victim = { $in: ["both", req.query.victim] };
