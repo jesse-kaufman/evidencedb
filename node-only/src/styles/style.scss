@@ -281,13 +281,14 @@ form {
     }
     video {
       width: 100%;
-      max-width: 50i0px;
+      max-width: 300px;
       max-height: 400px;
     }
     img {
       display: inline-block;
       margin: 0.1em 0.1em 0.1em 0;
-      max-width: 300px;
+      max-width: 200px;
+      max-height: 300px;
     }
     .duration {
       margin-top: 0em;
