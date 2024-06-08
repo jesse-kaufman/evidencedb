@@ -38,7 +38,14 @@ export async function printEvidence(req, res) {
   await res.render("index", {
     evidenceItems: evidenceItems,
     stats: stats,
-    get: req.query,
+    get: {
+      include: req.query.include,
+      victim: req.query.victim,
+      number: req.query.number,
+      date_sent_date: req.query.date_sent_date,
+      type: req.query.type,
+      query: req.query.query,
+    },
     dates: dates,
     cdn_url: process.env.CDN,
     formatPhone: formatPhone,
