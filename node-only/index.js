@@ -1,4 +1,8 @@
-// Server
+/**
+ * Evidence Database
+ *
+ * @author Jesse Kaufman <jesse@jessekaufman.com>
+ */
 
 /**
  * @typedef {Object} Stat
