@@ -46,7 +46,7 @@ export async function getStats(include, core_query) {
   let query = Object.assign({}, core_query);
 
   // Default to all types if none are specified
-  if (!include || !include[0]) {
+  if (include == null || include[0] == null) {
     types = [...validTypes, "total"];
   } else {
     types = [...include, "total"];
@@ -56,16 +56,16 @@ export async function getStats(include, core_query) {
   // Count number of evidence items received/sent per type
   //
   for (let i = 0; i < types.length; i++) {
+    // If type is "total", search all evidence items
+    delete query.type;
+
+    // If type is not "total", search evidence items of that type
     if (types[i] !== "total") {
-      // If type is not "total", search evidence items of that type
       validTypes.push("");
       if (!validTypes.includes(types[i])) {
         throw new Error("Invalid evidence type");
       }
       query.type = types[i];
-    } else {
-      // If type is "total", search all evidence items
-      delete query.type;
     }
 
     // Count number of evidence items received/sent
