@@ -31,6 +31,6 @@ script(type="application/ld+json").
             "email": "redacted@redacted.com"
         },
         "image" : "#{image}",
-        "datePublished": "#{item.date_sent.toISOString()}",
+        "headline": "#{item.subject ? item.subject : "(no subject)"}",
         "datePublished": "#{item.date_sent.toISOString()}"
     }
