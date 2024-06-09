@@ -29,6 +29,7 @@ script(type="application/ld+json").
         "datePublished": "#{item.date_sent.toISOString()}",
         "duration": "#{formatDuration(item.duration).toUpperCase().replace(' ', '')}",
         "encodingFormat": "video/mp4",
+        "image": "#{process.env.CDN}videos/#{item.filename}.webp",
         "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ')}",
         "author": {
             "@type": "Person",

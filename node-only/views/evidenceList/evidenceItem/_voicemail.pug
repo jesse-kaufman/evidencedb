@@ -12,6 +12,12 @@ audio(preload=none, controls=true, src=`${process.env.CDN}voicemails/${item.file
     h1 #[span(class="hide") ➖ Hide]#[span(class="show") ➕ Show] Auto-transcription
     .content !{item.body.replace(/\n/g, '<br/>')}
 
+- var image = process.env.DEFAULT_IMAGE
+
+if item.screenshots
+    - var image = item.screenshots?.length != null ? process.env.CDN + 'opt/screenshots/' + encodeURIComponent(item.screenshots[0].replace(/\.(jpg|jpeg|png)/, '.webp')) : process.env.DEFAULT_IMAGE
+
+
 script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
@@ -23,6 +29,7 @@ script(type="application/ld+json").
         "duration": "#{formatDuration(item.duration).toUpperCase().replace(' ', '')}",
         "encodingFormat": "audio/mpeg",
         "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ')}",
+        "image": "#{image}",
         "author": {
             "@type": "Person",
             "name": "Brian Tiemeyer"

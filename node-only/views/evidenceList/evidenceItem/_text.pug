@@ -8,6 +8,14 @@ include _attachments
 
 - var from = item.direction === 'IN' ? 'Brian Tiemeyer' : item.victim.toTitle()
 - var to = item.direction === 'IN' ? item.victim.toTitle() : 'Brian Tiemeyer'
+- var image = process.env.DEFAULT_IMAGE 
+
+if item.attachments
+    - var image = item.attachments?.length != null ? `${process.env.CDN}opt/attachments/${encodeURIComponent(item.attachments[0]?.filename.replace(/\.(jpg|jpeg|png)/, '.webp'))}` : process.env.DEFAULT_IMAGE
+
+if item.screenshots
+    - var image = item.screenshots?.length != null ? process.env.CDN + 'opt/screenshots/' + encodeURIComponent(item.screenshots[0].replace(/\.(jpg|jpeg|png)/, '.webp')) : process.env.DEFAULT_IMAGE
+
 
 script(type="application/ld+json").
     {
@@ -23,4 +31,5 @@ script(type="application/ld+json").
             "@type": "Person",
             "name": "#{to}"
         },
+        "image": "#{image}",
     }
