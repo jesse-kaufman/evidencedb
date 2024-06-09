@@ -40,7 +40,7 @@ const getStatsQuery = async (query) => {
  * @param {Object} core_query - The core query object to filter the evidence items.
  * @returns {Promise<Array.<Stat>>} - Promise of an array of statistics objects
  */
-export async function getStats(include, core_query) {
+export const getStats = async (include, core_query) => {
   let stats = [];
   let types = null;
   let query = Object.assign({}, core_query);
@@ -52,21 +52,21 @@ export async function getStats(include, core_query) {
     types = [...include, "total"];
   }
 
-  //
   // Count number of evidence items received/sent per type
-  //
-  for (let i = 0; i < types.length; i++) {
-    // If type is "total", search all evidence items
+  for (const type of types) {
+    // Check if type is valid
+    if (type !== "total" && !validTypes.includes(type)) {
+      throw new Error("Invalid evidence type");
+    }
+
+    // Search all evidence items by default
     delete query.type;
 
     // If type is not "total", search evidence items of that type
-    if (types[i] !== "total") {
-      validTypes.push("");
-      if (!validTypes.includes(types[i])) {
-        throw new Error("Invalid evidence type");
-      }
-      query.type = types[i];
+    if (type !== "total") {
+      query.type = type;
     }
+
     // Get query to pull statistics for type
     const statsQuery = await getStatsQuery(query);
 
@@ -74,13 +74,13 @@ export async function getStats(include, core_query) {
     const counts = await EvidenceItem.aggregate(statsQuery);
 
     // Default counts to 0
-    let count_in = counts[0]?.in ? counts[0].in : 0;
-    let count_out = counts[0]?.out ? counts[0].out : 0;
+    const count_in = counts[0]?.in || 0;
+    const count_out = counts[0]?.out || 0;
 
     // Only add to stats if either count is > 0
     if (count_in > 0 || count_out > 0) {
       stats.push({
-        type: types[i],
+        type: type,
         count_in: count_in,
         count_out: count_out,
       });
@@ -88,4 +88,4 @@ export async function getStats(include, core_query) {
   }
 
   return stats;
-}
+};
