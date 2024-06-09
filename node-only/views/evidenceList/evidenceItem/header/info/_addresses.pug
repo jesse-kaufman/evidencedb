@@ -7,18 +7,17 @@ if item.direction === 'IN'
 
     span.number
         if item.type === 'email'
-            - var email = item.from.trim().match(/(?:<(.+)>)/)[1]
-            - var name = item.from.trim().replace(`<${email}>`, '')
-            | #[strong #{name}] &lt;<a href="mailto:#{email}">#{email}</a>&gt; 
-        else if item.type === 'video'
-            | #[strong Brian Tiemeyer] &lt;YouTube&gt; 
+            - var uri = "mailto:"
         else if item.type === 'voicemail' || item.type === 'text'
-            - var from = formatPhone(item.from)
-            | #[strong Brian Tiemeyer] &lt;<a href="tel:+1#{item.from}">#{from}</a>&gt; 
+            - var uri = "tel:"
+
+
+        if uri
+            strong #{item.fromName} 
+            | &lt;#[a(href=`tel:+1${item.fromAddress}`) #{item.fromAddress}]&gt; 
         else
-            - var site = item.from.trim().match(/(?:<(.+)>)/)[1]
-            - var name = item.from.trim().replace(`<${site}>`, '')
-            | #[strong #{name}] &lt;#{site}</a>&gt; 
+            strong #{item.fromName} 
+            | &lt;#[strong #{item.fromAddress}]&gt; 
             
         strong to 
 

@@ -21,8 +21,8 @@ script(type="application/ld+json").
         "@type": "Article",
         "author": {
             "@type": "Person",
-            "name": "Brian Tiemeyer",
-            "email": "#{item.from.trim().match(/(?:<(.+)>)/)[1]}",
+            "name": "#{item.fromName}",
+            "email": "#{item.fromAddress}",
             "url": "https://linktr.ee/the_brian_tiemeyer_experience"
         },
         "recipient": {

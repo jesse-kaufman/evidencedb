@@ -61,29 +61,59 @@ export const getEvidenceItems = async (query, dateSentDate = "") => {
   // Filter based on date (or not)
   const dateFilter = dateSentDate ? { dateSentDate: dateSentDate } : {};
 
-  // Evidence item properties to select from database
-  const project = {
-    type: 1,
-    date_sent: 1,
-    from: 1,
-    to: 1,
-    direction: 1,
-    victim: 1,
-    body: 1,
-    body_html: 1,
-    subject: 1,
-    duration: 1,
-    filename: 1,
-    attachments: 1,
-    screenshots: 1,
-    title: 1,
-    formattedDate: {
-      $dateToString: {
-        format: "%b %d, %Y",
-        date: "$date_sent",
-        timezone: "America/Chicago",
+  const addFromFields = {
+    fromAddress: {
+      $switch: {
+        branches: [
+          {
+            case: { $in: ["$type", ["email", "social"]] },
+            then: {
+              $regexFind: {
+                input: "$from",
+                regex: /<([^>]+)>/,
+                options: "i",
+              },
+            },
+          },
+          {
+            case: { $eq: ["$type", "video"] },
+            then: "YouTube",
+          },
+          {
+            case: { $in: ["$type", ["text", "voicemail"]] },
+            then: {
+              $concat: [
+                { $substr: ["$from", 0, 3] },
+                "-",
+                { $substr: ["$from", 3, 3] },
+                "-",
+                { $substr: ["$from", 6, 4] },
+              ],
+            },
+          },
+        ],
       },
     },
+    fromName: {
+      $switch: {
+        branches: [
+          {
+            case: { $in: ["$type", ["email", "social"]] },
+            then: {
+              $regexFind: {
+                input: "$from",
+                regex: /(.*)<[^>]+>/,
+                options: "i",
+              },
+            },
+          },
+        ],
+        default: "Brian Tiemeyer",
+      },
+    },
+  };
+
+  const addDateFields = {
     dateSentDate: {
       $dateToString: {
         format: "%Y-%m-%d",
@@ -91,13 +121,50 @@ export const getEvidenceItems = async (query, dateSentDate = "") => {
         timezone: "America/Chicago",
       },
     },
+    formattedDate: {
+      $dateToString: {
+        format: "%b %d, %Y",
+        date: "$date_sent",
+        timezone: "America/Chicago",
+      },
+    },
+  };
+
+  const setFromFields = {
+    $set: {
+      fromAddress: {
+        $cond: {
+          if: { $in: ["$type", ["email", "social"]] },
+          then: { $arrayElemAt: ["$fromAddress.captures", 0] },
+          else: "$fromAddress",
+        },
+      },
+      fromName: {
+        $cond: {
+          if: { $in: ["$type", ["email", "social"]] },
+          then: {
+            $rtrim: {
+              input: { $arrayElemAt: ["$fromName.captures", 0] },
+              chars: " ",
+            },
+          },
+          else: "$fromName",
+        },
+      },
+    },
   };
 
   // Return matching evidence items for the query
   return await EvidenceItemModel.aggregate([{ $match: query }])
-    .sort(sort)
-    .project(project)
-    .match(dateFilter);
+    // Add formatted date fields to documents
+    .addFields(addDateFields)
+    // Filter results by date if applicable
+    .match(dateFilter)
+    // Set email from fields if applicable
+    .addFields(addFromFields)
+    .append(setFromFields)
+    // Sort the results by date
+    .sort(sort);
 };
 
 export default EvidenceItemModel;
