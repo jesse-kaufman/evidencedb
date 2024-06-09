@@ -33,4 +33,5 @@ script(type="application/ld+json").
         },
         "image": "#{image}",
         "headline": "Text message sent from #{from} to #{to} on #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}",
+        "datePublished": "#{item.date_sent.toISOString()}"
     }
