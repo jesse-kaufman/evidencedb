@@ -23,7 +23,7 @@ script(type="application/ld+json").
         "@context": "https://schema.org/",
         "@type": "AudioObject",
         "contentUrl": "#{process.env.CDN}voicemails/#{item.filename}"
-        "name": "Voicemail from Brian Tiemeyer on #{item.date_sent.toString({ dateStyle: 'full', timeStyle: 'medium', hour12: true })}",
+        "name": "Voicemail from Brian Tiemeyer on #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}",
         "@id": "https://texts.lloydnet.org/evidence-item/#{item._id}",
         "datePublished": "#{item.date_sent.toISOString()}",
         "duration": "#{formatDuration(item.duration).toUpperCase().replace(' ', '')}",
