@@ -1,7 +1,36 @@
 import EvidenceItem from "../models/evidenceItemModel.js";
 import { validTypes } from "../models/evidenceItemModel.js";
 
-const getStatsQuery = async (query) => {
+/**
+ * Gets stats for a given evidence item type
+ *
+ * @param {*} type
+ * @param {*} query
+ * @returns
+ */
+const getTypeStats = async (type, query) => {
+  // Search all evidence items by default
+  delete query.type;
+
+  // If type is not "total", search evidence items of that type
+  if (type !== "total") {
+    query.type = type;
+  }
+
+  // Get query to pull statistics for type
+  const statsQuery = await buildStatsQuery(query);
+
+  // Get number of evidence items received/sent for type
+  return await EvidenceItem.aggregate(statsQuery);
+};
+
+/**
+ * Builds query to pull statistics from MongoDB
+ *
+ * @param {*} query
+ * @returns
+ */
+const buildStatsQuery = async (query) => {
   const inCount = {
     $sum: {
       $cond: {
@@ -34,7 +63,7 @@ const getStatsQuery = async (query) => {
 };
 
 /**
- * Get statistics for evidence items based on the specified types and query.
+ * Gets statistics for evidence items based on the specified types and query.
  *
  * @param {Array.<EvidenceItemType>} include - An array of types to include in the statistics.
  * @param {Object} core_query - The core query object to filter the evidence items.
@@ -54,28 +83,12 @@ export const getStats = async (include, core_query) => {
 
   // Count number of evidence items received/sent per type
   for (const type of types) {
-    // Check if type is valid
-    if (type !== "total" && !validTypes.includes(type)) {
-      throw new Error("Invalid evidence type");
-    }
-
-    // Search all evidence items by default
-    delete query.type;
-
-    // If type is not "total", search evidence items of that type
-    if (type !== "total") {
-      query.type = type;
-    }
-
-    // Get query to pull statistics for type
-    const statsQuery = await getStatsQuery(query);
-
-    // Get number of evidence items received/sent for type
-    const counts = await EvidenceItem.aggregate(statsQuery);
+    // Get the actual stats from database
+    const typeStats = await getTypeStats(type, query);
 
     // Default counts to 0
-    const count_in = counts[0]?.in || 0;
-    const count_out = counts[0]?.out || 0;
+    const count_in = typeStats[0]?.in || 0;
+    const count_out = typeStats[0]?.out || 0;
 
     // Only add to stats if either count is > 0
     if (count_in > 0 || count_out > 0) {
