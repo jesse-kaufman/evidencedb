@@ -1,7 +1,7 @@
 import EvidenceItem from "../models/evidenceItemModel.js";
 import { validTypes } from "../models/evidenceItemModel.js";
 
-export function getStatsQuery(query) {
+const getStatsQuery = async (query) => {
   const inCount = {
     $sum: {
       $cond: {
@@ -31,7 +31,7 @@ export function getStatsQuery(query) {
   };
 
   return [{ $match: query }, group];
-}
+};
 
 /**
  * Get statistics for evidence items based on the specified types and query.
@@ -67,9 +67,11 @@ export async function getStats(include, core_query) {
       }
       query.type = types[i];
     }
+    // Get query to pull statistics for type
+    const statsQuery = await getStatsQuery(query);
 
-    // Count number of evidence items received/sent
-    let counts = await EvidenceItem.aggregate(getStatsQuery(query));
+    // Get number of evidence items received/sent for type
+    const counts = await EvidenceItem.aggregate(statsQuery);
 
     // Default counts to 0
     let count_in = counts[0]?.in ? counts[0].in : 0;
