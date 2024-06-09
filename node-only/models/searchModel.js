@@ -1,49 +1,19 @@
 import EvidenceItem from "../models/evidenceItemModel.js";
+import { getCountAggregation } from "../utils/db.js";
 
 /**
- * Gets the query object that calculates in/out counts, based on direction
- * @param {*} direction
- * @returns {Promise<Object>} - The $sum aggregation object
- */
-const getCountAggregation = async (direction) => {
-  return {
-    $sum: {
-      $cond: {
-        if: { $eq: ["$direction", direction.toUpperCase()] },
-        then: 1,
-        else: 0,
-      },
-    },
-  };
-};
-
-/**
- * Gets the $group aggregation stage for date query
+ * Get list of dates with in/out counts for search dropdown
  *
- * @returns {Promise<Object>} - The $group aggregation stage
+ * @param {Array} include - An array of types to include.
+ * @returns {Promise<Array>} - An array of date objects containing date, count_in, and count_out.
  */
-const getGroupAggregationStage = async () => {
-  // Get object to count number of evidence items sent per date
-  const outCount = await getCountAggregation("OUT");
+export async function getDates(include) {
+  // Get pipeline array to pull dates
+  const datePipeline = await getDatePipeline(include);
 
-  // Get object to count number of evidence items received per date
-  const inCount = await getCountAggregation("IN");
-
-  // Group by date_sent formatted as "YYYY-MM-DD"
-  return {
-    $group: {
-      _id: {
-        $dateToString: {
-          format: "%Y-%m-%d",
-          date: "$date_sent",
-          timezone: process.env.TZ,
-        },
-      },
-      in: inCount,
-      out: outCount,
-    },
-  };
-};
+  // Return list of dates with in/out counts
+  return await EvidenceItem.aggregate(datePipeline);
+}
 
 /**
  * Gets aggregat pipeline array to pull dates and counts from database
@@ -51,7 +21,7 @@ const getGroupAggregationStage = async () => {
  * @param {*} include
  * @returns
  */
-const getDateQuery = async (include) => {
+const getDatePipeline = async (include) => {
   // Default to all types if none are specified
   let match = {};
   if (include && include[0]) {
@@ -64,19 +34,28 @@ const getDateQuery = async (include) => {
   // Sort by date ascending
   const sort = { $sort: { _id: 1 } };
 
+  // Return complete pipeline array
   return [match, group, sort];
 };
 
 /**
- * Get list of dates with in/out counts for search dropdown
+ * Gets the $group aggregation stage for pipeline
  *
- * @param {Array} include - An array of types to include.
- * @returns {Promise<Array>} - An array of date objects containing date, count_in, and count_out.
+ * @returns {Promise<Object>} - The $group aggregation stage
  */
-export async function getDates(include) {
-  // Get $match, $group, and $sort objects for query
-  const dateQuery = await getDateQuery(include);
-
-  // Return list of dates with in/out counts
-  return await EvidenceItem.aggregate(dateQuery);
-}
+const getGroupAggregationStage = async () => {
+  // Group by date_sent formatted as "YYYY-MM-DD" and count items sent/received
+  return {
+    $group: {
+      _id: {
+        $dateToString: {
+          format: "%Y-%m-%d",
+          date: "$date_sent",
+          timezone: process.env.TZ,
+        },
+      },
+      in: await getCountAggregation("IN"),
+      out: await getCountAggregation("OUT"),
+    },
+  };
+};
