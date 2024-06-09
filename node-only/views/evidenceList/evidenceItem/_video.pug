@@ -23,7 +23,7 @@ script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
         "@type": "VideoObject",
-        "contentUrl": "#{process.env.CDN}videos/#{item.filename}"
+        "contentUrl": "#{process.env.CDN}videos/#{item.filename}",
         "name": "#{item.title}",
         "@id": "https://texts.lloydnet.org/evidence-item/#{item._id}",
         "datePublished": "#{item.date_sent.toISOString()}",

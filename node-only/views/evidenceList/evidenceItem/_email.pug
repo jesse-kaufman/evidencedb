@@ -11,21 +11,19 @@ include _attachments
 script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
-        "@type": "EmailMessage",
-        "sender": {
+        "@type": "Article",
+        "author": {
             "@type": "Person",
             "name": "Brian Tiemeyer",
-            "email": "#{item.from.trim().match(/(?:<(.+)>)/)[1]}"
+            "email": "#{item.from.trim().match(/(?:<(.+)>)/)[1]}",
+            "url": "https://linktr.ee/the_brian_tiemeyer_experience"
         },
         "recipient": {
             "@type": "Person",
             "name": "#{item.victim.toTitle()}",
             "email": "redacted@redacted.com"
-        }
-        "about": {
-            "@type": "Thing",
-            "name": "#{item.subject ? item.subject : "(no subject)"}"
         },
         "name": "#{item.subject ? item.subject : "(no subject)"}"
         "datePublished": "#{item.date_sent.toISOString()}",
+        "datePublished": "#{item.date_sent.toISOString()}"
     }

@@ -12,16 +12,14 @@ include _attachments
 script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
-        "@type": "Message",
-        "sender": {
+        "@type": "Article",
+        "author": {
             "@type": "Person",
             "name": "Brian Tiemeyer",
-            "phone": "#{item.direction === 'IN' ? formatPhone(item.from) : 'REDACTED'}"
+            "url": "https://linktr.ee/the_brian_tiemeyer_experience"
         },
         "recipient": {
             "@type": "Person",
-            "name": "#{to}",
-        }
-        "name": "Text message sent from #{from} to #{to} on #{item.date_sent.toString({ dateStyle: 'full', timeStyle: 'medium', hour12: true })}"
-        "datePublished": "#{item.date_sent.toISOString()}",
+            "name": "#{to}"
+        },
     }
