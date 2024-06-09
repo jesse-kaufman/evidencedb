@@ -1,66 +1,6 @@
 import EvidenceItem from "../models/evidenceItemModel.js";
 import { validTypes } from "../models/evidenceItemModel.js";
-
-/**
- * Gets stats for a given evidence item type
- *
- * @param {*} type
- * @param {*} query
- * @returns
- */
-const getTypeStats = async (type, query) => {
-  // Search all evidence items by default
-  delete query.type;
-
-  // If type is not "total", search evidence items of that type
-  if (type !== "total") {
-    query.type = type;
-  }
-
-  // Get query to pull statistics for type
-  const statsQuery = await buildStatsQuery(query);
-
-  // Get number of evidence items received/sent for type
-  return await EvidenceItem.aggregate(statsQuery);
-};
-
-/**
- * Builds query to pull statistics from MongoDB
- *
- * @param {*} query
- * @returns
- */
-const buildStatsQuery = async (query) => {
-  const inCount = {
-    $sum: {
-      $cond: {
-        if: { $eq: ["$direction", "IN"] },
-        then: 1,
-        else: 0,
-      },
-    },
-  };
-
-  const outCount = {
-    $sum: {
-      $cond: {
-        if: { $eq: ["$direction", "OUT"] },
-        then: 1,
-        else: 0,
-      },
-    },
-  };
-
-  const group = {
-    $group: {
-      _id: null,
-      in: inCount,
-      out: outCount,
-    },
-  };
-
-  return [{ $match: query }, group];
-};
+import { getCountAggregation } from "../utils/db.js";
 
 /**
  * Gets statistics for evidence items based on the specified types and query.
@@ -101,4 +41,53 @@ export const getStats = async (include, core_query) => {
   }
 
   return stats;
+};
+
+/**
+ * Builds query to pull statistics from MongoDB
+ *
+ * @param {*} query
+ * @returns
+ */
+const getTypeStatsPipeline = async (type, query) => {
+  // Search all evidence items by default
+  delete query.type;
+
+  // If type is not "total", search evidence items of that type
+  if (type !== "total") {
+    query.type = type;
+  }
+
+  // Get aggregation to count number of evidence items sent per type
+  const outCount = await getCountAggregation("OUT");
+
+  // Get aggregation to count number of evidence items received per type
+  const inCount = await getCountAggregation("IN");
+
+  // Group by type
+  const group = {
+    $group: {
+      _id: null,
+      in: inCount,
+      out: outCount,
+    },
+  };
+
+  // Return complete pipeline array
+  return [{ $match: query }, group];
+};
+
+/**
+ * Gets stats for a given evidence item type
+ *
+ * @param {*} type
+ * @param {*} query
+ * @returns
+ */
+const getTypeStats = async (type, query) => {
+  // Get query to pull statistics for type
+  const statsQuery = await getTypeStatsPipeline(type, query);
+
+  // Get number of evidence items received/sent for type
+  return await EvidenceItem.aggregate(statsQuery);
 };
