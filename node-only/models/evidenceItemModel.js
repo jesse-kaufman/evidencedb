@@ -48,6 +48,12 @@ const EvidenceItemSchema = new mongoose.Schema({
 
 const EvidenceItemModel = new mongoose.model("Item", EvidenceItemSchema);
 
+/**
+ * Gets evidence items from database
+ * @param {*} query
+ * @param {*} dateSentDate
+ * @returns
+ */
 export const getEvidenceItems = async function (query, dateSentDate = "") {
   // Sort by date
   const sort = { date_sent: 1 };
@@ -87,10 +93,11 @@ export const getEvidenceItems = async function (query, dateSentDate = "") {
     },
   };
 
-  // Get matching evidence items for the query
+  // Return matching evidence items for the query
   return await EvidenceItemModel.aggregate([{ $match: query }])
     .sort(sort)
     .project(project)
     .match(dateFilter);
 };
+
 export default EvidenceItemModel;
