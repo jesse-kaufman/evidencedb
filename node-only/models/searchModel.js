@@ -25,7 +25,7 @@ const getDatePipeline = async (include) => {
   // Default to all types if none are specified
   let match = {};
   if (include && include[0]) {
-    match = { $match: { type: { $in: include } } };
+    match = { type: { $in: include } };
   }
 
   // Group by date and sum number of evidence items received/sent
@@ -35,7 +35,7 @@ const getDatePipeline = async (include) => {
   const sort = { $sort: { _id: 1 } };
 
   // Return complete pipeline array
-  return [match, group, sort];
+  return [{ $match: match }, group, sort];
 };
 
 /**
