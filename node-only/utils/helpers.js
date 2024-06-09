@@ -29,7 +29,7 @@ export function formatPhone(number) {
  * @param {string} duration - Duration of video
  * @returns {string} Formatted transcript
  */
-export function formatVideoTranscript(transcript, duration) {
+export const formatVideoTranscript = (transcript, duration) => {
   // Default hasHour to false and use var so the scope is the function
   var hasHour = false;
 
@@ -67,7 +67,7 @@ export function formatVideoTranscript(transcript, duration) {
 
     return `<br/><span class="time">${formattedTime}</span>`;
   });
-}
+};
 
 /**
  * Formats duration
