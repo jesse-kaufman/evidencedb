@@ -3,9 +3,9 @@ import EvidenceItem from "../models/evidenceItemModel.js";
 /**
  * Gets the query object that calculates in/out counts, based on direction
  * @param {*} direction
- * @returns {Promise<Object>} - The $sum object for direction
+ * @returns {Promise<Object>} - The $sum aggregation object
  */
-const getCountQueryObject = async (direction) => {
+const getCountAggregation = async (direction) => {
   return {
     $sum: {
       $cond: {
@@ -18,16 +18,16 @@ const getCountQueryObject = async (direction) => {
 };
 
 /**
- * Gets the $group aggregate object for date query
+ * Gets the $group aggregation stage for date query
  *
- * @returns {Promise<Object>} - The $group aggregate
+ * @returns {Promise<Object>} - The $group aggregation stage
  */
-const getGroupQueryObject = async () => {
+const getGroupAggregationStage = async () => {
   // Get object to count number of evidence items sent per date
-  const outCount = await getCountQueryObject("OUT");
+  const outCount = await getCountAggregation("OUT");
 
   // Get object to count number of evidence items received per date
-  const inCount = await getCountQueryObject("IN");
+  const inCount = await getCountAggregation("IN");
 
   // Group by date_sent formatted as "YYYY-MM-DD"
   return {
@@ -46,24 +46,37 @@ const getGroupQueryObject = async () => {
 };
 
 /**
+ * Gets aggregat pipeline array to pull dates and counts from database
+ *
+ * @param {*} include
+ * @returns
+ */
+const getDateQuery = async (include) => {
+  // Default to all types if none are specified
+  let match = {};
+  if (include && include[0]) {
+    match = { $match: { type: { $in: include } } };
+  }
+
+  // Group by date and sum number of evidence items received/sent
+  const group = await getGroupAggregationStage();
+
+  // Sort by date ascending
+  const sort = { $sort: { _id: 1 } };
+
+  return [match, group, sort];
+};
+
+/**
  * Get list of dates with in/out counts for search dropdown
  *
  * @param {Array} include - An array of types to include.
  * @returns {Promise<Array>} - An array of date objects containing date, count_in, and count_out.
  */
 export async function getDates(include) {
-  // Default to all types if none are specified
-  let match = {};
-  if (include && include[0]) {
-    match = { type: { $in: include } };
-  }
-
-  // Group by date and sum number of evidence items received/sent
-  const group = await getGroupQueryObject();
-
-  // Sort by date ascending
-  const sort = { $sort: { _id: 1 } };
+  // Get $match, $group, and $sort objects for query
+  const dateQuery = await getDateQuery(include);
 
   // Return list of dates with in/out counts
-  return await EvidenceItem.aggregate([{ $match: match }, group, sort]);
+  return await EvidenceItem.aggregate(dateQuery);
 }
