@@ -17,6 +17,7 @@ script(type="application/ld+json").
             "@type": "Person",
             "name": "#{from}",
             "phone": "#{item.direction === 'IN' ? formatPhone(item.from) : 'REDACTED'}",
+            "url": "#{item.direction === 'IN' ? 'https://linktr.ee/the_brian_tiemeyer_experience' : 'https://texts.lloydnet.org/'}"
         },
         "recipient": {
             "@type": "Person",
