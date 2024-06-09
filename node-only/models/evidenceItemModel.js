@@ -54,7 +54,7 @@ const EvidenceItemModel = new mongoose.model("Item", EvidenceItemSchema);
  * @param {*} dateSentDate
  * @returns
  */
-export const getEvidenceItems = async function (query, dateSentDate = "") {
+export const getEvidenceItems = async (query, dateSentDate = "") => {
   // Sort by date
   const sort = { date_sent: 1 };
 
