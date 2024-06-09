@@ -3,4 +3,4 @@ if item.screenshots
         h3 Screenshots:
         each screenshot in item.screenshots
             - var imageUrl = `${cdn_url}opt/screenshots/${screenshot.replace(/\.(jpg|jpeg|png)/i, '.webp')}`
-            a(href=imageUrl data-lightbox=item._id) #[img(src=imageUrl alt=screenshot)]
+            a(href=imageUrl data-lightbox=item._id) #[img(src=imageUrl alt=screenshot lazy=true)]
