@@ -13,39 +13,46 @@ export async function getDates(include) {
     match = { type: { $in: include } };
   }
 
-  // Get list of dates with in/out counts
-  let dates = await EvidenceItem.aggregate([
-    { $match: match },
-    {
-      $group: {
-        _id: {
-          $dateToString: {
-            format: "%Y-%m-%d",
-            date: "$date_sent",
-          },
-        },
-        in: {
-          $sum: {
-            $cond: {
-              if: { $eq: ["$direction", "IN"] },
-              then: 1,
-              else: 0,
-            },
-          },
-        },
-        out: {
-          $sum: {
-            $cond: {
-              if: { $eq: ["$direction", "OUT"] },
-              then: 1,
-              else: 0,
-            },
-          },
-        },
+  // Count number of evidence items received per date
+  const inCount = {
+    $sum: {
+      $cond: {
+        if: { $eq: ["$direction", "IN"] },
+        then: 1,
+        else: 0,
       },
     },
-    { $sort: { _id: 1 } },
-  ]);
+  };
 
-  return dates;
+  // Count number of evidence items sent per date
+  const outCount = {
+    $sum: {
+      $cond: {
+        if: { $eq: ["$direction", "OUT"] },
+        then: 1,
+        else: 0,
+      },
+    },
+  };
+
+  // Group by date and sum number of evidence items received/sent
+  const group = {
+    $group: {
+      _id: {
+        $dateToString: {
+          format: "%Y-%m-%d",
+          date: "$date_sent",
+          timezone: process.env.TZ,
+        },
+      },
+      in: inCount,
+      out: outCount,
+    },
+  };
+
+  // Sort by date ascending
+  const sort = { $sort: { _id: 1 } };
+
+  // Return list of dates with in/out counts
+  return await EvidenceItem.aggregate([{ $match: match }, group, sort]);
 }
