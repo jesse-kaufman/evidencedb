@@ -53,12 +53,7 @@ export const getEvidenceItems = async function (query, dateSentDate = "") {
   const sort = { date_sent: 1 };
 
   // Filter based on date (or not)
-  let dateFilter = {};
-  if (dateSentDate) {
-    dateFilter = {
-      dateSentDate: dateSentDate,
-    };
-  }
+  const dateFilter = dateSentDate ? { dateSentDate: dateSentDate } : {};
 
   // Evidence item properties to select from database
   const project = {
