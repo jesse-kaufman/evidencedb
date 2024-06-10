@@ -19,6 +19,7 @@
     @include sent-message(config.$sent-color, -0.4);
   }
   &.jesse {
+    @include sent-message(config.$email-color, -0.15);
     color: white;
   }
 }
