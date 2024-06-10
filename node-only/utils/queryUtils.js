@@ -1,5 +1,11 @@
-export function getQuery(req) {
+import mongoose from "mongoose";
+
+export async function getQuery(req) {
   var query = {};
+
+  if (req.params.id) {
+    query._id = new mongoose.Types.ObjectId(req.params.id);
+  }
 
   // Filter based on evidence item body
   if (req.query.query) {

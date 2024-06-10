@@ -1,10 +1,13 @@
 - var messageClass = item.direction === 'OUT' ? item.victim : 'offender'
 
-.message(class=item.type + ' ' + messageClass)
+.message(class=item.type + ' ' + messageClass id=item._id)
     .meta
         include evidenceItem/header/_icon
         include evidenceItem/header/_info
 
+        a(href=`/evidence-item/${item._id}` target="_blank").evidence-item-link
+            svg(width="16" height="16")
+                use(xlink:href="../../public/images/share.svg#share")
     .body
         if item.type === 'video'
             include evidenceItem/_video

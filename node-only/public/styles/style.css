@@ -242,6 +242,12 @@ a.button {
 .email .meta strong.shannon {
   display: inline-block;
 }
+.message .meta a.evidence-item-link, .voicemail .meta a.evidence-item-link, .social .meta a.evidence-item-link, .video .meta a.evidence-item-link, .offender .meta a.evidence-item-link, .email .meta a.evidence-item-link {
+  position: relative;
+  top: 0;
+  right: 0;
+  display: block;
+}
 .message .body, .voicemail .body, .social .body, .video .body, .offender .body, .email .body {
   padding: 0.75em 1em 1em 1em;
 }
@@ -348,6 +354,14 @@ a.button {
 }
 .message .footer span, .voicemail .footer span, .social .footer span, .video .footer span, .offender .footer span, .email .footer span {
   opacity: 0.4;
+}
+
+.evidence-item-link {
+  width: 8px;
+  height: 16px;
+  text-align: center;
+  margin: 0 0 0 auto;
+  padding-left: 1em;
 }
 
 .email {

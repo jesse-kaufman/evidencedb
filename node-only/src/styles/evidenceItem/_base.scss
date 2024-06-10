@@ -40,6 +40,12 @@
     strong.shannon {
       display: inline-block;
     }
+    a.evidence-item-link {
+      position: relative;
+      top: 0;
+      right: 0;
+      display: block;
+    }
   }
   .body {
     padding: 0.75em 1em 1em 1em;
