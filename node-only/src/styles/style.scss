@@ -405,7 +405,7 @@ a.button {
   ///
   /// Styles for incoming messages
   ///
-  &.brian {
+  &.offender {
     /// Shared styles for labels
     @mixin labels($color) {
       border: 0.75px solid #333;
