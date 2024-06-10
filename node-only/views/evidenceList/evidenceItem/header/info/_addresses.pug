@@ -6,19 +6,21 @@
 if item.direction === 'IN'
 
     span.number
+        - var uri = null
         if item.type === 'email'
             - var uri = "mailto:"
         else if item.type === 'voicemail' || item.type === 'text'
-            - var uri = "tel:"
+            - var uri = "tel:+1-"
+        else if item.type === 'social' && item.fromAddress.match(/^http/)
+            - var uri = ""
 
-
-        if uri
+        if uri != null
             strong #{item.fromName} 
-            | &lt;#[a(href=`tel:+1${item.fromAddress}`) #{item.fromAddress}]&gt; 
+            | &lt;#[a(href=`${uri}${item.fromAddress}`) #{item.fromAddress}]&gt; 
         else
             strong #{item.fromName} 
             | &lt;#[strong #{item.fromAddress}]&gt; 
-            
+
         | to 
 
 // Display "victim" information for incoming and outgoing items
