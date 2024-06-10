@@ -1,0 +1,14 @@
+@use "config" as config;
+a.button {
+  background-color: config.$voicemail-color;
+  border-radius: 20px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 0.5px solid white;
+  font-size: 0.8em;
+  margin-top: 0.1em;
+  line-height: 1em;
+}

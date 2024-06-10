@@ -1,0 +1,24 @@
+@use "sass:color";
+@use "config" as config;
+
+///
+/// Sent items
+///
+@mixin sent-message($color, $alpha) {
+  background: color.adjust($color, $alpha: $alpha);
+  margin-left: auto;
+  .meta,
+  .footer {
+    background: $color;
+  }
+}
+
+.message {
+  &.jesse,
+  &.shannon {
+    @include sent-message(config.$sent-color, -0.4);
+  }
+  &.jesse {
+    color: white;
+  }
+}

@@ -1,0 +1,21 @@
+@use "sass:color";
+@use "config" as config;
+@use "evidenceItem/base" as itemBase;
+
+///
+/// Video message
+///
+.video {
+  @extend .message;
+  background: color.adjust(config.$video-color, $alpha: -0.82);
+
+  .footer,
+  .meta {
+    background: color.adjust(config.$video-color, $alpha: -0.7);
+  }
+  .body > h1 {
+    font-size: 1.4em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}

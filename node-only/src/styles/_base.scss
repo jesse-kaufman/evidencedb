@@ -1,0 +1,27 @@
+body {
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4em;
+  position: relative;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+form {
+  margin: 0;
+  display: inline-block;
+}
+#message_list {
+  margin: 120px 8px 8px 8px;
+}
+span.time {
+  opacity: 0.56;
+  padding-right: 0.5em;
+}
+mark {
+  background-color: yellow;
+  font-weight: bold;
+}

@@ -7,12 +7,3 @@
   line-height: 1.2em;
   text-align: right;
 }
-
-@mixin sent-message($color, $alpha) {
-  background: color.adjust($color, $alpha: $alpha);
-  margin-left: auto;
-  .meta,
-  .footer {
-    background: $color;
-  }
-}
