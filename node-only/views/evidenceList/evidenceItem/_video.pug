@@ -31,10 +31,10 @@ script(type="application/ld+json").
         "encodingFormat": "video/mp4",
         "image": "#{process.env.CDN}videos/#{item.filename}.webp",
         "thumbnailURL": "#{process.env.CDN}videos/#{item.filename}.webp",
-        "description": "Video posted by Brian Tiemeyer on  #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}"
+        "description": "Video posted by #{process.env.OFFENDER_NAME} on  #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}"
         "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ')}",
         "author": {
             "@type": "Person",
-            "name": "Brian Tiemeyer"
+            "name": "#{process.env.OFFENDER_NAME}"
         }
     }

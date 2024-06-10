@@ -23,7 +23,7 @@ script(type="application/ld+json").
             "@type": "Person",
             "name": "#{item.fromName}",
             "email": "#{item.fromAddress}",
-            "url": "https://linktr.ee/the_brian_tiemeyer_experience"
+            "url": "#{item.direction === 'IN' ? `${process.env.OFFENDER_URL}` : 'https://texts.lloydnet.org/'}"
         },
         "recipient": {
             "@type": "Person",

@@ -108,7 +108,7 @@ export const getEvidenceItems = async (query, dateSentDate = "") => {
             },
           },
         ],
-        default: "Brian Tiemeyer",
+        default: process.env.OFFENDER_NAME,
       },
     },
   };

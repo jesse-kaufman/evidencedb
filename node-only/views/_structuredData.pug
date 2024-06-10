@@ -2,16 +2,16 @@ script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
         "@type": "Article",
-        "name": "Brian Tiemeyer Harassment Database",
-        "headline": "Brian Tiemeyer's Harassment, Stalking, Threats, Extortion and Blackmail of others",
+        "name": "#{process.env.PAGE_TITLE}",
+        "headline": "#{process.env.PAGE_TITLE}",
         "image": "#{process.env.DEFAULT_IMAGE}",
         "author": {
             "@type": "Person",
-            "name": "Brian Tiemeyer",
-            "url": "https://linktr.ee/the_brian_tiemeyer_experience"
+            "name": "#{process.env.OFFENDER_NAME}",
+            "url": "#{process.env.OFFENDER_URL}"
         },
         "datePublished": "2024-01-01T00:00:00Z",
-        "description": "This database contains MOST of the harassment sent by Brian Tiemeyer. It does not include countless social media messages, comments, etc."
+        "description": "#{process.env.PAGE_DESCRIPTION}"
     }
 script(type="application/ld+json").
     {
@@ -19,12 +19,12 @@ script(type="application/ld+json").
         "@type": "ProfilePage",
         "mainEntity": {
             "@type": "Person",
-            "name": "Brian Tiemeyer"
+            "name": "#{process.env.OFFENDER_NAME}",
         }
     }
 script(type="application/ld+json").
     {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Brian Tiemeyer"
+        "name": "#{process.env.OFFENDER_NAME}"
     }

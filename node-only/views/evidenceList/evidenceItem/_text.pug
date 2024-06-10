@@ -6,8 +6,8 @@ div !{item.body}
 
 include _attachments
 
-- var from = item.direction === 'IN' ? 'Brian Tiemeyer' : item.victim.toTitle()
-- var to = item.direction === 'IN' ? item.victim.toTitle() : 'Brian Tiemeyer'
+- var from = item.direction === 'IN' ? process.env.OFFENDER_NAME : item.victim.toTitle()
+- var to = item.direction === 'IN' ? item.victim.toTitle() : process.env.OFFENDER_NAME
 - var image = process.env.DEFAULT_IMAGE 
 
 if item.attachments
@@ -25,7 +25,7 @@ script(type="application/ld+json").
             "@type": "Person",
             "name": "#{from}",
             "phone": "#{item.direction === 'IN' ? formatPhone(item.from) : 'REDACTED'}",
-            "url": "#{item.direction === 'IN' ? 'https://linktr.ee/the_brian_tiemeyer_experience' : 'https://texts.lloydnet.org/'}"
+            "url": "#{item.direction === 'IN' ? `${process.env.OFFENDER_URL}` : 'https://texts.lloydnet.org/'}"
         },
         "recipient": {
             "@type": "Person",

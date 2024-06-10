@@ -1,13 +1,13 @@
 head
-    title Brian Tiemeyer's Harassment, Stalking, Threats, Extortion and Blackmail of others
+    title= process.env.PAGE_TITLE
 
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(property="og:type" content="article") 
-    meta(property="og:url" content="https://texts.lloydnet.org") 
-    meta(property="og:title" content="Brian Tiemeyer's Harassment, Stalking, Threats, Extortion and Blackmail of others") 
-    meta(property="og:image" content="https://cdn.lloydnet.org/texts/opt/screenshots/2024-01-18%20Sexual%20harassment%20-%201.webp")
-    meta(property="og:description" content="This database contains MOST of the harassment sent by Brian Tiemeyer. It does not include countless social media messages, comments, etc.")
+    meta(property="og:url" content=`${process.env.BASE_URL}`)
+    meta(property="og:title" content=`${process.env.PAGE_TITLE}`)
+    meta(property="og:image" content=`${process.env.DEFAULT_IMAGE}`)
+    meta(property="og:description" content=`${process.env.PAGE_DESCRIPTION}`)
 
     script.
         (function(w, d, s, l, i) {
