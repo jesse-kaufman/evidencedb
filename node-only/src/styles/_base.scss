@@ -14,12 +14,12 @@ form {
   margin: 0;
   display: inline-block;
 }
-#message_list {
-  margin: 120px 8px 8px 8px;
+footer {
+  text-align: center;
+  font-size: 0.8em;
 }
-span.time {
-  opacity: 0.56;
-  padding-right: 0.5em;
+#message_list {
+  margin: 0 8px 8px 8px;
 }
 mark {
   background-color: yellow;
