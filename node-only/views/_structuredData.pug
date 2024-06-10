@@ -25,6 +25,18 @@ script(type="application/ld+json").
 script(type="application/ld+json").
     {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "#{process.env.OFFENDER_NAME}"
+        "@type": "LocalBusiness",
+        "name": "#{process.env.OFFENDER_NAME}",
+        "image": "#{process.env.DEFAULT_IMAGE}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "#{process.env.OFFENDER_CITY}",
+            "addressRegion": "#{process.env.OFFENDER_STATE}",
+            "postalCode": "#{process.env.OFFENDER_ZIP}",
+            "streetAddress": "#{process.env.OFFENDER_ADDRESS}",
+            "addressCountry": "US"
+        },
+        "url": "#{process.env.OFFENDER_URL}",
+        "priceRange": "$",
+        "telephone": "#{process.env.OFFENDER_PHONE}"
     }

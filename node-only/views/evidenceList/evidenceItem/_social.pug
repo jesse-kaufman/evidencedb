@@ -16,6 +16,7 @@ script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
         "@type": "Article",
+        "@id": "https://texts.lloydnet.org/evidence-item/#{item._id}",
         "author": {
             "@type": "Person",
             "name": "#{process.env.OFFENDER_NAME}",
