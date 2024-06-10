@@ -24,7 +24,7 @@ const execReportOptions = {
 };
 
 task("sass", function (cb) {
-  src("src/styles/*.scss")
+  src("src/styles/**/*.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(dest("public/styles"));
   cb();
@@ -58,7 +58,7 @@ gulp.task("start-dev", function () {
   });
 
   watch("src/js/*.ts", parallel("ts"));
-  watch("src/styles/*.scss", parallel("sass"));
+  watch("src/styles/**/*.scss", parallel("sass"));
 });
 
 task("default", function () {
