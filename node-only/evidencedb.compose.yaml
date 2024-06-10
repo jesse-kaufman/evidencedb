@@ -60,6 +60,10 @@ services:
       - CSS_VER=${CSS_VER}
       - GTM_ID=${GTM_ID}
       - DEFAULT_IMAGE=${DEFAULT_IMAGE}
+      - OFFENDER_NAME=${OFFENDER_NAME}
+      - PAGE_TITLE=${PAGE_TITLE}
+      - BASE_URL=${BASE_URL}
+      - PAGE_DESCRIPTION=${PAGE_DESCRIPTION}
     volumes:
       - ./:/app
     tmpfs:
