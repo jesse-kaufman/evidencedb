@@ -1,8 +1,7 @@
 // 
 // Social Media Evidence Item
 // 
-
-div !{item.body.replace(/\n/g,"<br/>")}
+| !{item.body_html ? item.body_html : item.body.replace(/\n/g, '<br/>')}
 
 include _attachments
 
