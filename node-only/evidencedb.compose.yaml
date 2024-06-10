@@ -20,7 +20,7 @@ services:
       - OFFENDER_NAME=${OFFENDER_NAME}
       - PAGE_TITLE=${PAGE_TITLE}
       - BASE_URL=${BASE_URL}
-      - PAGE_DECRIPTION=${PAGE_DECRIPTION}
+      - PAGE_DESCRIPTION=${PAGE_DESCRIPTION}
     tmpfs:
       - /tmp:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
     logging:
