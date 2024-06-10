@@ -62,8 +62,8 @@ gulp.task("start-dev", function () {
 });
 
 task("default", function () {
-  watch("src/js/*.tc", parallel("start-dev"), parallel("ts"));
-  watch("src/styles/*.scss", parallel("start-dev"), parallel("sass"));
+  watch("src/js/*.tc", parallel("ts"));
+  watch(["src/styles/*/*.scss", "src/styles/*.scss"], parallel("sass"));
 });
 
 task("pre-commit", () => {
