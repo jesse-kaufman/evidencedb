@@ -1,0 +1,18 @@
+@use "sass:color";
+@mixin counts {
+  font-size: 1em;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.2em;
+  text-align: right;
+}
+
+@mixin sent-message($color, $alpha) {
+  background: color.adjust($color, $alpha: $alpha);
+  margin-left: auto;
+  .meta,
+  .footer {
+    background: $color;
+  }
+}
