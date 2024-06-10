@@ -27,6 +27,12 @@ Object.defineProperty(String.prototype, "toTitle", {
 import dotenv from "dotenv";
 dotenv.config();
 
+process.env.BASE_URL = process.env.DEV_BASE_URL;
+
+if (process.env.NODE_ENV === "production") {
+  process.env.BASE_URL = process.env.PROD_BASE_URL;
+}
+
 // MongoDB connection
 import connectDB from "./utils/db.js";
 connectDB();
