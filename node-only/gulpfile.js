@@ -43,14 +43,7 @@ gulp.task("start-dev", function () {
     env: { NODE_ENV: "development" },
     verbose: false,
     ignore: [],
-    watch: [
-      "index.js",
-      "routes/*",
-      "utils/",
-      "models/*",
-      "views/*",
-      "controllers/*",
-    ],
+    watch: ["index.js", "**/*.js", "!node_modules/**", "!public/**"],
   };
 
   nodemon(nodemonOptions).on("restart", function () {
@@ -63,7 +56,7 @@ gulp.task("start-dev", function () {
 
 task("default", function () {
   watch("src/js/*.tc", parallel("ts"));
-  watch(["src/styles/*/*.scss", "src/styles/*.scss"], parallel("sass"));
+  watch("src/styles/**/*.scss", parallel("sass"));
 });
 
 task("pre-commit", () => {
