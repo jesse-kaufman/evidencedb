@@ -29,11 +29,11 @@ export async function printEvidence(req, res) {
   // Get stats for the query to display on frontend
   let stats = await getStats(req.query.include, query);
 
-  // Get matching evidence items for the query
-  let evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
-
   // Get dates for dropdown items
   let dates = await getDates(req.query.include);
+
+  // Get matching evidence items for the query
+  let evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
 
   // Render the index page using pugjs
   await res.render("index", {
