@@ -1,6 +1,4 @@
-if item.type === "email"
-    - var email= item.from.trim().match(/(?:<(.+)>)/)[1]
-
-    if lastEmail !== email
-        .email_divider= email
-        - var lastEmail= email
+if item.direction === "IN" && item.type === "email"
+    if lastEmail !== item.fromAddress
+        .email_divider= item.fromAddress
+        - var lastEmail= item.fromAddress

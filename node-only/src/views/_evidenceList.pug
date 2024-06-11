@@ -3,11 +3,9 @@
 - var lastDate = null
 #message_list
     each item in evidenceItems
-        if item.direction === "IN"
-            include dividers/_number
-            include dividers/_email
-            include dividers/_date
-
+        include dividers/_number
+        include dividers/_email
+        include dividers/_date
         include _evidenceItem
 
 
