@@ -2,7 +2,7 @@
 
 .date_divider {
   position: sticky;
-  z-index: 9999999;
+  z-index: 1;
   top: 120px;
   font-size: 0.85em;
   background: config.$voicemail-color;
