@@ -52,6 +52,10 @@ export const getStats = async (include, core_query) => {
 const getTypeStatsPipeline = async (type, core_query, include) => {
   let query = Object.assign({}, core_query);
 
+  let dateSentDate = query.date_sent_date;
+  delete query.date_sent_date;
+
+  // Default to searching all included types
   delete query.type;
 
   if (include != null) {
@@ -78,8 +82,25 @@ const getTypeStatsPipeline = async (type, core_query, include) => {
     },
   };
 
+  const addDateFields = {
+    dateSentDate: {
+      $dateToString: {
+        format: "%Y-%m-%d",
+        date: "$date_sent",
+        timezone: "America/Chicago",
+      },
+    },
+  };
+
+  let dateFilter = { dateSentDate: dateSentDate };
+
   // Return complete pipeline array
-  return [{ $match: query }, group];
+  return [
+    { $match: query },
+    { $addFields: addDateFields },
+    { $match: dateFilter },
+    group,
+  ];
 };
 
 /**
