@@ -21,8 +21,8 @@ export async function getQuery(req) {
   }
 
   // Filter based on phone number
-  if (req.query.number) {
-    query.from = req.query.number;
+  if (req.query.date_sent_date) {
+    query.date_sent_date = req.query.date_sent_date;
   }
 
   // Filter based on evidence item type
