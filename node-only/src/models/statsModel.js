@@ -24,7 +24,7 @@ export const getStats = async (include, core_query) => {
   // Count number of evidence items received/sent per type
   for (const type of types) {
     // Get the actual stats from database
-    const typeStats = await getTypeStats(type, query);
+    const typeStats = await getTypeStats(type, query, include);
 
     // Default counts to 0
     const count_in = typeStats[0]?.in || 0;
@@ -49,9 +49,14 @@ export const getStats = async (include, core_query) => {
  * @param {*} query
  * @returns
  */
-const getTypeStatsPipeline = async (type, query) => {
-  // Search all evidence items by default
+const getTypeStatsPipeline = async (type, core_query, include) => {
+  let query = Object.assign({}, core_query);
+
   delete query.type;
+
+  if (include != null) {
+    query.type = { $in: include };
+  }
 
   // If type is not "total", search evidence items of that type
   if (type !== "total") {
@@ -84,9 +89,9 @@ const getTypeStatsPipeline = async (type, query) => {
  * @param {*} query
  * @returns
  */
-const getTypeStats = async (type, query) => {
+const getTypeStats = async (type, query, include) => {
   // Get query to pull statistics for type
-  const statsQuery = await getTypeStatsPipeline(type, query);
+  const statsQuery = await getTypeStatsPipeline(type, query, include);
 
   // Get number of evidence items received/sent for type
   return await EvidenceItem.aggregate(statsQuery);
