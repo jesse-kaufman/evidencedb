@@ -27,7 +27,14 @@ export async function getQuery(req) {
 
   // Filter based on evidence item type
   if (req.query.include && req.query.include.length > 0) {
-    query.type = { $in: req.query.include };
+    let types = [];
+    types = req.query.include.map((type) => {
+      if (type.match(/s$/)) {
+        return type.slice(0, -1);
+      }
+      return type;
+    });
+    query.type = { $in: types };
   }
 
   return query;
