@@ -1,0 +1,18 @@
+mixin contactInfo
+    | "name": "#{process.env.OFFENDER_NAME}",
+    | "alternateName": [
+    |     "!{process.env.OFFENDER_ALT_NAMES.replaceAll(', ', '",\n"')}"
+    | ],
+    | "image": "#{process.env.DEFAULT_IMAGE}",
+    | "address": {
+    |     "@type": "PostalAddress",
+    |     "addressLocality": "#{process.env.OFFENDER_CITY}",
+    |     "addressRegion": "#{process.env.OFFENDER_STATE}",
+    |     "postalCode": "#{process.env.OFFENDER_ZIP}",
+    //- |     "streetAddress": "#{process.env.OFFENDER_ADDRESS}",
+    |     "addressCountry": "US"
+    | },
+    | "email": ["!{process.env.OFFENDER_EMAILS.replaceAll(', ', '",\n"')}"],
+    | "url": "#{process.env.OFFENDER_URL}",
+    | "sameAs": ["!{process.env.OFFENDER_ALT_URLS.replaceAll(', ', '",\n"')}"],
+    | "telephone": ["!{process.env.OFFENDER_PHONES.replaceAll(', ', '",\n"')}"]

@@ -1,0 +1,24 @@
+include _image
+
+script(type="application/ld+json").
+    {
+        "@context": "https://schema.org/",
+        "@type": "EmailMessage",
+        "sender": {
+            "@type": "Person",
+            "name": "#{item.fromName}",
+            "email": "#{item.fromAddress}"
+        },
+        "recipient": {
+            "@type": "Person",
+            "name": "#{from}",
+            "email": "redacted@redacted.com"
+        },
+        "image" : "#{image}",
+        "headline": "#{item.subject ? item.subject : "(no subject)"}",
+        "datePublished": "#{item.date_sent.toISOString()}",
+        "about": {
+            "@type": "Thing",
+            "name": "#{item.subject ? item.subject : "(no subject)"}"
+        }
+    }

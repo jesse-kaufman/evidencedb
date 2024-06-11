@@ -1,4 +1,6 @@
 - var messageClass = item.direction === 'OUT' ? item.victim : 'offender'
+- var from = item.direction === 'IN' ? process.env.OFFENDER_NAME : item.victim.toTitle()
+- var to = item.direction === 'IN' ? item.victim.toTitle() : process.env.OFFENDER_NAME
 
 .evidenceItem(class=item.type + ' ' + messageClass id=item._id)
     .meta

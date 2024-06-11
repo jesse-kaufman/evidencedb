@@ -1,0 +1,26 @@
+
+mixin message(messageType)
+    include _image
+    include ../_utils/_title
+
+    if messageType === 'text'
+        - var phone = `,"telephone": "${item.direction === 'IN' ? item.fromAddress : 'REDACTED'}"`
+
+    script(type="application/ld+json").
+        {
+            "@context": "https://schema.org/",
+            "@type": "Message",
+            "@id": "#{process.env.BASE_URL}/evidence-item/#{item._id}",
+            "sender": {
+                "@type": "Person",
+                "name": "#{from}"
+                !{phone}
+            },
+            "recipient": {
+                "@type": "Person",
+                "name": "#{to}"
+            },
+            "image": "#{image}",
+            "headline": "#{title}",
+            "dateSent": "#{item.date_sent.toISOString()}"
+        }

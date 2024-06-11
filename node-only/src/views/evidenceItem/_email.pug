@@ -8,29 +8,4 @@ div !{body.replace(/\d+ E \dth [A-Z]+[a-z]+/, '[JESSE\'S ADDRESS REDACTED]')}
 
 include _attachments
 
-- var image = process.env.DEFAULT_IMAGE
-if item.attachments
-    - var image = item.attachments?.length != null ? `${process.env.CDN}opt/attachments/${item.attachments[0].attachment_id}/${encodeURIComponent(item.attachments[0]?.filename.replace(/\.(jpg|jpeg|png)/, '.webp'))}` : process.env.DEFAULT_IMAGE
-if item.screenshots
-    - var image = item.screenshots?.length != null ? process.env.CDN + 'opt/screenshots/' + encodeURIComponent(item.screenshots[0].replace(/\.(jpg|jpeg|png)/, '.webp')) : process.env.DEFAULT_IMAGE
-
-
-script(type="application/ld+json").
-    {
-        "@context": "https://schema.org/",
-        "@type": "Article",
-        "author": {
-            "@type": "Person",
-            "name": "#{item.fromName}",
-            "email": "#{item.fromAddress}",
-            "url": "#{item.direction === 'IN' ? `${process.env.OFFENDER_URL}` : 'https://texts.lloydnet.org/'}"
-        },
-        "recipient": {
-            "@type": "Person",
-            "name": "#{item.victim.toTitle()}",
-            "email": "redacted@redacted.com"
-        },
-        "image" : "#{image}",
-        "headline": "#{item.subject ? item.subject : "(no subject)"}",
-        "datePublished": "#{item.date_sent.toISOString()}"
-    }
+include ../structuredData/_emailMessage

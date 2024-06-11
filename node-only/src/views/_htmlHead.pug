@@ -1,11 +1,13 @@
+include _utils/_title
+
 head
-    title= process.env.PAGE_TITLE
+    title= title
 
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(property="og:type" content="article") 
     meta(property="og:url" content=`${process.env.BASE_URL}`)
-    meta(property="og:title" content=`${process.env.PAGE_TITLE}`)
+    meta(property="og:title" content=title)
     meta(property="og:image" content=`${process.env.DEFAULT_IMAGE}`)
     meta(property="og:description" content=`${process.env.PAGE_DESCRIPTION}`)
 
@@ -24,7 +26,6 @@ head
             'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', '#{process.env.GTM_ID}');
-        // End Google Tag Manager
 
     link(rel="stylesheet" type="text/css" href=`/public/css/style.css?${process.env.CSS_VER}`)
     link(rel="stylesheet" type="text/css" href="/libs/lightbox2/css/lightbox.css")

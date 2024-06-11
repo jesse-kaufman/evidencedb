@@ -1,6 +1,7 @@
 // 
 // Voicemail Evidence Item
 // 
+include ../structuredData/_contactInfo
 
 p.duration
     strong Duration: 
@@ -12,26 +13,4 @@ audio(preload=none, controls=true, src=`${process.env.CDN}voicemails/${item.file
     h1 #[span(class="hide") ➖ Hide]#[span(class="show") ➕ Show] Auto-transcription
     .content !{item.body.replace(/\n/g, '<br/>')}
 
-- var image = process.env.DEFAULT_IMAGE
-
-if item.screenshots
-    - var image = item.screenshots?.length != null ? `${process.env.CDN}opt/screenshots/${encodeURIComponent(item.screenshots[0].replace(/\.(jpg|jpeg|png)/, '.webp'))}` : process.env.DEFAULT_IMAGE
-
-
-script(type="application/ld+json").
-    {
-        "@context": "https://schema.org/",
-        "@type": "AudioObject",
-        "contentUrl": "#{process.env.CDN}voicemails/#{item.filename}"
-        "name": "Voicemail from #{process.env.OFFENDER_NAME} on #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}",
-        "@id": "https://texts.lloydnet.org/evidence-item/#{item._id}",
-        "datePublished": "#{item.date_sent.toISOString()}",
-        "duration": "#{formatDuration(item.duration).toUpperCase().replace(' ', '')}",
-        "encodingFormat": "audio/mpeg",
-        "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ')}",
-        "image": "#{image}",
-        "author": {
-            "@type": "Person",
-            "name": "#{process.env.OFFENDER_NAME}"
-        }
-    }
+include ../structuredData/_audioObject

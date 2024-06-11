@@ -1,38 +1,12 @@
 // 
 // Text Evidence Item
 // 
-
 div !{item.body.replace(/\n/g, '<br/>')}
 
 include _attachments
 
 - var from = item.direction === 'IN' ? process.env.OFFENDER_NAME : item.victim.toTitle()
 - var to = item.direction === 'IN' ? item.victim.toTitle() : process.env.OFFENDER_NAME
-- var image = process.env.DEFAULT_IMAGE 
 
-if item.attachments
-    - var image = item.attachments?.length != null ? `${process.env.CDN}opt/attachments/${encodeURIComponent(item.attachments[0]?.filename.replace(/\.(jpg|jpeg|png)/, '.webp'))}` : process.env.DEFAULT_IMAGE
-
-if item.screenshots
-    - var image = item.screenshots?.length != null ? `${process.env.CDN}opt/screenshots/${encodeURIComponent(item.screenshots[0].replace(/\.(jpg|jpeg|png)/, '.webp'))}` : process.env.DEFAULT_IMAGE
-
-
-script(type="application/ld+json").
-    {
-        "@context": "https://schema.org/",
-        "@type": "Article",
-        "@id": "https://texts.lloydnet.org/evidence-item/#{item._id}",
-        "author": {
-            "@type": "Person",
-            "name": "#{from}",
-            "phone": "#{item.direction === 'IN' ? formatPhone(item.from) : 'REDACTED'}",
-            "url": "#{item.direction === 'IN' ? `${process.env.OFFENDER_URL}` : 'https://texts.lloydnet.org/'}"
-        },
-        "recipient": {
-            "@type": "Person",
-            "name": "#{to}"
-        },
-        "image": "#{image}",
-        "headline": "Text message sent from #{from} to #{to} on #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}",
-        "datePublished": "#{item.date_sent.toISOString()}"
-    }
+include ../structuredData/_message
++message('text')

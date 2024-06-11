@@ -1,0 +1,40 @@
+
+
+//- Default to the default title
+- var title = `${process.env.PAGE_TITLE}`
+
+if item
+    - var _item = item
+
+
+//- If _item still not set and it's a single view, try the first item in the array
+if !_item
+    if isSingle
+        - var _item = evidenceItems[0]
+
+
+//- If item previously set or set in this file, generate a title
+if _item
+    - var from = _item.direction === 'IN' ? process.env.OFFENDER_NAME : _item.victim.toTitle()
+    - var to = _item.direction === 'IN' ? _item.victim.toTitle() : process.env.OFFENDER_NAME
+    - var headlineSuffix = `from ${from} to ${to} on ${_item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}`
+
+    case _item.type
+        when 'voicemail'
+            - var title = `Voicemail ${headlineSuffix}`
+
+        when 'social'
+            - var title = `Social media message/post ${headlineSuffix}`
+
+        when 'text'
+            - var title = `Text message ${headlineSuffix}`
+
+        when 'email'
+            - var title = `Email ${headlineSuffix}`
+            if _item.subject
+                - var title = `${_item.subject}`
+
+        when 'video'
+            - var title = `YouTube video titled '${_item.title}'`
+
+

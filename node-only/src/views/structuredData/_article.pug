@@ -1,0 +1,17 @@
+include _contactInfo
+include ../_utils/_title
+
+script(type="application/ld+json").
+    {
+        "@context": "https://schema.org/",
+        "@type": "Article",
+        "name": "#{title}",
+        "headline": "#{title}",
+        "image": "#{process.env.DEFAULT_IMAGE}",
+        "author": {
+            "@type": "Person",
+            #[+contactInfo]
+        },
+        "datePublished": "2023-12-01T00:00:00Z",
+        "description": "#{process.env.PAGE_DESCRIPTION}"
+    }
