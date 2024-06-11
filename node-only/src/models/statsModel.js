@@ -82,25 +82,27 @@ const getTypeStatsPipeline = async (type, core_query, include) => {
     },
   };
 
+  // If not filtering by date, return pipeline
+  if (dateSentDate == null) {
+    return [{ $match: query }, group];
+  }
+
   const addDateFields = {
-    dateSentDate: {
-      $dateToString: {
-        format: "%Y-%m-%d",
-        date: "$date_sent",
-        timezone: "America/Chicago",
+    $addFields: {
+      dateSentDate: {
+        $dateToString: {
+          format: "%Y-%m-%d",
+          date: "$date_sent",
+          timezone: "America/Chicago",
+        },
       },
     },
   };
 
-  let dateFilter = { dateSentDate: dateSentDate };
+  let dateFilter = { $match: { dateSentDate: dateSentDate } };
 
   // Return complete pipeline array
-  return [
-    { $match: query },
-    { $addFields: addDateFields },
-    { $match: dateFilter },
-    group,
-  ];
+  return [{ $match: query }, addDateFields, dateFilter, group];
 };
 
 /**
