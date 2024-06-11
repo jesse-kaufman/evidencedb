@@ -1,0 +1,16 @@
+@use "sass:color";
+@use "config" as config;
+
+.evidenceItem {
+  .footer {
+    text-align: center;
+    font-size: 0.7em;
+    line-height: 1.2em;
+    text-transform: uppercase;
+    background: color.adjust(config.$received-color, $alpha: -0.75);
+
+    span {
+      opacity: 0.4;
+    }
+  }
+}

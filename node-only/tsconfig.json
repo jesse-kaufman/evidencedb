@@ -6,8 +6,8 @@
     "declaration": false,
     //"composite": true,
     "declarationMap": false,
-    "outDir": "public",
-    "rootDir": "src",
+    "outDir": "src/public/js",
+    "rootDir": "src/public/src/typescript",
     "types": ["node", "jquery"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -22,8 +22,8 @@
     "alwaysStrict": true,
     "allowJs": true
   },
-  "include": ["src/**/*.ts", "src/**/*.js"],
-  "exclude": ["node_modules", "src/**/*spec.ts"],
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "src/public/js"],
   "ts-node": {
     "esm": true,
     "transpileOnly": true,

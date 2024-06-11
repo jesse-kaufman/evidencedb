@@ -1,0 +1,37 @@
+.evidenceItem .body {
+  .transcript {
+    color: #444;
+    font-style: italic;
+    margin-top: 1em;
+
+    h1 {
+      font-size: 1em;
+      cursor: pointer;
+
+      .show {
+        display: inline;
+      }
+      .hide {
+        display: none;
+      }
+    }
+
+    .content {
+      font-size: 0.8em;
+      line-height: 1.2em;
+      display: none;
+    }
+
+    &.show {
+      h1 .show {
+        display: none;
+      }
+      h1 .hide {
+        display: inline;
+      }
+      .content {
+        display: block;
+      }
+    }
+  }
+}

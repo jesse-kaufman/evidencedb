@@ -1,0 +1,26 @@
+- var messageClass = item.direction === 'OUT' ? item.victim : 'offender'
+
+.evidenceItem(class=item.type + ' ' + messageClass id=item._id)
+    .meta
+        include evidenceItem/header/_icon
+        include evidenceItem/header/_info
+
+        a(href=`/evidence-item/${item._id}` target="_blank").evidence-item-link
+            svg(width="16" height="16")
+                use(xlink:href="../../public/images/share.svg#share")
+    .body
+        if item.type === 'video'
+            include evidenceItem/_video
+        if item.type === 'text'
+            include evidenceItem/_text
+        if item.type === 'email'
+            include evidenceItem/_email
+        if item.type === 'voicemail'
+            include evidenceItem/_voicemail
+        if item.type === 'social'
+            include evidenceItem/_social
+
+        include evidenceItem/_screenshots
+
+    .footer
+        span= item.type === 'text' ? 'text message' : item.type

@@ -76,8 +76,8 @@ services:
       - OFFENDER_STATE="${OFFENDER_STATE}"
       - OFFENDER_ZIP="${OFFENDER_ZIP}"
       - OFFENDER_PHONE="${OFFENDER_PHONE}"
-    volumes:
-      - ./:/app
+    # volumes:
+    #   - ./:/app
     tmpfs:
       - /tmp:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
     logging:

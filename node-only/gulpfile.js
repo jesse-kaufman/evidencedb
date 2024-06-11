@@ -22,9 +22,9 @@ const execReportOptions = {
  * Builds Sass files into CSS files.
  */
 const sassTask = (cb) => {
-  src("src/styles/**/*.scss")
+  src("src/public/src/sass/**/*.scss")
     .pipe(sass().on("error", sass.logError))
-    .pipe(dest("public/styles"));
+    .pipe(dest("src/public/css"));
   cb();
 };
 
@@ -42,7 +42,7 @@ const tsTask = (cb) => {
  * Cleans build files.
  */
 const clean = () => {
-  return deleteAsync(["public/styles/*.css*", "public/js/*.js"]);
+  return deleteAsync(["src/public/css/*", "src/public/js/*"]);
 };
 
 /**
@@ -50,16 +50,16 @@ const clean = () => {
  */
 const startDev = () => {
   let nodemonOptions = {
-    script: "index.js",
+    script: "src/index.js",
     ext: "js",
     env: { NODE_ENV: "development" },
     verbose: false,
     ignore: [],
     watch: [
-      "index.js",
-      "**/*.js",
+      "src/index.js",
+      "src/**/*.js",
       "!node_modules/**",
-      "!public/**",
+      "!src/public/**",
       "!gulpfile.js",
     ],
   };
@@ -73,8 +73,8 @@ const startDev = () => {
  * Watches for changes and runs TypeScript / Sass tasks
  */
 const watchTask = () => {
-  watch("src/js/*.ts", parallel(tsTask));
-  watch("src/styles/**/*.scss", parallel(sassTask));
+  watch("src/public/src/typescript/*.ts", parallel(tsTask));
+  watch("src/public/src/sass/*", parallel(sassTask));
 };
 
 // import gitGuppy from "git-guppy";
@@ -87,7 +87,7 @@ const watchTask = () => {
 //     const filter = gulpFilter(["*.js$"], { restore: true });
 //     const glob = files.length
 //       ? files
-//       : ["*.js", "!*public/js", "!*node_modules"];
+//       : ["*.js", "!*src/public/js", "!*node_modules"];
 //     src(glob)
 //       .pipe(filter)
 //       .pipe(jshint())

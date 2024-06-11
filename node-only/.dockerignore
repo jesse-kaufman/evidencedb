@@ -4,9 +4,6 @@
 .npm*
 eslint.config.js
 *compose.yaml
-gulpfile.js
-tsconfig.json
-src
 .dockerignore
 *Dockerfile*
 .git

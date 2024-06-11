@@ -9,10 +9,14 @@ USER node
 WORKDIR /app
 EXPOSE ${NODE_PORT}
 
-COPY package*.json ./
+COPY package*.json .
 RUN npm ci && npm cache clean --force
 
-COPY --chown=node:node ./ ./
+COPY --chown=node:node . .
+
+RUN ./node_modules/.bin/gulp build && \
+    rm -rf ./src/public/src && \
+    rm -f tsconfig.json
 
 CMD [ "npm", "start" ]
 
