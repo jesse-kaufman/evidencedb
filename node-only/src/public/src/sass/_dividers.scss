@@ -1,6 +1,5 @@
 @use "config" as config;
-.number_divider,
-.date_divider {
+.divider {
   position: sticky;
   z-index: 1;
   top: 120px;
@@ -19,17 +18,20 @@
     top: 125px;
   }
 }
-.email_divider {
-  @extend .date_divider;
-  left: 115px;
-  border-radius: 20px;
-}
 .date_divider {
-  @extend .date_divider;
+  @extend .divider;
   border-radius: 20px;
   background: #333;
   top: 120px;
   left: 100%;
   width: 90px;
   text-align: center;
+}
+.email_divider {
+  @extend .divider;
+  left: 115px;
+  border-radius: 20px;
+}
+.number_divider {
+  @extend .divider;
 }
