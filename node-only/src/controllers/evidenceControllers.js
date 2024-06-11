@@ -39,6 +39,7 @@ export async function printEvidence(req, res) {
   await res.render("index", {
     evidenceItems: evidenceItems,
     stats: stats,
+    isSingle: req.params.id ? true : false,
     get: {
       include: req.query.include,
       victim: req.query.victim,
