@@ -14,9 +14,15 @@
     }
 
     video {
+      display: block;
       width: 100%;
       max-width: 300px;
       max-height: 400px;
+      body.single & {
+        max-width: 500px;
+        max-height: 500px;
+        margin: 0 auto;
+      }
     }
     img {
       display: inline-block;
