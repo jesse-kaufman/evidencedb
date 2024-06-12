@@ -4,7 +4,7 @@ script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
         "@type": "VideoObject",
-        "contentUrl": "#{process.env.CDN}videos/#{item.filename}",
+        "contentUrl": "#{process.env.CDN}videos/#{`${encodeURIComponent(item.filename)}`}",
         "name": "#{item.title}",
         "@id": "#{process.env.BASE_URL}/evidence-item/#{item._id}",
         "datePublished": "#{item.date_sent.toISOString()}",
@@ -15,8 +15,8 @@ script(type="application/ld+json").
             "@type": "Person",
             #[+contactInfo]
         },
-        "image": "#{process.env.CDN}videos/#{item.filename}.webp",
-        "thumbnailURL": "#{process.env.CDN}videos/#{item.filename}.webp",
+        "image": "#{process.env.CDN}videos/#{`${encodeURIComponent(item.filename)}`}.webp",
+        "thumbnailURL": "#{process.env.CDN}videos/#{`${encodeURIComponent(item.filename)}`}.webp",
         "description": "Video posted by #{process.env.OFFENDER_NAME} to YouTube on #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}",
         "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ')}"
     }
