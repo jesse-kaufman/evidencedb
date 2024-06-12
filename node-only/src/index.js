@@ -41,10 +41,6 @@ connectDB();
 import express from "express";
 const expressApp = express();
 
-// Cookie parser
-import cookieParser from "cookie-parser";
-expressApp.use(cookieParser());
-
 // Enable compression
 import compression from "compression";
 expressApp.use(compression());
