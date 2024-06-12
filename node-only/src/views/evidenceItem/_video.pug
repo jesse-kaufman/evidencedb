@@ -16,7 +16,7 @@ if item.filename
         source(src=videoUrl type="video/mp4")
 
 .transcript
-    h1 #[span(class="hide") Hide]#[span(class="show") Show] Auto-transcription:
+    h2 #[span(class="hide") Hide]#[span(class="show") Show] Auto-transcription:
     .content !{formatVideoTranscript(item.body, item.duration)}
 
 include ../structuredData/_videoObject
