@@ -1,6 +1,36 @@
 @use "config" as config;
 @use "mixins" as mixins;
-@use "base" as base;
 @use "dividers" as dividers;
 @use "header" as header;
 @use "evidenceItem" as evidenceItem;
+
+body {
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4em;
+  position: relative;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+form {
+  margin: 0;
+  display: inline-block;
+}
+footer {
+  text-align: center;
+  padding-top: 4em;
+  padding-bottom: 2em;
+  font-size: 0.8em;
+}
+#message_list {
+  margin: 0 8px 8px 8px;
+  padding-top: 120px;
+}
+mark {
+  background-color: yellow;
+  font-weight: bold;
+}
