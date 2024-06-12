@@ -34,4 +34,18 @@
       }
     }
   }
+
+  body.single & .transcript {
+    .content {
+      display: block;
+      font-size: 1.1em;
+      line-height: 1.3em;
+    }
+    h1 {
+      font-size: 1.2em;
+    }
+    h1 span {
+      display: none;
+    }
+  }
 }
