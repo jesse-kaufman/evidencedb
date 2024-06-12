@@ -54,15 +54,20 @@ expressApp.use(cors());
 expressApp.set("views", "src/views");
 expressApp.set("view engine", "pug");
 
+let staticOptions = {
+  maxAge: "2y",
+  etag: false,
+};
+
 // Static routes
-expressApp.use("/public", express.static("src/public"));
+expressApp.use("/public", express.static("src/public", staticOptions));
 expressApp.use(
   "/libs/lightbox2",
-  express.static("node_modules/lightbox2/dist")
+  express.static("node_modules/lightbox2/dist", staticOptions)
 );
 expressApp.use(
   "/libs/jquery/jquery.min.js",
-  express.static("node_modules/jquery/dist/jquery.min.js")
+  express.static("node_modules/jquery/dist/jquery.min.js", staticOptions)
 );
 
 // EvidenceItem routes
