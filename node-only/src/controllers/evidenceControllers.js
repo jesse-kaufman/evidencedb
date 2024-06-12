@@ -34,12 +34,14 @@ export async function printEvidence(req, res) {
 
   // Get matching evidence items for the query
   let evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
+  let isSingle = "id" in req.params;
 
   // Render the index page using pugjs
   await res.render("index", {
     evidenceItems: evidenceItems,
     stats: stats,
-    isSingle: req.params.id ? true : false,
+    isSingle: isSingle,
+    pageClass: isSingle === true ? "single" : "list",
     get: {
       include: req.query.include,
       victim: req.query.victim,
