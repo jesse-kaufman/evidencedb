@@ -14,6 +14,7 @@ services:
       - MONGO_URL=${MONGO_URL}
       - CDN=${CDN}
       - NODE_PORT=${NODE_PORT}
+      - JS_VER=${JS_VER}
       - CSS_VER=${CSS_VER}
       - GTM_ID=${GTM_ID}
       - DEFAULT_IMAGE=${DEFAULT_IMAGE}
@@ -68,6 +69,7 @@ services:
       - CDN=${CDN}
       - NODE_PORT=${NODE_PORT}
       - CSS_VER=${CSS_VER}
+      - JS_VER=${JS_VER}
       - GTM_ID=${GTM_ID}
       - DEFAULT_IMAGE=${DEFAULT_IMAGE}
       - OFFENDER_NAME=${OFFENDER_NAME}
