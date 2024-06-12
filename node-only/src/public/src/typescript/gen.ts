@@ -2,7 +2,7 @@
  * Sets up the event listeners for the transcript links.
  */
 const setupTranscript = (): void => {
-  $(".transcript h1").on("click", (e) => {
+  $("body.list .transcript h1").on("click", (e) => {
     if ($(e.currentTarget).parent().hasClass("show")) {
       // Hide transcript
       $(e.currentTarget).parent().removeClass("show");
