@@ -39,42 +39,45 @@ connectDB();
 
 // Setup Express
 import express from "express";
-const app = express();
+const expressApp = express();
 
 // Cookie parser
 import cookieParser from "cookie-parser";
-app.use(cookieParser());
+expressApp.use(cookieParser());
 
 // Enable compression
 import compression from "compression";
-app.use(compression());
+expressApp.use(compression());
 
-app.use(express.urlencoded({ extended: true }));
+expressApp.use(express.urlencoded({ extended: true }));
 
 // Use CORS
 import cors from "cors";
-app.use(cors());
+expressApp.use(cors());
 
-app.set("views", "src/views");
-app.set("view engine", "pug");
+expressApp.set("views", "src/views");
+expressApp.set("view engine", "pug");
 
 // Static routes
-app.use("/public", express.static("src/public"));
-app.use("/libs/lightbox2", express.static("node_modules/lightbox2/dist"));
-app.use(
+expressApp.use("/public", express.static("src/public"));
+expressApp.use(
+  "/libs/lightbox2",
+  express.static("node_modules/lightbox2/dist")
+);
+expressApp.use(
   "/libs/jquery/jquery.min.js",
   express.static("node_modules/jquery/dist/jquery.min.js")
 );
 
 // EvidenceItem routes
 import evidenceRoutes from "./routes/evidenceRoutes.js";
-app.use("/", evidenceRoutes);
+expressApp.use("/", evidenceRoutes);
 
 // Start the server
-const server = app.listen(process.env.NODE_PORT, () => {
+const server = expressApp.listen(process.env.NODE_PORT, async () => {
+  let host = server.address().address;
+  let port = server.address().port;
   console.log(
-    `Express running → PORT ${server.address().port} in ${
-      process.env.NODE_ENV
-    } mode`
+    `Express running → http://[${host}]:${port} in ${process.env.NODE_ENV} mode`
   );
 });
