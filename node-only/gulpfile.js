@@ -74,7 +74,7 @@ const startDev = () => {
  */
 const watchTask = () => {
   watch("src/public/src/typescript/*.ts", parallel(tsTask));
-  watch("src/public/src/sass/*", parallel(sassTask));
+  watch("src/public/src/sass/**/*.scss", parallel(sassTask));
 };
 
 // import gitGuppy from "git-guppy";
