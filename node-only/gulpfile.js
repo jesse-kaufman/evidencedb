@@ -6,8 +6,13 @@ import gulpSass from "gulp-sass";
 import * as dartSass from "sass";
 import exec from "gulp-exec";
 import nodemon from "gulp-nodemon";
-
+import { writeFile } from "fs";
+import randomString from "randomstring";
 const sass = gulpSass(dartSass);
+
+/**
+ * Configuration objects for gulp-exec
+ */
 const execOptions = {
   continueOnError: false, // default = false, true means don't emit error event
   pipeStdout: false, // default = false, true means stdout is written to file.contents
@@ -19,9 +24,31 @@ const execReportOptions = {
 };
 
 /**
+ * Updates the version strings to use at the end of JS and CSS files
+ */
+const updateVersionStringsTask = async (cb) => {
+  const versionStringData = {
+    js: randomString.generate(5),
+    css: randomString.generate(5),
+  };
+
+  const versionString = `export default ${JSON.stringify(versionStringData)};`;
+
+  writeFile("build/versions.js", versionString, (err) => {
+    if (err) {
+      console.error(err.toString());
+    } else {
+      console.log("Version strings updated successfully.");
+    }
+  });
+
+  cb();
+};
+
+/**
  * Builds Sass files into CSS files.
  */
-const sassTask = (cb) => {
+const buildSassTask = async (cb) => {
   src("src/public/src/sass/**/*.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(dest("src/public/css"));
@@ -31,7 +58,7 @@ const sassTask = (cb) => {
 /**
  * Transpiles TypeScript into JavaScript.
  */
-const tsTask = (cb) => {
+const buildTypeScriptTask = async (cb) => {
   src(".")
     .pipe(exec(() => "tsc -p .", execOptions))
     .pipe(exec.reporter(execReportOptions));
@@ -41,15 +68,18 @@ const tsTask = (cb) => {
 /**
  * Cleans build files.
  */
-const clean = () => {
-  return deleteAsync(["src/public/css/*", "src/public/js/*"]);
+const clean = async () => {
+  return await deleteAsync(
+    ["build/*"],
+    ["src/public/css/*", "src/public/js/*"]
+  );
 };
 
 /**
  * Starts server in development mode and runs watch task.
  */
-const startDev = () => {
-  let nodemonOptions = {
+const startDev = async () => {
+  const nodemonOptions = {
     script: "src/index.js",
     ext: "js",
     env: { NODE_ENV: "development" },
@@ -64,7 +94,7 @@ const startDev = () => {
     ],
   };
 
-  nodemon(nodemonOptions).on("restart", function () {
+  nodemon(nodemonOptions).on("restart", async () => {
     console.log("restarted!");
   });
 };
@@ -72,9 +102,9 @@ const startDev = () => {
 /**
  * Watches for changes and runs TypeScript / Sass tasks
  */
-const watchTask = () => {
-  watch("src/public/src/typescript/*.ts", parallel(tsTask));
-  watch("src/public/src/sass/**/*.scss", parallel(sassTask));
+const watchTask = async () => {
+  watch("src/public/src/typescript/*.ts", parallel(buildTypeScriptTask));
+  watch("src/public/src/sass/**/*.scss", parallel(buildSassTask));
 };
 
 // import gitGuppy from "git-guppy";
@@ -97,9 +127,16 @@ const watchTask = () => {
 //   });
 // });
 
+task("update-version", updateVersionStringsTask);
 task("start-dev", parallel(startDev, watchTask));
 task("watch", watchTask);
-task("sass", sassTask);
-task("ts", tsTask);
+task("sass", buildSassTask);
+task("ts", buildTypeScriptTask);
 task("clean", clean);
-task("build", series(clean, parallel(sassTask, tsTask)));
+task(
+  "build",
+  series(
+    clean,
+    parallel(updateVersionStringsTask, buildSassTask, buildTypeScriptTask)
+  )
+);

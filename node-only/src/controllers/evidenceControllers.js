@@ -5,6 +5,7 @@
  * @author Jesse Kaufman <jesse@jessekaufman.com>
  */
 
+import versionStrings from "../../build/versions.js";
 import { getEvidenceItems } from "../models/evidenceItemModel.js";
 import { getQuery } from "../utils/queryUtils.js";
 import { getStats } from "../models/statsModel.js";
@@ -38,6 +39,7 @@ export async function printEvidence(req, res) {
     stats: stats,
     isSingle: isSingle,
     pageClass: isSingle === true ? "single" : "list",
+    versionStrings: versionStrings,
     get: {
       include: req.query.include,
       victim: req.query.victim,
