@@ -40,7 +40,7 @@ const EvidenceItemSchema = new mongoose.Schema({
     required: true,
   },
   body_html: String,
-  duration: Number,
+  duration: String,
   filename: String,
   attachments: [AttachmentSchema],
   screenshots: Array,
