@@ -1,7 +1,7 @@
 // Enviroment variables
 import dotenv from "dotenv";
 
-const setup = () => {
+const setup = async () => {
   dotenv.config();
 
   process.env.BASE_URL = process.env.DEV_BASE_URL;
