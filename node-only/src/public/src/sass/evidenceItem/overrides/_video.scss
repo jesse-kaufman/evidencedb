@@ -17,5 +17,22 @@
       padding-bottom: 0;
       margin-bottom: 0;
     }
+
+    body.single & {
+      video {
+        min-width: 300px;
+        flex-shrink: 1;
+        flex-basis: 48%;
+        max-height: calc(60vh - 120px);
+      }
+
+      .video {
+        display: flex;
+        align-items: flex-start;
+        gap: 1em;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
   }
 }

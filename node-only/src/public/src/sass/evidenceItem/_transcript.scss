@@ -1,3 +1,5 @@
+@use "config" as config;
+
 .evidenceItem .body {
   .transcript {
     color: #444;
@@ -51,17 +53,39 @@
     }
   }
 
-  body.single & .transcript {
-    .content {
-      display: block;
-      font-size: 1em;
-      line-height: 1.5em;
-    }
-    h2 {
-      font-size: 1.2em;
-    }
-    h2 span {
-      display: none;
+  body.single & {
+    .transcript {
+      margin-top: 0;
+      flex-shrink: 1;
+      min-width: 300px;
+      flex-basis: 48%;
+      display: flex;
+      flex-direction: column;
+      max-height: calc(60vh - config.$header-height);
+
+      @media (max-width: 1024px) {
+        flex-basis: 100%;
+        h2 {
+          text-align: center;
+        }
+      }
+
+      .content {
+        display: block;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.2em;
+        font-size: 0.8em;
+        line-height: 1.2em;
+        padding-left: 2em;
+        overflow-x: scroll;
+      }
+      h2 span {
+        display: none;
+      }
+      h2 {
+        margin-top: 0;
+      }
     }
   }
 }

@@ -12,6 +12,9 @@
     | #{formatDuration(item.duration)}
 
 if item.filename
+    .video
+        video(preload="none" controls=true poster=`${videoUrl}.webp`)
+            source(src=videoUrl type="video/mp4")
         include _transcript
 
 include ../structuredData/_videoObject
