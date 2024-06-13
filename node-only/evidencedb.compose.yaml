@@ -22,6 +22,7 @@ services:
       - PAGE_TITLE=${PAGE_TITLE}
       - DEV_BASE_URL=${DEV_BASE_URL}
       - PROD_BASE_URL=${PROD_BASE_URL}
+      - STATS_URL=${STATS_URL}
       - PAGE_DESCRIPTION=${PAGE_DESCRIPTION}
       - OFFENDER_ADDRESS=${OFFENDER_ADDRESS}
       - OFFENDER_CITY=${OFFENDER_CITY}
@@ -45,7 +46,7 @@ services:
         limits:
           cpus: "10"
           pids: 300
-          memory: 600M
+          memory: 1G
     security_opt:
       - no-new-privileges=true
 
@@ -76,6 +77,7 @@ services:
       - PAGE_TITLE=${PAGE_TITLE}
       - DEV_BASE_URL=${DEV_BASE_URL}
       - PROD_BASE_URL=${PROD_BASE_URL}
+      - STATS_URL=${STATS_URL}
       - PAGE_DESCRIPTION=${PAGE_DESCRIPTION}
       - OFFENDER_ADDRESS=${OFFENDER_ADDRESS}
       - OFFENDER_CITY=${OFFENDER_CITY}
@@ -101,6 +103,6 @@ services:
         limits:
           cpus: "10"
           pids: 300
-          memory: 600M
+          memory: 1G
     security_opt:
       - no-new-privileges=true
