@@ -21,7 +21,7 @@ Object.defineProperty(String.prototype, "toTitle", {
  */
 export const formatTranscript = (transcript, duration) => {
   // Default hasHour to false and use var so the scope is the function
-  var hasHour = false;
+  let hasHour = false;
 
   // If transcript is undefined, return empty string
   if (!transcript) {
