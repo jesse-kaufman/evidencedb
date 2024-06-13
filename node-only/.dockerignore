@@ -7,4 +7,3 @@ eslint.config.js
 .dockerignore
 *Dockerfile*
 .git
-build
