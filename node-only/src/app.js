@@ -13,9 +13,11 @@ expressApp.use(compression());
 // Use CORS
 expressApp.use(cors());
 
+// Use Pug for templating
 expressApp.set("views", "src/views");
 expressApp.set("view engine", "pug");
 
+// Static routes
 expressApp.use("/", staticRoutes);
 
 // EvidenceItem routes
