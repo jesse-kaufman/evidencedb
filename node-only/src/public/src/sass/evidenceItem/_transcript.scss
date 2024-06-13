@@ -18,16 +18,24 @@
       }
     }
 
-    span.time {
-      display: inline-block;
-      font-size: 0.8em;
-      opacity: 0.7;
-    }
-
     .content {
       font-size: 0.8em;
       line-height: 1.2em;
       display: none;
+      padding-left: 2em;
+    }
+
+    span.time {
+      display: inline-block;
+      font-size: 0.8em;
+      line-height: 1em;
+      opacity: 0.7;
+      margin-top: 1.6em;
+      margin-left: -3em;
+
+      body.single & {
+        font-size: 0.65em;
+      }
     }
 
     &.show {
