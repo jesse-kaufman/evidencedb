@@ -49,7 +49,7 @@ const updateVersionStringsTask = async (cb) => {
  * Builds Sass files into CSS files.
  */
 const buildSassTask = async (cb) => {
-  src("src/public/src/sass/**/*.scss")
+  src("src/public/styles/**/*.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(dest("build/public/css"));
   cb();
