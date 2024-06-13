@@ -6,8 +6,8 @@
     "declaration": false,
     //"composite": true,
     "declarationMap": false,
-    "outDir": "src/public/js",
-    "rootDir": "src/public/src/typescript",
+    "outDir": "build/public/js",
+    "rootDir": "src/public/scripts",
     "types": ["node", "jquery"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,7 +23,7 @@
     "allowJs": true
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "src/public/js"],
+  "exclude": ["node_modules", "build"],
   "ts-node": {
     "esm": true,
     "transpileOnly": true,

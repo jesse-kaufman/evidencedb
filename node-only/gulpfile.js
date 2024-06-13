@@ -51,7 +51,7 @@ const updateVersionStringsTask = async (cb) => {
 const buildSassTask = async (cb) => {
   src("src/public/src/sass/**/*.scss")
     .pipe(sass().on("error", sass.logError))
-    .pipe(dest("src/public/css"));
+    .pipe(dest("build/public/css"));
   cb();
 };
 
@@ -69,7 +69,7 @@ const buildTypeScriptTask = async (cb) => {
  * Cleans build files.
  */
 const clean = async () => {
-  return await deleteAsync(["build/*", "src/public/css/*", "src/public/js/*"]);
+  return await deleteAsync(["build/*"]);
 };
 
 /**
