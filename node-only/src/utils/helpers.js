@@ -11,7 +11,7 @@ Object.defineProperty(String.prototype, "toTitle", {
 });
 
 /**
- * Formats video transcript
+ * Formats transcript
  *
  * Adds styling for timecodes in transcripts and makes them inline
  *
@@ -19,7 +19,7 @@ Object.defineProperty(String.prototype, "toTitle", {
  * @param {string} duration - Duration of video
  * @returns {string} Formatted transcript
  */
-export const formatVideoTranscript = (transcript, duration) => {
+export const formatTranscript = (transcript, duration) => {
   // Default hasHour to false and use var so the scope is the function
   var hasHour = false;
 

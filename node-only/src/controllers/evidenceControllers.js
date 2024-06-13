@@ -10,7 +10,7 @@ import { getEvidenceItems } from "../models/evidenceItemModel.js";
 import { getQuery } from "../utils/queryUtils.js";
 import { getStats } from "../models/statsModel.js";
 import { getDates } from "../models/searchModel.js";
-import { formatVideoTranscript, formatDuration } from "../utils/helpers.js";
+import { formatTranscript, formatDuration } from "../utils/helpers.js";
 
 /**
  *
@@ -50,7 +50,7 @@ export async function printEvidence(req, res) {
     },
     dates: dates,
     cdn_url: process.env.CDN,
-    formatVideoTranscript: formatVideoTranscript,
+    formatVideoTranscript: formatTranscript,
     formatDuration: formatDuration,
   });
 }
