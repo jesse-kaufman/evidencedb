@@ -7,7 +7,11 @@ const staticOptions = {
 };
 
 // Static routes
-router.use("/public", express.static("src/public", staticOptions));
+router.use("/public", express.static("build/public", staticOptions));
+router.use(
+  "/public/images",
+  express.static("src/public/images", staticOptions)
+);
 router.use(
   "/libs/lightbox2",
   express.static("node_modules/lightbox2/dist", staticOptions)
