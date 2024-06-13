@@ -28,7 +28,7 @@ footer {
 }
 #message_list {
   margin: 0 8px 8px 8px;
-  padding-top: 120px;
+  padding-top: config.$header-height;
 }
 mark {
   background-color: yellow;
