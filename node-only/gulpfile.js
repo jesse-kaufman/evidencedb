@@ -69,10 +69,7 @@ const buildTypeScriptTask = async (cb) => {
  * Cleans build files.
  */
 const clean = async () => {
-  return await deleteAsync(
-    ["build/*"],
-    ["src/public/css/*", "src/public/js/*"]
-  );
+  return await deleteAsync(["build/*", "src/public/css/*", "src/public/js/*"]);
 };
 
 /**
