@@ -62,7 +62,7 @@ export const formatVideoTranscript = (transcript, duration) => {
  * @param {string} duration - The duration to format
  * @returns {string} The formatted duration
  */
-export function formatDuration(duration) {
+export const formatDuration = (duration) => {
   let formattedDuration = "";
 
   const [hours, minutes, seconds] = duration.split(":");
@@ -78,4 +78,4 @@ export function formatDuration(duration) {
   }
 
   return formattedDuration;
-}
+};
