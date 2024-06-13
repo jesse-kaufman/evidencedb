@@ -9,11 +9,7 @@ import { getEvidenceItems } from "../models/evidenceItemModel.js";
 import { getQuery } from "../utils/queryUtils.js";
 import { getStats } from "../models/statsModel.js";
 import { getDates } from "../models/searchModel.js";
-import {
-  formatPhone,
-  formatVideoTranscript,
-  formatDuration,
-} from "../utils/helpers.js";
+import { formatVideoTranscript, formatDuration } from "../utils/helpers.js";
 
 /**
  *
@@ -52,7 +48,6 @@ export async function printEvidence(req, res) {
     },
     dates: dates,
     cdn_url: process.env.CDN,
-    formatPhone: formatPhone,
     formatVideoTranscript: formatVideoTranscript,
     formatDuration: formatDuration,
   });

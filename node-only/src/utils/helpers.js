@@ -5,22 +5,6 @@
  */
 
 /**
- * Formats phone number
- *
- * @param {string} number - Phone number to format
- * @return {string} Formatted phone number
- */
-export function formatPhone(number) {
-  return (
-    number.substring(0, 3) +
-    "-" +
-    number.substring(3, 6) +
-    "-" +
-    number.substring(6)
-  );
-}
-
-/**
  * Formats video transcript
  *
  * Adds styling for timecodes in transcripts and makes them inline
