@@ -12,11 +12,6 @@
     | #{formatDuration(item.duration)}
 
 if item.filename
-    video(preload="none" controls=true poster=`${videoUrl}.webp`)
-        source(src=videoUrl type="video/mp4")
-
-.transcript
-    h2 #[span(class="hide") Hide]#[span(class="show") Show] Auto-transcription:
-    .content !{formatVideoTranscript(item.body, item.duration)}
+        include _transcript
 
 include ../structuredData/_videoObject
