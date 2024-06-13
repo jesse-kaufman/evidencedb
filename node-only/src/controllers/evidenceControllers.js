@@ -38,9 +38,19 @@ const render = async (req, res) => {
   let evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
   let isSingle = "id" in req.params;
 
+  const renderEvidenceItemList = pug.compileFile("src/views/_evidenceList.pug");
+  const evidenceItemList = renderEvidenceItemList({
+    evidenceItems: evidenceItems,
+    isSingle: isSingle,
+    cdn_url: process.env.CDN,
+    formatVideoTranscript: formatTranscript,
+    formatDuration: formatDuration,
+  });
+
   // Render the index page using pugjs
   await res.render("index", {
     evidenceItems: evidenceItems,
+    evidenceItemList: evidenceItemList,
     stats: stats,
     isSingle: isSingle,
     pageClass: isSingle === true ? "single" : "list",
