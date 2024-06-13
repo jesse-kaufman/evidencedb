@@ -20,5 +20,10 @@ router.use(
   "/libs/jquery/jquery.min.js",
   express.static("node_modules/jquery/dist/jquery.min.js", staticOptions)
 );
+// Route for favicon.ico
+router.use(
+  "/favicon.ico",
+  express.static("src/public/images/favicon.ico", staticOptions)
+);
 
 export default router;
