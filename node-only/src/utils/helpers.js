@@ -34,29 +34,36 @@ export const formatTranscript = (transcript, duration) => {
   }
 
   // Wrap timecodes in span for styling
-  return transcript.replace(/((\d{1,2}:)+\d\d)/g, (time) => {
-    let formattedTime = "";
-    var h,
-      m,
-      s = null;
+  let wrappedTranscript = transcript.replace(
+    /((\d{1,2}:)+\d\d)/g,
+    (time, hasHour) => wrapTimecode(time, hasHour)
+  );
 
-    // Split timecode into seconds, minutes, and optionally hours
-    if (time.match(/\d{1,2}:\d\d:\d\d/)) {
-      [h, m, s] = time.split(":");
-    } else {
-      [m, s] = time.split(":");
-    }
+  return wrappedTranscript;
+};
 
-    if (hasHour) {
-      // If undefined use "00:" for hour, otherwise zero-pad hour and add ":"
-      formattedTime = h === undefined ? "00:" : `${h.padStart(2, "0")}:`;
-    }
+const wrapTimecode = (time, hasHour) => {
+  let formattedTime = "";
+  var h,
+    m,
+    s = null;
 
-    // Add zero-padded minutes and seconds
-    formattedTime += `${m.padStart(2, "0")}:${s.padStart(2, "0")}`;
+  // Split timecode into seconds, minutes, and optionally hours
+  if (time.match(/\d{1,2}:\d\d:\d\d/)) {
+    [h, m, s] = time.split(":");
+  } else {
+    [m, s] = time.split(":");
+  }
 
-    return `<br/><span class="time">${formattedTime}</span>`;
-  });
+  if (hasHour) {
+    // If undefined use "00:" for hour, otherwise zero-pad hour and add ":"
+    formattedTime = h === undefined ? "00:" : `${h.padStart(2, "0")}:`;
+  }
+
+  // Add zero-padded minutes and seconds
+  formattedTime += `${m.padStart(2, "0")}:${s.padStart(2, "0")}`;
+
+  return `<br/><span class="time">${formattedTime}</span>`;
 };
 
 /**
