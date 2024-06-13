@@ -1,10 +1,6 @@
 doctype xml
-urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1")
     url
         loc=`${process.env.BASE_URL}/`
         
-    each item in evidenceItems
-        url
-            loc=`${process.env.BASE_URL}/evidence-item/${item._id}`
-            lastmod=item.dateSentDate
-        
+    include sitemap/_evidenceItem
