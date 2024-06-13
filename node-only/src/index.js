@@ -3,6 +3,9 @@
  *
  * @author Jesse Kaufman <jesse@jessekaufman.com>
  */
+import config from "./config/config.js";
+import app from "./app.js";
+config.setup();
 
 /**
  * @typedef {Object} Stat
@@ -23,46 +26,12 @@ Object.defineProperty(String.prototype, "toTitle", {
   },
 });
 
-// Enviroment variables
-import dotenv from "dotenv";
-dotenv.config();
-
-process.env.BASE_URL = process.env.DEV_BASE_URL;
-
-if (process.env.NODE_ENV === "production") {
-  process.env.BASE_URL = process.env.PROD_BASE_URL;
-}
-
 // MongoDB connection
 import connectDB from "./utils/db.js";
 connectDB();
 
-// Setup Express
-import express from "express";
-const expressApp = express();
-
-// Enable compression
-import compression from "compression";
-expressApp.use(compression());
-
-expressApp.use(express.urlencoded({ extended: true }));
-
-// Use CORS
-import cors from "cors";
-expressApp.use(cors());
-
-expressApp.set("views", "src/views");
-expressApp.set("view engine", "pug");
-
-import staticRoutes from "./routes/staticRoutes.js";
-expressApp.use("/", staticRoutes);
-
-// EvidenceItem routes
-import evidenceRoutes from "./routes/evidenceRoutes.js";
-expressApp.use("/", evidenceRoutes);
-
 // Start the server
-const server = expressApp.listen(process.env.NODE_PORT, async () => {
+const server = app.listen(process.env.NODE_PORT, async () => {
   let host = server.address().address;
   let port = server.address().port;
   console.log(
