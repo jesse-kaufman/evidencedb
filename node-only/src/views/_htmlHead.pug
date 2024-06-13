@@ -9,7 +9,7 @@ head
     meta(property="og:url" content=`${process.env.BASE_URL}`)
     meta(property="og:title" content=title)
     meta(property="og:image" content=`${process.env.DEFAULT_IMAGE}`)
-    meta(property="og:description" content=`${process.env.PAGE_DESCRIPTION}`)
+    meta(property="og:description" content=`${item ? item.body.slice(0, 160) : process.env.PAGE_DESCRIPTION}`)
     meta(name="description" content=`${item ? item.body.slice(0, 160) : process.env.PAGE_DESCRIPTION}`)
 
     script.
