@@ -29,3 +29,4 @@ yarn-error.log*
 node-only/robots.txt
 node-only/src/public/js/gen.js
 node-only/src/public/css/style.css
+node-only/build
