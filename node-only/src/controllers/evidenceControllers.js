@@ -7,10 +7,15 @@
 
 import versionStrings from "../../build/versions.js";
 import { getEvidenceItems } from "../models/evidenceItemModel.js";
-import { getQuery } from "../utils/queryUtils.js";
+import { getQuery } from "../services/queryService.js";
 import { getStats } from "../models/statsModel.js";
 import { getDates } from "../models/searchModel.js";
-import { formatTranscript, formatDuration } from "../utils/helpers.js";
+import {
+  formatTranscript,
+  formatDuration,
+} from "../services/formattingService.js";
+import { mongoose } from "mongoose";
+import pug from "pug";
 
 /**
  *
@@ -19,9 +24,9 @@ import { formatTranscript, formatDuration } from "../utils/helpers.js";
  * @param {Object} req Request object
  * @param {Object} res Response object
  */
-export async function printEvidence(req, res) {
+const render = async (req, res) => {
   // Build the query from the request object
-  let query = await getQuery(req);
+  let query = await getQuery(mongoose, req);
 
   // Get stats for the query to display on frontend
   let stats = await getStats(req.query.include, query);
@@ -53,4 +58,6 @@ export async function printEvidence(req, res) {
     formatVideoTranscript: formatTranscript,
     formatDuration: formatDuration,
   });
-}
+};
+
+export default { render };

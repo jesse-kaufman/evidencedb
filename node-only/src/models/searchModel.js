@@ -1,5 +1,5 @@
 import EvidenceItem from "../models/evidenceItemModel.js";
-import { getCountAggregation } from "../utils/db.js";
+import { getCountAggregation } from "../services/queryService.js";
 
 /**
  * Get list of dates with in/out counts for search dropdown

@@ -30,6 +30,7 @@ export const formatTranscript = (transcript, duration) => {
 
   // If item's duration includes an hour, set hasHour = true for later
   if (duration.match(/01:\d\d:\d\d/)) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     hasHour = true;
   }
 

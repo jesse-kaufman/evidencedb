@@ -1,6 +1,21 @@
 import EvidenceItem from "../models/evidenceItemModel.js";
 import { validTypes } from "../models/evidenceItemModel.js";
-import { getCountAggregation } from "../utils/db.js";
+import { getCountAggregation } from "../services/queryService.js";
+
+/**
+ * Gets stats for a given evidence item type
+ *
+ * @param {*} type
+ * @param {*} query
+ * @returns
+ */
+const getTypeStats = async (type, query, include) => {
+  // Get query to pull statistics for type
+  const statsQuery = await buildTypeStatsPipeline(type, query, include);
+
+  // Get number of evidence items received/sent for type
+  return await EvidenceItem.aggregate(statsQuery);
+};
 
 /**
  * Gets statistics for evidence items based on the specified types and query.
@@ -49,7 +64,7 @@ export const getStats = async (include, core_query) => {
  * @param {*} query
  * @returns
  */
-const getTypeStatsPipeline = async (type, core_query, include) => {
+const buildTypeStatsPipeline = async (type, core_query, include) => {
   let query = Object.assign({}, core_query);
 
   let dateSentDate = query.date_sent_date;
@@ -58,6 +73,7 @@ const getTypeStatsPipeline = async (type, core_query, include) => {
   // Default to searching all included types
   delete query.type;
 
+  // If include was set, only include those types
   if (include != null) {
     query.type = { $in: include };
   }
@@ -67,18 +83,12 @@ const getTypeStatsPipeline = async (type, core_query, include) => {
     query.type = type;
   }
 
-  // Get aggregation to count number of evidence items sent per type
-  const outCount = await getCountAggregation("OUT");
-
-  // Get aggregation to count number of evidence items received per type
-  const inCount = await getCountAggregation("IN");
-
-  // Group by type
+  // Group by type and count in/out items
   const group = {
     $group: {
       _id: null,
-      in: inCount,
-      out: outCount,
+      in: await getCountAggregation("IN"),
+      out: await getCountAggregation("OUT"),
     },
   };
 
@@ -103,19 +113,4 @@ const getTypeStatsPipeline = async (type, core_query, include) => {
 
   // Return complete pipeline array
   return [{ $match: query }, addDateFields, dateFilter, group];
-};
-
-/**
- * Gets stats for a given evidence item type
- *
- * @param {*} type
- * @param {*} query
- * @returns
- */
-const getTypeStats = async (type, query, include) => {
-  // Get query to pull statistics for type
-  const statsQuery = await getTypeStatsPipeline(type, query, include);
-
-  // Get number of evidence items received/sent for type
-  return await EvidenceItem.aggregate(statsQuery);
 };

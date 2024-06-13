@@ -5,11 +5,8 @@
  */
 import config from "./config/config.js";
 import app from "./app.js";
-config.setup();
-
-// MongoDB connection
-import connectDB from "./utils/db.js";
-connectDB();
+import connectDB from "./config/db.js";
+connectDB(config.mongoUrl);
 
 // Start the server
 const server = app.listen(process.env.NODE_PORT, async () => {
