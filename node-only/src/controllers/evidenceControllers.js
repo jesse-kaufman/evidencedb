@@ -34,40 +34,72 @@ const render = async (req, res) => {
   // Get dates for dropdown items
   let dates = await getDates(req.query.include);
 
-  // Get matching evidence items for the query
-  let evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
-  let isSingle = "id" in req.params;
+  // View is single item view
+  const isSingle = "id" in req.params;
 
-  const renderEvidenceItemList = pug.compileFile("src/views/_evidenceList.pug");
-  const evidenceItemList = renderEvidenceItemList({
-    evidenceItems: evidenceItems,
-    isSingle: isSingle,
-    cdn_url: process.env.CDN,
-    formatVideoTranscript: formatTranscript,
-    formatDuration: formatDuration,
-  });
+  // Get matching evidence items
+  let evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
+
+  // Render the evidence item list to a string
+  const evidenceItemList = await renderEvidenceItemList(
+    evidenceItems,
+    isSingle
+  );
+
+  const get = {
+    include: req.query.include,
+    victim: req.query.victim,
+    number: req.query.number,
+    date_sent_date: req.query.date_sent_date,
+    type: req.query.type,
+    query: req.query.query,
+  };
+
+  // Render the search form to a string
+  const searchForm = await renderSearchForm(get, dates);
 
   // Render the index page using pugjs
   await res.render("index", {
-    evidenceItems: evidenceItems,
+    item: isSingle ? evidenceItems[0] : null,
     evidenceItemList: evidenceItemList,
+    searchForm: searchForm,
     stats: stats,
     isSingle: isSingle,
     pageClass: isSingle === true ? "single" : "list",
     versionStrings: versionStrings,
-    get: {
-      include: req.query.include,
-      victim: req.query.victim,
-      number: req.query.number,
-      date_sent_date: req.query.date_sent_date,
-      type: req.query.type,
-      query: req.query.query,
-    },
     dates: dates,
+    cdn_url: process.env.CDN,
+  });
+};
+
+/**
+ * Renders the HTML for the search form and returns it as a string
+ * @param {*} get
+ * @param {*} dates
+ * @returns
+ */
+const renderSearchForm = async (get, dates) => {
+  const searchForm = pug.compileFile("src/views/header/_search.pug")({
+    get,
+    dates,
+  });
+  return searchForm;
+};
+
+/**
+ * Renders evidence item list to string
+ * @param {*} evidenceItems
+ * @param {*} isSingle
+ * @returns
+ */
+const renderEvidenceItemList = async (evidenceItems, isSingle) => {
+  const evidenceItemList = pug.compileFile("src/views/_evidenceList.pug")({
+    evidenceItems: evidenceItems,
+    isSingle: isSingle,
     cdn_url: process.env.CDN,
     formatVideoTranscript: formatTranscript,
     formatDuration: formatDuration,
   });
+  return evidenceItemList;
 };
-
 export default { render };
