@@ -1,16 +1,16 @@
 //- Use the first screenshot if one exists
-- var imageFile = item?.screenshots?.length != null ? item?.screenshots[0].replace(/\.(jpg|jpeg|png)/, '.webp') : ''
-if imageFile != ''
+- var imageFile = item?.screenshots?.length != null ? item?.screenshots[0].replace(/\.(jpg|jpeg|png)/, ".webp") : ""
+if imageFile != ""
     - var imageFile = encodeURIComponent(imageFile)
     - var image = `${process.env.CDN}opt/screenshots/${imageFile}`
 
 //- If no screenshot existed, try the first attachment if one exists
-if image == ''
-    - var imageFile = item?.attachments?.length != null ? item?.attachments[0]?.filename.replace(/\.(jpg|jpeg|png)/, '.webp') : ''
-    if imageFile != ''
+if image == ""
+    - var imageFile = item?.attachments?.length != null ? item?.attachments[0]?.filename.replace(/\.(jpg|jpeg|png)/, ".webp") : ""
+    if imageFile != ""
         - var imageFile = encodeURIComponent(imageFile)
-        - var image = item?.attachments?.length != null ? `${process.env.CDN}opt/attachments/${imageIfle}` : ''
+        - var image = item?.attachments?.length != null ? `${process.env.CDN}opt/attachments/${imageIfle}` : ""
 
 //- If no attachment existed, use the default
-if image == ''
+if image == ""
     - var image = `${process.env.DEFAULT_IMAGE}`

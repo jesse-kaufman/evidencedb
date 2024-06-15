@@ -1,8 +1,8 @@
-- var messageClass = item.direction === 'OUT' ? item.victim : 'offender'
-- var from = item.direction === 'IN' ? process.env.OFFENDER_NAME : item.victim.toTitle()
-- var to = item.direction === 'IN' ? item.victim.toTitle() : process.env.OFFENDER_NAME
+- var messageClass = item.direction === "OUT" ? item.victim : "offender"
+- var from = item.direction === "IN" ? process.env.OFFENDER_NAME : item.victim.toTitle()
+- var to = item.direction === "IN" ? item.victim.toTitle() : process.env.OFFENDER_NAME
 
-.evidenceItem(class=item.type + ' ' + messageClass id=item._id)
+.evidenceItem(class=`${item.type} ${messageClass}` id=item._id)
     .meta
         include evidenceItem/header/_icon
         include evidenceItem/header/_info
@@ -11,18 +11,18 @@
             svg(width="16" height="16")
                 use(xlink:href="../../public/images/share.svg#share")
     .body
-        if item.type === 'video'
+        if item.type === "video"
             include evidenceItem/_video
-        if item.type === 'text'
+        if item.type === "text"
             include evidenceItem/_text
-        if item.type === 'email'
+        if item.type === "email"
             include evidenceItem/_email
-        if item.type === 'voicemail'
+        if item.type === "voicemail"
             include evidenceItem/_voicemail
-        if item.type === 'social'
+        if item.type === "social"
             include evidenceItem/_social
 
         include evidenceItem/_screenshots
 
     .footer
-        span= item.type === 'text' ? 'text message' : item.type
+        span= item.type === "text" ? "text message" : item.type

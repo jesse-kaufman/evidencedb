@@ -2,10 +2,15 @@
     - var jesse_selected = get.victim === "jesse" ? "" : false
     - var shannon_selected = get.victim === "shannon"? true : false
     - var others_selected = get.victim === "others" ? true : false
+    - var anthony_selected = get.victim === "anthony" ? true : false
+    - var jane_selected = get.victim === "jane" ? true : false
+    
     
     strong Recipent: 
     select(name="victim")
         option(value="") Any
         option(value="shannon" selected=shannon_selected) Shannon
         option(value="jesse" selected=jesse_selected) Jesse
+        option(value="anthony" selected=anthony_selected) Anthony
+        option(value="jane" selected=jane_selected) Jane
         option(value="others" selected=others_selected) Other

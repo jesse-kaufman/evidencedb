@@ -1,0 +1,18 @@
+//- Default to the default title
+- var description = `${process.env.PAGE_DESCRIPTION}`
+
+if item
+    - var _item = item
+
+
+//- If _item still not set and it's a single view, try the first item in the array
+if !_item
+    if isSingle
+        - var _item = evidenceItems[0]
+
+
+//- If item previously set or set in this file, generate a title
+if _item
+    - var description = _item.body.replaceAll("\n", " ").replace(/ {2,}/, " ").slice(0,160)
+
+
