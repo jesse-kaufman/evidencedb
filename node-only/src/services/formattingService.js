@@ -25,7 +25,7 @@ const wrapTimecode = (time, hasHour) => {
 
   if (hasHour) {
     // If undefined use "00:" for hour, otherwise zero-pad hour and add ":"
-    formattedTime = h === undefined ? "00:" : `${h.padStart(2, "0")}:`;
+    formattedTime = h != null ? "00:" : `${h?.padStart(2, "0")}:`;
   }
 
   // Add zero-padded minutes and seconds
@@ -81,13 +81,13 @@ export const formatDuration = (duration) => {
 
   const [hours, minutes, seconds] = duration.split(":");
 
-  if (hours && hours > 0) {
+  if (hours > 0) {
     formattedDuration = `${parseInt(hours)}h `;
   }
-  if (minutes && minutes > 0) {
+  if (minutes > 0) {
     formattedDuration += `${parseInt(minutes)}m `;
   }
-  if (seconds && seconds > 0) {
+  if (seconds > 0) {
     formattedDuration += `${parseInt(seconds)}s`;
   }
 
