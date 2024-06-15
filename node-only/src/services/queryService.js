@@ -3,16 +3,28 @@
  * @param {*} direction
  * @returns {Promise<Object>} - The $sum aggregation object
  */
-export const getCountAggregation = async (direction) => {
-  return {
-    $sum: {
-      $cond: {
-        if: { $eq: ["$direction", direction.toUpperCase()] },
-        then: 1,
-        else: 0,
-      },
+export const getCountAggregation = async (direction) => ({
+  $sum: {
+    $cond: {
+      if: { $eq: ["$direction", direction.toUpperCase()] },
+      then: 1,
+      else: 0,
     },
-  };
+  },
+});
+
+/**
+ * Replaces "s" in each item in types array to fix old URLs
+ * @param {*} types
+ * @returns
+ */
+const fixIncludeTypes = (types) => {
+  return types.map((type) => {
+    if (type.match(/s$/)) {
+      return type.slice(0, -1);
+    }
+    return type;
+  });
 };
 
 /**

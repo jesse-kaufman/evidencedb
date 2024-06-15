@@ -10,6 +10,30 @@ Object.defineProperty(String.prototype, "toTitle", {
   },
 });
 
+const wrapTimecode = (time, hasHour) => {
+  let formattedTime = "";
+  let h = null;
+  let m = null;
+  let s = null;
+
+  // Split timecode into seconds, minutes, and optionally hours
+  if (time.match(/\d{1,2}:\d\d:\d\d/)) {
+    [h, m, s] = time.split(":");
+  } else {
+    [m, s] = time.split(":");
+  }
+
+  if (hasHour) {
+    // If undefined use "00:" for hour, otherwise zero-pad hour and add ":"
+    formattedTime = h === undefined ? "00:" : `${h.padStart(2, "0")}:`;
+  }
+
+  // Add zero-padded minutes and seconds
+  formattedTime += `${m.padStart(2, "0")}:${s.padStart(2, "0")}`;
+
+  return `<br/><span class="time">${formattedTime}</span>`;
+};
+
 /**
  * Formats transcript
  *
@@ -41,30 +65,6 @@ export const formatTranscript = (transcript, duration) => {
   );
 
   return wrappedTranscript;
-};
-
-const wrapTimecode = (time, hasHour) => {
-  let formattedTime = "";
-  var h,
-    m,
-    s = null;
-
-  // Split timecode into seconds, minutes, and optionally hours
-  if (time.match(/\d{1,2}:\d\d:\d\d/)) {
-    [h, m, s] = time.split(":");
-  } else {
-    [m, s] = time.split(":");
-  }
-
-  if (hasHour) {
-    // If undefined use "00:" for hour, otherwise zero-pad hour and add ":"
-    formattedTime = h === undefined ? "00:" : `${h.padStart(2, "0")}:`;
-  }
-
-  // Add zero-padded minutes and seconds
-  formattedTime += `${m.padStart(2, "0")}:${s.padStart(2, "0")}`;
-
-  return `<br/><span class="time">${formattedTime}</span>`;
 };
 
 /**
