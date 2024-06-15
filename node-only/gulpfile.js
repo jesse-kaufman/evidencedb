@@ -14,13 +14,13 @@ const sass = gulpSass(dartSass);
  * Configuration objects for gulp-exec
  */
 const execOptions = {
-  continueOnError: false, // default = false, true means don't emit error event
-  pipeStdout: false, // default = false, true means stdout is written to file.contents
+  continueOnError: false, // Default = false, true means don't emit error event
+  pipeStdout: false, // Default = false, true means stdout is written to file.contents
 };
 const execReportOptions = {
-  err: true, // default = true, false means don't write err
-  stderr: true, // default = true, false means don't write stderr
-  stdout: true, // default = true, false means don't write stdout
+  err: true, // Default = true, false means don't write err
+  stderr: true, // Default = true, false means don't write stderr
+  stdout: true, // Default = true, false means don't write stdout
 };
 
 /**
@@ -99,11 +99,18 @@ const startDev = async () => {
 /**
  * Watches for changes and runs TypeScript / Sass tasks
  */
-const watchTask = async () => {
-  watch("src/public/src/typescript/*.ts", parallel(buildTypeScriptTask));
-  watch("src/public/src/sass/**/*.scss", parallel(buildSassTask));
+const watchTask = () => {
+  watch(
+    "src/public/scripts/*.ts",
+    parallel(buildTypeScriptTask, updateVersionStringsTask)
+  );
+  watch(
+    "src/public/styles/**/*.scss",
+    parallel(buildSassTask, updateVersionStringsTask)
+  );
 };
 
+//
 // import gitGuppy from "git-guppy";
 // import gulpFilter from "gulp-filter";
 // import jshint from "gulp-jshint";
