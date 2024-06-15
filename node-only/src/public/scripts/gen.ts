@@ -13,10 +13,31 @@ const setupTranscript = (): void => {
   });
 };
 
+const wrapSearchTerm = (e: HTMLElement, term: string): void => {
+  $(e).html().replace(new RegExp(term, "ig"), "<mark>$&</mark>");
+};
+
+/**
+ * Searches the message list for the input query and highlights the matching text.
+ */
+const highlightSearch = (): void => {
+  const term = $("input[name=query]")?.val()?.toString() ?? "";
+
+  // Do search if term is set
+  if (term) {
+    $("#message_list .message")
+      .children(".body")
+      .each((i, e): void => wrapSearchTerm(e, term));
+
+    // Setup transcript link events
+    setupTranscript();
+  }
+};
+
 /**
  * Initializes the necessary event listeners and functions for the application.
  */
-$(function (): void {
+$((): void => {
   /**
    * Attaches an event listener to the 'select' elements,
    * triggering a form submission when their value changes.
@@ -27,34 +48,5 @@ $(function (): void {
   setupTranscript();
 
   // Highlights matching messages based on the input query.
-  hl_search();
+  highlightSearch();
 });
-
-// function hl_clear(): void {
-//   $("#message_list .message .body").html((i, e): string =>
-//     $(e).html().replace("<mark>", "").replace("</mark>", "")
-//   );
-//   // Setup transcript link events.
-//   setupTranscript();
-// }
-
-/**
- * Searches the message list for the input query and highlights the matching text.
- */
-function hl_search(): void {
-  const term = $("input[name=query]")?.val()?.toString() ?? "";
-
-  // Do search if term is set
-  if (term !== "") {
-    $("#message_list .message")
-      .children(".body")
-      .each((i, e): void => {
-        $(e).html(
-          $(e).html().replace(new RegExp(term, "ig"), "<mark>$&</mark>")
-        );
-      });
-
-    // Setup transcript link events
-    setupTranscript();
-  }
-}

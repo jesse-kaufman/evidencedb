@@ -1,62 +1,5 @@
-import EvidenceItem from "../models/evidenceItemModel.js";
-import { validTypes } from "../models/evidenceItemModel.js";
+import EvidenceItem, { validTypes } from "../models/evidenceItemModel.js";
 import { getCountAggregation } from "../services/queryService.js";
-
-/**
- * Gets stats for a given evidence item type
- *
- * @param {*} type
- * @param {*} query
- * @returns
- */
-const getTypeStats = async (type, query, include) => {
-  // Get query to pull statistics for type
-  const statsQuery = await buildTypeStatsPipeline(type, query, include);
-
-  // Get number of evidence items received/sent for type
-  return await EvidenceItem.aggregate(statsQuery);
-};
-
-/**
- * Gets statistics for evidence items based on the specified types and query.
- *
- * @param {Array.<EvidenceItemType>} include - An array of types to include in the statistics.
- * @param {Object} core_query - The core query object to filter the evidence items.
- * @returns {Promise<Array.<Stat>>} - Promise of an array of statistics objects
- */
-export const getStats = async (include, core_query) => {
-  let stats = [];
-  let types = null;
-  let query = Object.assign({}, core_query);
-
-  // Default to all types if none are specified
-  if (include == null || include[0] == null) {
-    types = [...validTypes, "total"];
-  } else {
-    types = [...include, "total"];
-  }
-
-  // Count number of evidence items received/sent per type
-  for (const type of types) {
-    // Get the actual stats from database
-    const typeStats = await getTypeStats(type, query, include);
-
-    // Default counts to 0
-    const count_in = typeStats[0]?.in || 0;
-    const count_out = typeStats[0]?.out || 0;
-
-    // Only add to stats if either count is > 0
-    if (count_in > 0 || count_out > 0) {
-      stats.push({
-        type: type,
-        count_in: count_in,
-        count_out: count_out,
-      });
-    }
-  }
-
-  return stats;
-};
 
 /**
  * Builds query to pull statistics from MongoDB
@@ -64,8 +7,8 @@ export const getStats = async (include, core_query) => {
  * @param {*} query
  * @returns
  */
-const buildTypeStatsPipeline = async (type, core_query, include) => {
-  let query = Object.assign({}, core_query);
+const buildTypeStatsPipeline = async (type, baseQuery, include) => {
+  let query = Object.assign({}, baseQuery);
 
   let dateSentDate = query.date_sent_date;
   delete query.date_sent_date;
@@ -113,4 +56,64 @@ const buildTypeStatsPipeline = async (type, core_query, include) => {
 
   // Return complete pipeline array
   return [{ $match: query }, addDateFields, dateFilter, group];
+};
+
+/**
+ * Gets stats for a given evidence item type
+ *
+ * @param {*} type
+ * @param {*} query
+ * @returns
+ */
+const getTypeStats = async (type, query, include) => {
+  // Get query to pull statistics for type
+  const statsQuery = await buildTypeStatsPipeline(type, query, include);
+
+  // Get number of evidence items received/sent for type
+  let typeStats = await EvidenceItem.aggregate(statsQuery);
+
+  // Only add to stats if either count is > 0
+  if (typeStats[0]?.in > 0 || typeStats[0]?.out > 0) {
+    return {
+      type: type,
+      count_in: typeStats[0].in,
+      count_out: typeStats[0].out,
+    };
+  }
+};
+
+/**
+ * Gets statistics for evidence items based on the specified types and query.
+ *
+ * @param {Array} include - An array of types to include in the statistics.
+ * @param {Object} baseQuery - The core query object to filter the evidence items.
+ * @returns {Promise<Array>} - Promise of an array of statistics objects
+ */
+export const getStats = async (include, baseQuery) => {
+  let stats = [];
+  let types = null;
+  let query = Object.assign({}, baseQuery);
+
+  // Default to all types if none are specified
+  if (include == null || include[0] == null) {
+    types = [...validTypes, "total"];
+  } else {
+    types = [...include, "total"];
+  }
+
+  // Count number of evidence items received/sent per type
+  for (const type of types) {
+    // Get the actual stats from database
+    // eslint-disable-next-line no-await-in-loop
+    const typeStats = await getTypeStats(type, query, include);
+
+    // Only add to stats if either count is > 0
+    stats.push({
+      type: type,
+      count_in: typeStats.count_in,
+      count_out: typeStats.count_out,
+    });
+  }
+
+  return stats;
 };

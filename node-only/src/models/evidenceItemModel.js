@@ -55,8 +55,8 @@ const EvidenceItemModel = new mongoose.model("Item", EvidenceItemSchema);
  * @param {*} dateSentDate
  * @returns
  */
-export const getEvidenceItems = async (core_query, dateSentDate = "") => {
-  let query = Object.assign({}, core_query);
+export const getEvidenceItems = async (baseQuery, dateSentDate = "") => {
+  let query = Object.assign({}, baseQuery);
   delete query.date_sent_date;
 
   // Sort by date
