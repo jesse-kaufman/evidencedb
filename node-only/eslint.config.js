@@ -20,8 +20,14 @@ const config = [
       "no-unreachable-loop": "error",
       "no-use-before-define": "warn",
       "require-atomic-updates": "warn",
-      "capitalized-comments": ["warn", "always"],
-      camelcase: "warn",
+      "capitalized-comments": [
+        "warn",
+        "always",
+        { ignoreInlineComments: true, ignoreConsecutiveComments: true },
+      ],
+      complexity: ["warn", { max: 4 }],
+      camelcase: ["warn", { properties: "never" }],
+      curly: "warn",
     },
   },
 ];
