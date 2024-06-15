@@ -35,7 +35,7 @@ const fixIncludeTypes = (types) => {
  * @returns
  */
 export const getQuery = async (db, req) => {
-  var query = {};
+  let query = {};
 
   if (req.params.id) {
     query._id = new db.Types.ObjectId(req.params.id);
