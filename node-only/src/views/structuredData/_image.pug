@@ -12,5 +12,5 @@ if !image
         - var image = item?.attachments?.length != null ? `${process.env.CDN}opt/attachments/${imageIfle}` : ""
 
 //- If no attachment existed, use the default
-if image == ""
+if !image
     - var image = `${process.env.DEFAULT_IMAGE}`
