@@ -30,5 +30,9 @@ router.use(
   "/favicon.ico",
   express.static("src/public/images/favicon.ico", staticOptions)
 );
+router.use(
+  "/robots.txt",
+  express.static("src/public/robots.txt", staticOptions)
+);
 
 export default router;
