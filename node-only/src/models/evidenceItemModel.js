@@ -32,7 +32,7 @@ const EvidenceItemSchema = new mongoose.Schema({
   direction: String,
   victim: {
     type: String,
-    enum: ["jesse", "shannon", "both"],
+    enum: ["jesse", "shannon", "anthony", "jane", "others", "both"],
     required: true,
   },
   body: {
