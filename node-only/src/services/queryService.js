@@ -48,9 +48,10 @@ export const getQuery = async (db, req) => {
 
   // Filter based on victim
   if (req.query.victim && req.query.victim !== "both") {
-    query.victim = { $in: ["both", req.query.victim] };
-    if (req.query.victim === "others") {
-      query.victim = "others";
+    if (["jesse", "shannon"].includes(req.query.victim)) {
+      query.victim = { $in: ["both", req.query.victim] };
+    } else {
+      query.victim = req.query.victim;
     }
   }
 
