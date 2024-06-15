@@ -18,6 +18,37 @@ import { mongoose } from "mongoose";
 import pug from "pug";
 
 /**
+ * Renders the HTML for the search form and returns it as a string
+ * @param {*} get
+ * @param {*} dates
+ * @returns
+ */
+const renderSearchForm = async (get, dates) => {
+  const searchForm = pug.compileFile("src/views/header/_search.pug")({
+    get,
+    dates,
+  });
+  return searchForm;
+};
+
+/**
+ * Renders evidence item list to string
+ * @param {*} evidenceItems
+ * @param {*} isSingle
+ * @returns
+ */
+const renderEvidenceItemList = async (evidenceItems, isSingle) => {
+  const evidenceItemList = pug.compileFile("src/views/_evidenceList.pug")({
+    evidenceItems: evidenceItems,
+    isSingle: isSingle,
+    cdn_url: process.env.CDN,
+    formatVideoTranscript: formatTranscript,
+    formatDuration: formatDuration,
+  });
+  return evidenceItemList;
+};
+
+/**
  *
  * Lists evidence items
  *
@@ -72,34 +103,4 @@ const render = async (req, res) => {
   });
 };
 
-/**
- * Renders the HTML for the search form and returns it as a string
- * @param {*} get
- * @param {*} dates
- * @returns
- */
-const renderSearchForm = async (get, dates) => {
-  const searchForm = pug.compileFile("src/views/header/_search.pug")({
-    get,
-    dates,
-  });
-  return searchForm;
-};
-
-/**
- * Renders evidence item list to string
- * @param {*} evidenceItems
- * @param {*} isSingle
- * @returns
- */
-const renderEvidenceItemList = async (evidenceItems, isSingle) => {
-  const evidenceItemList = pug.compileFile("src/views/_evidenceList.pug")({
-    evidenceItems: evidenceItems,
-    isSingle: isSingle,
-    cdn_url: process.env.CDN,
-    formatVideoTranscript: formatTranscript,
-    formatDuration: formatDuration,
-  });
-  return evidenceItemList;
-};
 export default { render };
