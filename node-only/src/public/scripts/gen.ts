@@ -1,7 +1,7 @@
 /**
  * Sets up the event listeners for the transcript links.
  */
-const setupTranscript = (): void => {
+const setupTranscript = async (): Promise<void> => {
   $("body.list .transcript h2").on("click", (e) => {
     if ($(e.currentTarget).parent().hasClass("show")) {
       // Hide transcript
@@ -30,23 +30,22 @@ const highlightSearch = (): void => {
       .each((i, e): void => wrapSearchTerm(e, term));
 
     // Setup transcript link events
-    setupTranscript();
   }
 };
 
 /**
  * Initializes the necessary event listeners and functions for the application.
  */
-$((): void => {
+$(async (): Promise<void> => {
   /**
    * Attaches an event listener to the 'select' elements,
    * triggering a form submission when their value changes.
    */
   $("select").on("change", () => $("form").trigger("submit"));
 
-  // Sets up the event listeners for the transcript links.
-  setupTranscript();
-
   // Highlights matching messages based on the input query.
   highlightSearch();
+
+  // Sets up the event listeners for the transcript links.
+  await setupTranscript();
 });
