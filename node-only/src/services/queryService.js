@@ -4,7 +4,7 @@
  * @returns {Promise<Object>} - The $sum aggregation object
  */
 
-const getVictimFilter = async (victimName) => {
+const getVictimFilter = (victimName) => {
   // Victim is set and is not "both"
   if (victimName) {
     if (["jesse", "shannon"].includes(victimName)) {
@@ -15,7 +15,7 @@ const getVictimFilter = async (victimName) => {
   }
 };
 
-const getQueryFilter = async (query) => {
+const getQueryFilter = (query) => {
   if (query) {
     return { $text: { $search: `"${query}"` } };
   }
@@ -29,26 +29,28 @@ const getQueryFilter = async (query) => {
 const fixIncludeTypes = (types) => {
   return types.map((type) => {
     if (type.match(/s$/)) {
+      // eslint-disable-next-line no-magic-numbers
       return type.slice(0, -1);
     }
     return type;
   });
 };
 
-const getDateFilter = async (dateSentDate) => {
+const getDateFilter = (dateSentDate) => {
   if (dateSentDate) {
     return { date_sent_date: dateSentDate };
   }
 };
 
-const getTypeFilter = async (include) => {
+const getTypeFilter = (include) => {
   // Filter based on evidence item type
+  // eslint-disable-next-line no-magic-numbers
   if (include && include.length > 0) {
     return { type: { $in: fixIncludeTypes(include) } };
   }
 };
 
-export const getCountAggregation = async (direction) => ({
+export const getCountAggregation = (direction) => ({
   $sum: {
     $cond: {
       if: { $eq: ["$direction", direction.toUpperCase()] },
@@ -75,19 +77,19 @@ export const getQuery = async (db, req) => {
   }
 
   // Filter based on evidence item body
-  let queryFilter = await getQueryFilter(req.query.query);
+  const queryFilter = await getQueryFilter(req.query.query);
   query = { ...query, ...queryFilter };
 
   // Filter based on victim
-  let victimFilter = await getVictimFilter(req.query.victim);
+  const victimFilter = await getVictimFilter(req.query.victim);
   query = { ...query, ...victimFilter };
 
   // Filter based on date
-  let dateFilter = await getDateFilter(req.query.date_sent_date);
+  const dateFilter = await getDateFilter(req.query.date_sent_date);
   query = { ...query, ...dateFilter };
 
   // Filter based on evidence item type
-  let typeFilter = await getTypeFilter(req.query.include);
+  const typeFilter = await getTypeFilter(req.query.include);
   query = { ...query, ...typeFilter };
 
   return query;

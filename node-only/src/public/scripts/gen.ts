@@ -1,7 +1,7 @@
 /**
  * Sets up the event listeners for the transcript links.
  */
-const setupTranscript = async (): Promise<void> => {
+const setupTranscript = (): void => {
   $("body.list .transcript h2").on("click", (e) => {
     if ($(e.currentTarget).parent().hasClass("show")) {
       // Hide transcript

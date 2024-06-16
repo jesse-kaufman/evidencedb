@@ -83,12 +83,15 @@ export const formatDuration = (duration) => {
 
   const [hours, minutes, seconds] = duration.split(":");
 
+  // eslint-disable-next-line no-magic-numbers
   if (hours > 0) {
     formattedDuration = `${parseInt(hours)}h `;
   }
+  // eslint-disable-next-line no-magic-numbers
   if (minutes > 0) {
     formattedDuration += `${parseInt(minutes)}m `;
   }
+  // eslint-disable-next-line no-magic-numbers
   if (seconds > 0) {
     formattedDuration += `${parseInt(seconds)}s`;
   }
