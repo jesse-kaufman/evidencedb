@@ -2,6 +2,7 @@
 // Voicemail Evidence Item
 // 
 include ../structuredData/_contactInfo
+include ../structuredData/_audioObject
 
 p.duration
     strong Duration: 
@@ -11,4 +12,5 @@ audio(preload=none, controls=true, src=`${process.env.CDN}voicemails/${item.file
 
 include _transcript
 
-include ../structuredData/_audioObject
+script(type="application/ld+json").
+    #[+audioObject(true)]

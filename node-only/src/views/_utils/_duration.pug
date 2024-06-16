@@ -1,0 +1,17 @@
+mixin formatDuration(duration, style)
+    - var formattedDuration = ''
+    - var [hours, minutes, seconds] = duration.split(":");
+
+    if hours > 0
+        - var formattedDuration = `${parseInt(hours)}h `
+    
+    if minutes > 0
+        - var formattedDuration = `${formattedDuration}${parseInt(minutes)}m `
+    
+    if seconds > 0
+        - var formattedDuration = `${formattedDuration}${parseInt(seconds)}s`
+
+    if style === 'structuredData'
+        - var formattedDuration = formattedDuration.toUpperCase().replace(" ", "")
+
+    | #{formattedDuration}

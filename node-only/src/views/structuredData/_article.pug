@@ -1,5 +1,6 @@
 include _contactInfo
 include ../_utils/_title
+include _audioObject
 
 script(type="application/ld+json").
     {
@@ -12,6 +13,7 @@ script(type="application/ld+json").
             "@type": "Person",
             #[+contactInfo]
         },
+        #[+audioObject]
         "datePublished": "2023-12-01T00:00:00Z",
         "description": "#{process.env.PAGE_DESCRIPTION}"
     }
