@@ -2,6 +2,13 @@ include _contactInfo
 include ../_utils/_title
 include _audioObject
 
+if item
+    - var datePublished = `${item.date_sent.toISOString()}`
+    | #{`${console.log(item)}`}
+
+else
+    - var datePublished = `${process.env.DEFAULT_DATE_PUBLISHED}`
+
 script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
@@ -14,6 +21,6 @@ script(type="application/ld+json").
             #[+contactInfo]
         },
         #[+audioObject]
-        "datePublished": "2023-12-01T00:00:00Z",
+        "datePublished": "#{datePublished}",
         "description": "#{process.env.PAGE_DESCRIPTION}"
     }
