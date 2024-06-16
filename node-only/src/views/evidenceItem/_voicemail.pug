@@ -12,5 +12,5 @@ audio(preload=none, controls=true, src=`${process.env.CDN}voicemails/${item.file
 
 include _transcript
 
-script(type="application/ld+json").
-    #[+audioObject(true)]
+script(type="application/ld+json")
+    +audioObject
