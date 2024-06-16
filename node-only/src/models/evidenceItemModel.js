@@ -132,6 +132,17 @@ export const getEvidenceItems = async (baseQuery, dateSentDate = "") => {
         timezone: "America/Chicago",
       },
     },
+    // formattedDuration: {
+    //   $dateToString: {
+    //     format: "%Hh %Mm %Ss",
+    //     date: {
+    //       $dateFromString: {
+    //         dateString: "$yourTimeProperty",
+    //         format: "%H:%M:%S",
+    //       },
+    //     },
+    //   },
+    // },
   };
 
   const setFromFields = {
