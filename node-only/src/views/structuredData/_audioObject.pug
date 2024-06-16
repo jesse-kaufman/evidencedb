@@ -3,26 +3,30 @@ include _image
 include ../_utils/_duration
 
 mixin audioObject
-    if single !== true 
-        | "audio": 
+    - var audioObject = ''
 
-    |    {
-    |        "@context": "https://schema.org/",
-    |        "@type": "AudioObject",
-    |        "contentUrl": "#{process.env.CDN}voicemails/#{item.filename}",
-    |        "name": "Voicemail from #{process.env.OFFENDER_NAME} on #{item.date_sent.toLocaleString("en-US", { dateStyle: "long", timeStyle: "short", hour12: true })}",
-    |        "@id": "#{process.env.BASE_URL}/evidence-item/#{item._id}",
-    |        "datePublished": "#{item.date_sent.toISOString()}",
-    |        "duration": "#[+formatDuration(item.duration, "structuredData")]",
-    |        "encodingFormat": "audio/mpeg",
-    |        "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, "").replace(/\n/g, " ")}",
-    |        "image": "#{image}",
-    |        "author": {
-    |            "@type": "Person",
-    |            #[+contactInfo]
-    |        }
-    |    }
+    if item
+        if pageMeta === true 
+            | "audio":
+
+        | #{audioObject}
+        |        {
+        |            "@context": "https://schema.org/",
+        |            "@type": "AudioObject",
+        |            "contentUrl": "#{`${process.env.CDN}voicemails/${item.filename}`}",
+        |            "name": "Voicemail from #{process.env.OFFENDER_NAME} on #{item.date_sent.toLocaleString("en-US", { dateStyle: "long", timeStyle: "short", hour12: true })}",
+        |            "@id": "#{process.env.BASE_URL}/evidence-item/#{item._id}",
+        |            "datePublished": "#{item.date_sent.toISOString()}",
+        |            "duration": "#[+formatDuration(item.duration,"structuredData")]",
+        |            "encodingFormat": "audio/mpeg",
+        |            "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, "").replace(/\n/g, " ")}",
+        |            "image": "#{image}",
+        |            "author": {
+        |                "@type": "Person",
+        |                #[+contactInfo]
+        |            }
+        |        }
 
 
-    if single !== true 
-        | ,
+        if pageMeta === true 
+            | ,
