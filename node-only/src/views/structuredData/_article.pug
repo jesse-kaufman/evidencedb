@@ -2,12 +2,9 @@ include _contactInfo
 include ../_utils/_title
 include _audioObject
 
+- var datePublished = `${process.env.DEFAULT_DATE_PUBLISHED}`
 if item
     - var datePublished = `${item.date_sent.toISOString()}`
-    | #{`${console.log(item)}`}
-
-else
-    - var datePublished = `${process.env.DEFAULT_DATE_PUBLISHED}`
 
 script(type="application/ld+json").
     {
