@@ -85,6 +85,7 @@ const startDev = async () => {
     watch: [
       "src/index.js",
       "src/**/*.js",
+      "src/views/**/*.pug",
       "!node_modules/**",
       "!src/public/**",
       "!gulpfile.js",
