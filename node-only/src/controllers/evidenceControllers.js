@@ -4,18 +4,17 @@
  * @module controllers/evidenceControllers
  * @author Jesse Kaufman <jesse@jessekaufman.com>
  */
-
-import versionStrings from "../../build/versions.js";
+import {
+  formatDuration,
+  formatTranscript,
+} from "../services/formattingService.js";
+import { getDates } from "../models/searchModel.js";
 import { getEvidenceItems } from "../models/evidenceItemModel.js";
 import { getQuery } from "../services/queryService.js";
 import { getStats } from "../models/statsModel.js";
-import { getDates } from "../models/searchModel.js";
-import {
-  formatTranscript,
-  formatDuration,
-} from "../services/formattingService.js";
 import { mongoose } from "mongoose";
 import pug from "pug";
+import versionStrings from "../../build/versions.js";
 
 /**
  * Renders the HTML for the search form and returns it as a string
@@ -23,7 +22,7 @@ import pug from "pug";
  * @param {*} dates
  * @returns
  */
-const renderSearchForm = async (get, dates) => {
+const renderSearchForm = (get, dates) => {
   const searchForm = pug.compileFile("src/views/header/_search.pug")({
     get,
     dates,
@@ -37,7 +36,7 @@ const renderSearchForm = async (get, dates) => {
  * @param {*} isSingle
  * @returns
  */
-const renderEvidenceItemList = async (evidenceItems, isSingle) => {
+const renderEvidenceItemList = (evidenceItems, isSingle) => {
   const evidenceItemList = pug.compileFile("src/views/_evidenceList.pug")({
     evidenceItems: evidenceItems,
     isSingle: isSingle,
@@ -57,25 +56,22 @@ const renderEvidenceItemList = async (evidenceItems, isSingle) => {
  */
 const render = async (req, res) => {
   // Build the query from the request object
-  let query = await getQuery(mongoose, req);
+  const query = await getQuery(mongoose, req);
 
   // Get stats for the query to display on frontend
-  let stats = await getStats(req.query.include, query);
+  const stats = await getStats(req.query.include, query);
 
   // Get dates for dropdown items
-  let dates = await getDates(req.query.include);
+  const dates = await getDates(req.query.include);
 
   // View is single item view
   const isSingle = "id" in req.params;
 
   // Get matching evidence items
-  let evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
+  const evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
 
   // Render the evidence item list to a string
-  const evidenceItemList = await renderEvidenceItemList(
-    evidenceItems,
-    isSingle
-  );
+  const evidenceItemList = renderEvidenceItemList(evidenceItems, isSingle);
 
   const get = {
     include: req.query.include,
@@ -87,7 +83,7 @@ const render = async (req, res) => {
   };
 
   // Render the search form to a string
-  const searchForm = await renderSearchForm(get, dates);
+  const searchForm = renderSearchForm(get, dates);
 
   // Render the index page using pugjs
   await res.render("index", {

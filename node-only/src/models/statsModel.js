@@ -8,9 +8,9 @@ import { getCountAggregation } from "../services/queryService.js";
  * @returns
  */
 const buildTypeStatsPipeline = async (type, baseQuery, include) => {
-  let query = Object.assign({}, baseQuery);
+  const query = Object.assign({}, baseQuery);
 
-  let dateSentDate = query.date_sent_date;
+  const dateSentDate = query.date_sent_date;
   delete query.date_sent_date;
 
   // Default to searching all included types
@@ -52,7 +52,7 @@ const buildTypeStatsPipeline = async (type, baseQuery, include) => {
     },
   };
 
-  let dateFilter = { $match: { dateSentDate: dateSentDate } };
+  const dateFilter = { $match: { dateSentDate: dateSentDate } };
 
   // Return complete pipeline array
   return [{ $match: query }, addDateFields, dateFilter, group];
@@ -70,10 +70,12 @@ const getTypeStats = async (type, query, include) => {
   const statsQuery = await buildTypeStatsPipeline(type, query, include);
 
   // Get number of evidence items received/sent for type
-  let typeStats = await EvidenceItem.aggregate(statsQuery);
+  const typeStats = await EvidenceItem.aggregate(statsQuery);
 
-  // Only add to stats if either count is > 0
+  // eslint-disable-next-line no-magic-numbers
   if (typeStats[0]?.in > 0 || typeStats[0]?.out > 0) {
+    // Only add to stats if either count is > 0
+
     return {
       type: type,
       count_in: typeStats[0].in,
@@ -90,12 +92,13 @@ const getTypeStats = async (type, query, include) => {
  * @returns {Promise<Array>} - Promise of an array of statistics objects
  */
 export const getStats = async (include, baseQuery) => {
-  let stats = [];
+  const stats = [];
   let types = [...validTypes, "total"];
-  let query = Object.assign({}, baseQuery);
+  const query = Object.assign({}, baseQuery);
 
-  // Default to all types if none are specified
+  // eslint-disable-next-line no-magic-numbers
   if (include?.length > 0) {
+    // Default to all types if none are specified
     types = [...include, "total"];
   }
 

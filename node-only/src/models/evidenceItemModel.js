@@ -47,6 +47,7 @@ const EvidenceItemSchema = new mongoose.Schema({
   screenshots: Array,
 });
 
+// eslint-disable-next-line new-cap
 const EvidenceItemModel = new mongoose.model("Item", EvidenceItemSchema);
 
 /**
@@ -56,7 +57,7 @@ const EvidenceItemModel = new mongoose.model("Item", EvidenceItemSchema);
  * @returns
  */
 export const getEvidenceItems = async (baseQuery, dateSentDate = "") => {
-  let query = Object.assign({}, baseQuery);
+  const query = Object.assign({}, baseQuery);
   delete query.date_sent_date;
 
   // Sort by date
@@ -87,10 +88,13 @@ export const getEvidenceItems = async (baseQuery, dateSentDate = "") => {
             case: { $in: ["$type", ["text", "voicemail"]] },
             then: {
               $concat: [
+                // eslint-disable-next-line no-magic-numbers
                 { $substr: ["$from", 0, 3] },
                 "-",
+                // eslint-disable-next-line no-magic-numbers
                 { $substr: ["$from", 3, 3] },
                 "-",
+                // eslint-disable-next-line no-magic-numbers
                 { $substr: ["$from", 6, 4] },
               ],
             },
@@ -132,6 +136,7 @@ export const getEvidenceItems = async (baseQuery, dateSentDate = "") => {
         timezone: "America/Chicago",
       },
     },
+    //
     // formattedDuration: {
     //   $dateToString: {
     //     format: "%Hh %Mm %Ss",
@@ -150,6 +155,7 @@ export const getEvidenceItems = async (baseQuery, dateSentDate = "") => {
       fromAddress: {
         $cond: {
           if: { $in: ["$type", ["email", "social"]] },
+          // eslint-disable-next-line no-magic-numbers
           then: { $arrayElemAt: ["$fromAddress.captures", 0] },
           else: "$fromAddress",
         },
@@ -159,6 +165,7 @@ export const getEvidenceItems = async (baseQuery, dateSentDate = "") => {
           if: { $in: ["$type", ["email", "social"]] },
           then: {
             $rtrim: {
+              // eslint-disable-next-line no-magic-numbers
               input: { $arrayElemAt: ["$fromName.captures", 0] },
               chars: " ",
             },

@@ -1,6 +1,6 @@
 // Static routes
 import express from "express";
-const router = express.Router();
+const router = new express.Router();
 
 // Default options
 const staticOptions = {

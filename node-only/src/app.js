@@ -1,9 +1,9 @@
 // Setup Express
-import express from "express";
 import compression from "compression";
 import cors from "cors";
-import staticRoutes from "./routes/staticRoutes.js";
 import evidenceRoutes from "./routes/evidenceRoutes.js";
+import express from "express";
+import staticRoutes from "./routes/staticRoutes.js";
 
 const expressApp = express();
 

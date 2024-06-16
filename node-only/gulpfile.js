@@ -1,13 +1,14 @@
 // NOTES: pre commit hook is created by running npm install
 
-import { task, src, dest, watch, parallel, series } from "gulp";
-import { deleteAsync } from "del";
-import gulpSass from "gulp-sass";
 import * as dartSass from "sass";
+import { dest, parallel, series, src, task, watch } from "gulp";
+import { deleteAsync } from "del";
 import exec from "gulp-exec";
+import gulpSass from "gulp-sass";
 import nodemon from "gulp-nodemon";
-import { writeFile } from "fs";
 import randomString from "randomstring";
+import { writeFile } from "fs";
+
 const sass = gulpSass(dartSass);
 
 /**
@@ -26,10 +27,11 @@ const execReportOptions = {
 /**
  * Updates the version strings to use at the end of JS and CSS files
  */
-const updateVersionStringsTask = async (cb) => {
+const updateVersionStringsTask = (cb) => {
+  const stringLength = 5;
   const versionStringData = {
-    js: randomString.generate(5),
-    css: randomString.generate(5),
+    js: randomString.generate(stringLength),
+    css: randomString.generate(stringLength),
   };
 
   const versionString = `export default ${JSON.stringify(versionStringData)};`;
@@ -48,7 +50,7 @@ const updateVersionStringsTask = async (cb) => {
 /**
  * Builds Sass files into CSS files.
  */
-const buildSassTask = async (cb) => {
+const buildSassTask = (cb) => {
   src("src/public/styles/**/*.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(dest("build/public/css"));
@@ -58,7 +60,7 @@ const buildSassTask = async (cb) => {
 /**
  * Transpiles TypeScript into JavaScript.
  */
-const buildTypeScriptTask = async (cb) => {
+const buildTypeScriptTask = (cb) => {
   src(".")
     .pipe(exec(() => "tsc -p .", execOptions))
     .pipe(exec.reporter(execReportOptions));
@@ -75,7 +77,7 @@ const clean = async () => {
 /**
  * Starts server in development mode and runs watch task.
  */
-const startDev = async () => {
+const startDev = () => {
   const nodemonOptions = {
     script: "src/index.js",
     ext: "js",
@@ -92,7 +94,7 @@ const startDev = async () => {
     ],
   };
 
-  nodemon(nodemonOptions).on("restart", async () => {
+  nodemon(nodemonOptions).on("restart", () => {
     console.log("restarted!");
   });
 };

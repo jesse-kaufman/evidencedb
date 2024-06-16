@@ -52,10 +52,10 @@ const getDatePipeline = async (include) => {
  * @param {Array} include - An array of types to include.
  * @returns {Promise<Array>} - An array of date objects containing date, count_in, and count_out.
  */
-export async function getDates(include) {
+export const getDates = async (include) => {
   // Get pipeline array to pull dates
   const datePipeline = await getDatePipeline(include);
 
   // Return list of dates with in/out counts
   return await EvidenceItem.aggregate(datePipeline);
-}
+};
