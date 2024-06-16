@@ -3,7 +3,7 @@ footer
         | Any other use of it is a violation of the terms and conditions.
 
 include footer/_scripts
-if !item || ["video","voicemail"].includes(item.type) && !isSingle
+if !item || !(["video"].includes(item.type))
     include structuredData/_article
 include structuredData/_localBusiness
 include structuredData/_profilePage
