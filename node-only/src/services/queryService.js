@@ -4,14 +4,14 @@
  * @returns {Promise<Object>} - The $sum aggregation object
  */
 
-const getVictimFilter = async (victim) => {
+const getVictimFilter = async (victimName) => {
   // Victim is set and is not "both"
-  if (victim) {
-    if (["jesse", "shannon"].includes(victim)) {
-      return { victim: { $in: ["both", victim] } };
+  if (victimName) {
+    if (["jesse", "shannon"].includes(victimName)) {
+      return { victim: { $in: ["both", victimName] } };
     }
 
-    return victim;
+    return { victim: victimName };
   }
 };
 
