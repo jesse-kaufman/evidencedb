@@ -3,9 +3,7 @@ include _image
 include ../_utils/_duration
 
 mixin audioObject
-    - var audioObject = ''
-
-    if item
+    if item && item.type === "voicemail"
         if pageMeta === true 
             | "audio":
 
