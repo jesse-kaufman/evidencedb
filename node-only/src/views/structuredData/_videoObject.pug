@@ -9,7 +9,7 @@ script(type="application/ld+json").
         "@id": "#{process.env.BASE_URL}/evidence-item/#{item._id}",
         "datePublished": "#{item.date_sent.toISOString()}",
         "uploadDate": "#{item.date_sent.toISOString()}",
-        "duration": "#{formatDuration(item.duration).toUpperCase().replace(/ /g, '')}",
+        "duration": "#{formatDuration(item.duration).toUpperCase().replaceAll(" ", "")}",
         "encodingFormat": "video/mp4",
         "author": {
             "@type": "Person",
