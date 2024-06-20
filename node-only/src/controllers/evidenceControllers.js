@@ -77,6 +77,10 @@ const render = async (req, res) => {
   // View is single item view
   const isSingle = "id" in req.params;
 
+  if (req.params.type != null) {
+    query.type = req.params.type;
+  }
+
   // Get matching evidence items
   const evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
 
@@ -88,7 +92,7 @@ const render = async (req, res) => {
     victim: req.query.victim,
     number: req.query.number,
     date_sent_date: req.query.date_sent_date,
-    type: req.query.type,
+    type: query.type,
     query: req.query.query,
   };
 
@@ -106,6 +110,7 @@ const render = async (req, res) => {
     versionStrings: versionStrings,
     dates: dates,
     cdn_url: process.env.CDN,
+    get: get,
   });
 };
 
