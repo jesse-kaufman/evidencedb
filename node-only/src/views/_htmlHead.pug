@@ -1,17 +1,27 @@
 include _utils/_title
 include _utils/_description
 
+- var url = `${process.env.BASE_URL}`
+
+if get.type
+    - var url = `${url}/${get.type}`
+
+if isSingle
+    - var url = `${url}/evidence-item/${item._id}`
+
 head
     title= title
 
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(property="og:type" content="article") 
-    meta(property="og:url" content=`${process.env.BASE_URL}`)
+    meta(property="og:url" content=`${url}`)
     meta(property="og:title" content=title)
     meta(property="og:image" content=`${process.env.DEFAULT_IMAGE}`)
     meta(property="og:description" content=description)
     meta(name="description" content=description)
+
+    link(name="canonical" content=url)
 
     script.
         (function(w, d, s, l, i) {
