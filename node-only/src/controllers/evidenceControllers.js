@@ -53,6 +53,7 @@ const renderEvidenceItemList = (evidenceItems, isSingle) => {
     cdn_url: process.env.CDN,
     formatVideoTranscript: formatTranscript,
     formatDuration: formatDuration,
+    linkify: linkify,
   });
   return evidenceItemList;
 };
