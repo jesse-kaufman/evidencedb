@@ -15,6 +15,8 @@ import { getStats } from "../models/statsModel.js";
 import { mongoose } from "mongoose";
 import pug from "pug";
 import versionStrings from "../../build/versions.js";
+import { linkify } from "../services/formattingService.js";
+
 
 /**
  * Renders the HTML for the search form and returns it as a string
