@@ -94,7 +94,7 @@ const render = async (req, res) => {
     victim: req.query.victim,
     number: req.query.number,
     date_sent_date: req.query.date_sent_date,
-    type: query.type,
+    type: req.params.type,
     query: req.query.query,
   };
 
