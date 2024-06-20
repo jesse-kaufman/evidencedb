@@ -4,12 +4,14 @@
  * @module controllers/evidenceControllers
  * @author Jesse Kaufman <jesse@jessekaufman.com>
  */
+import EvidenceItemModel, {
+  getEvidenceItems,
+} from "../models/evidenceItemModel.js";
 import {
   formatDuration,
   formatTranscript,
   linkify,
 } from "../services/formattingService.js";
-import EvidenceItemModel from "../models/evidenceItemModel.js";
 import { getDates } from "../models/searchModel.js";
 import { getQuery } from "../services/queryService.js";
 import { getStats } from "../models/statsModel.js";
