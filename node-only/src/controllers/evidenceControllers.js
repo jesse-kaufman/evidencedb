@@ -13,10 +13,18 @@ import { getEvidenceItems } from "../models/evidenceItemModel.js";
 import { getQuery } from "../services/queryService.js";
 import { getStats } from "../models/statsModel.js";
 import { mongoose } from "mongoose";
+import EvidenceItemModel from "../models/evidenceItemModel.js";
 import pug from "pug";
 import versionStrings from "../../build/versions.js";
 import { linkify } from "../services/formattingService.js";
 
+/**
+ * Redirects to canonical evidence item page
+ */
+const redirect = async (req, res) => {
+  let item = await EvidenceItemModel.findById(req.params.id);
+  res.redirect(301, `/${item.type}/evidence-item/${item.id}`);
+};
 
 /**
  * Renders the HTML for the search form and returns it as a string
@@ -101,4 +109,4 @@ const render = async (req, res) => {
   });
 };
 
-export default { render };
+export default { render, redirect };
