@@ -36,7 +36,7 @@ const wrapTimecode = (time) => {
   // eslint-disable-next-line no-magic-numbers
   formattedTime += `${m.padStart(2, "0")}:${s.padStart(2, "0")}`;
 
-  return `<br/><span class="time">${formattedTime}</span>`;
+  return `<span class="time">${formattedTime}</span><span class="text">`;
 };
 
 /**
@@ -62,9 +62,13 @@ export const formatTranscript = (transcript, duration) => {
   }
 
   // Wrap timecodes in span for styling
-  const wrappedTranscript = transcript.replace(/((\d{1,2}:)+\d\d)/g, (time) =>
-    wrapTimecode(time)
+  let wrappedTranscript = transcript.replace(/((\d{1,2}:)+\d\d)\n/g, (time) =>
+    wrapTimecode(time.trim())
   );
+
+  wrappedTranscript = wrappedTranscript.replace(/(.*)/g, (line) => {
+    return line ? `<div class="line">${line}</span></div>` : "";
+  });
 
   return wrappedTranscript;
 };
@@ -97,4 +101,13 @@ export const formatDuration = (duration) => {
   }
 
   return formattedDuration;
+};
+
+export const linkify = (text) => {
+  var urlRegex =
+    /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+
+  return text.replace(urlRegex, function (url) {
+    return `<a href="${url.trim()}">${url}</a>`;
+  });
 };
