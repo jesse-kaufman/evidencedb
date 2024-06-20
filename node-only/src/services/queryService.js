@@ -72,7 +72,7 @@ export const getQuery = async (db, req) => {
 
   // Filter based on evidence item id and return immediately
   if (req.params.id) {
-    query._id = new db.Types.ObjectId(req.params.id);
+    query._id = db.Types.ObjectId.createFromHexString(req.params.id);
     return query;
   }
 
