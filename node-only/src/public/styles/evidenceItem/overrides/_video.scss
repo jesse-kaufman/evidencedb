@@ -4,35 +4,41 @@
 ///
 /// Video message
 ///
-.evidenceItem {
-  &.video {
-    background: color.adjust(config.$video-color, $alpha: -0.82);
 
-    .footer,
-    .meta {
-      background: color.adjust(config.$video-color, $alpha: -0.7);
+.evidenceItem.video {
+  video {
+    background: black;
+  }
+  background: color.adjust(config.$video-color, $alpha: -0.82);
+
+  .footer,
+  .meta {
+    background: color.adjust(config.$video-color, $alpha: -0.7);
+  }
+  .body > h1 {
+    font-size: 1.4em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  body.single & {
+    video {
+      min-width: 300px;
+      flex-shrink: 1;
+      flex-basis: 48%;
+      max-height: calc(60vh - 120px);
     }
-    .body > h1 {
-      font-size: 1.4em;
-      padding-bottom: 0;
-      margin-bottom: 0;
+
+    .transcript {
+      margin-top: -1.3em;
+      max-height: calc(60vh - 120px + 1.3em);
     }
-
-    body.single & {
-      video {
-        min-width: 300px;
-        flex-shrink: 1;
-        flex-basis: 48%;
-        max-height: calc(60vh - 120px);
-      }
-
-      .video {
-        display: flex;
-        align-items: flex-start;
-        gap: 1em;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
+    .video {
+      display: flex;
+      align-items: flex-start;
+      gap: 1em;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 }
