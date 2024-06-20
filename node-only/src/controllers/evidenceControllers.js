@@ -7,16 +7,15 @@
 import {
   formatDuration,
   formatTranscript,
+  linkify,
 } from "../services/formattingService.js";
+import EvidenceItemModel from "../models/evidenceItemModel.js";
 import { getDates } from "../models/searchModel.js";
-import { getEvidenceItems } from "../models/evidenceItemModel.js";
 import { getQuery } from "../services/queryService.js";
 import { getStats } from "../models/statsModel.js";
 import { mongoose } from "mongoose";
-import EvidenceItemModel from "../models/evidenceItemModel.js";
 import pug from "pug";
 import versionStrings from "../../build/versions.js";
-import { linkify } from "../services/formattingService.js";
 
 /**
  * Redirects to canonical evidence item page
