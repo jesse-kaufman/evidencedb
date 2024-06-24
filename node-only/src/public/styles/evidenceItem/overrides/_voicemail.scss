@@ -4,17 +4,15 @@
 ///
 /// Voicemail
 ///
-.evidenceItem {
-  &.voicemail {
-    background: color.adjust(config.$voicemail-color, $alpha: -0.82);
+.evidenceItem.voicemail {
+  background: color.adjust(config.$voicemail-color, $alpha: -0.82);
 
-    .meta {
-      background: color.adjust(config.$voicemail-color, $alpha: -0.75);
-    }
-    .footer {
-      background: color.adjust(config.$voicemail-color, $alpha: -0.05);
-      color: white;
-    }
-    border-radius: 0 !important;
+  .meta {
+    background: color.adjust(config.$voicemail-color, $alpha: -0.75);
   }
+  .footer {
+    background: color.adjust(config.$voicemail-color, $alpha: -0.05);
+    color: white;
+  }
+  border-radius: 0 !important;
 }

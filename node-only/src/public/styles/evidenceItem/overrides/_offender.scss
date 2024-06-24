@@ -3,23 +3,21 @@
 ///
 /// Styles for incoming messages
 ///
-.evidenceItem {
-  &.offender {
-    /// Shared styles for labels
-    @mixin labels($color) {
-      border: 0.75px solid #333;
-      border-radius: 1em;
-      padding: 0 0.5em;
-      background-color: $color;
+.evidenceItem.offender {
+  /// Shared styles for labels
+  @mixin labels($color) {
+    border: 0.75px solid #333;
+    border-radius: 1em;
+    padding: 0 0.5em;
+    background-color: $color;
+  }
+  .meta {
+    strong.shannon {
+      @include labels(config.$sent-color);
     }
-    .meta {
-      strong.shannon {
-        @include labels(config.$sent-color);
-      }
-      strong.jesse {
-        @include labels(config.$email-color);
-        color: white;
-      }
+    strong.jesse {
+      @include labels(config.$email-color);
+      color: white;
     }
   }
 }

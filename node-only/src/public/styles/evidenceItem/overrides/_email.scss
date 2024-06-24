@@ -4,19 +4,17 @@
 ///
 /// Email message
 ///
-.evidenceItem {
-  &.email {
-    border: 4px solid color.adjust(config.$email-color, $alpha: -0.05);
-    border-bottom: 0;
-    background: color.adjust(config.$email-color, $alpha: -0.59);
-    border-radius: 0 !important;
+.evidenceItem.email {
+  border: 4px solid color.adjust(config.$email-color, $alpha: -0.05);
+  border-bottom: 0;
+  background: color.adjust(config.$email-color, $alpha: -0.59);
+  border-radius: 0 !important;
 
-    .meta {
-      background: color.adjust(config.$email-color, $alpha: -0.75);
-    }
-    .footer {
-      background: color.adjust(config.$email-color, $alpha: -0.05);
-      color: white;
-    }
+  .meta {
+    background: color.adjust(config.$email-color, $alpha: -0.75);
+  }
+  .footer {
+    background: color.adjust(config.$email-color, $alpha: -0.05);
+    color: white;
   }
 }
