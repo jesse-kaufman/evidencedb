@@ -93,8 +93,9 @@ const getTypeStats = async (type, query, include) => {
  */
 export const getStats = async (include, baseQuery) => {
   const stats = [];
-  let types = [...validTypes, "total"];
   const query = { ...baseQuery };
+  let types = [...validTypes, "total"];
+
   // eslint-disable-next-line no-magic-numbers
   if (include?.length > 0 && include[0]) {
     // Default to all types if none are specified
@@ -107,10 +108,8 @@ export const getStats = async (include, baseQuery) => {
     // eslint-disable-next-line no-await-in-loop
     const typeStats = await getTypeStats(type, query, include);
 
-    if (typeStats) {
-      // Only add to stats if either count is > 0
-      stats.push(typeStats);
-    }
+    // Only add to stats if either count is > 0
+    if (typeStats) stats.push(typeStats);
   }
 
   return stats;
