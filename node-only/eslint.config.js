@@ -1,6 +1,7 @@
+/* eslint-disable capitalized-comments */
+/* eslint-disable no-magic-numbers */
 import globals from "globals";
 import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
 
 const config = [
   { ignores: ["**/node_modules/*", "**/public/js/*"] },
@@ -8,7 +9,6 @@ const config = [
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
   },
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
   {
     rules: {
       "array-callback-return": "error",
@@ -25,20 +25,19 @@ const config = [
       "guard-for-in": "error",
       // "init-declarations": ["error", "never", { ignoreForLoopInit: true }],
       "max-depth": "error",
-      // eslint-disable-next-line no-magic-numbers
       "max-nested-callbacks": ["error", 3],
       "new-cap": "error",
       "no-await-in-loop": "error",
       "no-duplicate-imports": "error",
       "no-empty-function": "warn",
       "no-inner-declarations": "error",
-      "no-invalid-this": "error",
+      // "no-invalid-this": "error",
       "no-lone-blocks": "error",
       "no-lonely-if": "error",
       "no-loop-func": "error",
       "no-magic-numbers": [
         "warn",
-        { ignoreArrayIndexes: true, ignoreDefaultValues: true },
+        { ignoreArrayIndexes: true, ignore: [0, 1], enforceConst: true },
       ],
       "no-multi-assign": "error",
       "no-multi-str": "error",
@@ -80,8 +79,8 @@ const config = [
       //"prefer-destructuring": "error",
       //"sort-keys": "error",
       camelcase: ["warn", { properties: "never" }],
-      complexity: ["warn", { max: 4 }],
-      curly: "warn",
+      complexity: ["warn", { max: 5 }],
+      //curly: "warn",
       eqeqeq: ["error", "smart"],
     },
   },
