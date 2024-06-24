@@ -17,7 +17,7 @@ const buildTypeStatsPipeline = async (type, baseQuery, include) => {
   delete query.type;
 
   // If include was set, only include those types
-  if (include != null) {
+  if (include != null || include?.length > 0) {
     query.type = { $in: include };
   }
 
@@ -97,7 +97,7 @@ export const getStats = async (include, baseQuery) => {
   const query = Object.assign({}, baseQuery);
 
   // eslint-disable-next-line no-magic-numbers
-  if (include?.length > 0) {
+  if (include?.length > 0 && include[0]) {
     // Default to all types if none are specified
     types = [...include, "total"];
   }
