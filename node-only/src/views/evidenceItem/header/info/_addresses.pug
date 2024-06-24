@@ -4,9 +4,10 @@
 
 // Display "from" information for incoming items
 if item.direction === 'IN'
+    - var uri = null
+    - var fromName = item.fromName
 
     span.number
-        - var uri = null
         if item.type === 'email'
             - var uri = "mailto:"
         else if item.type === 'voicemail' || item.type === 'text'
@@ -14,8 +15,9 @@ if item.direction === 'IN'
         else if item.type === 'social' && item.fromAddress.match(/^http/)
             - var uri = ""
 
-        if item.direction === "IN" && item.fromName !== process.env.OFFENDER_NAME
+        if item.fromName !== process.env.OFFENDER_NAME
             - var fromName = `"${item.fromName}" (${process.env.OFFENDER_NAME})`
+
 
         if uri != null
             strong #{fromName} 
