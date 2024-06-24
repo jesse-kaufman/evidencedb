@@ -48,20 +48,13 @@ const wrapTimecode = (time) => {
  * @param {string} duration - Duration of video
  * @returns {string} Formatted transcript
  */
-export const formatTranscript = (transcript, duration) => {
-  let hasHour = false;
+export const formatTranscript = (transcript) => {
   // If transcript is undefined, return empty string
   if (!transcript) {
     return "";
   }
 
-  // If item's duration includes an hour, set hasHour = true for later
-  if (duration.match(/01:\d\d:\d\d/)) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    hasHour = true;
-  }
-
-  // Wrap timecodes in span for styling
+  // Wrap time codes in span for styling
   let wrappedTranscript = transcript.replace(/((\d{1,2}:)+\d\d)\n/g, (time) =>
     wrapTimecode(time.trim())
   );
