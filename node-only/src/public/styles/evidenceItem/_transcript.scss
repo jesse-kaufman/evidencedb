@@ -1,6 +1,15 @@
 @use "config" as config;
 
 .evidenceItem .body {
+  body.single & {
+    .video {
+      display: flex;
+      align-items: flex-start;
+      gap: 1em;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
   .transcript {
     color: #444;
     font-style: italic;
@@ -70,16 +79,18 @@
 
   body.single & {
     .transcript {
-      margin-top: 0;
       flex-shrink: 1;
       min-width: 300px;
       flex-basis: 48%;
       display: flex;
       flex-direction: column;
       max-height: calc(60vh - config.$header-height);
+      margin-top: -1.3em;
 
       @media (max-width: 1024px) {
+        margin-top: 0;
         flex-basis: 100%;
+
         h2 {
           text-align: center;
         }
@@ -87,12 +98,12 @@
 
       .content {
         display: block;
-        max-width: 600px;
         margin: 0 auto 0 0;
         line-height: 1.2em;
         font-size: 0.8em;
         margin-left: 0;
         overflow-x: scroll;
+        width: 100%;
       }
 
       h2 span {

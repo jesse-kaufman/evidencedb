@@ -1,64 +1,78 @@
 @use "config" as config;
 @use "transcript" as transcript;
 
-.evidenceItem {
-  .body {
-    padding: 0.75em 1em 1em 1em;
-    .title {
-      font-size: 1.2em;
-      line-height: 1.2em;
-      margin-bottom: 0.2em;
-    }
-    .duration {
-      margin-bottom: 1em;
-    }
+.evidenceItem .body {
+  padding: 0.75em 1em 1em 1em;
 
-    video {
-      display: block;
-      width: 100%;
-      max-height: 300px;
-      body.single & {
-        max-width: 500px;
-        max-height: 500px;
-        margin: 0 auto;
+  .title {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    margin-bottom: 0.2em;
+  }
+  .duration {
+    margin-bottom: 1em;
+  }
+
+  video {
+    display: block;
+    width: 100%;
+    background: black;
+    max-height: 300px;
+
+    body.single & {
+      margin: 0 auto;
+      min-width: 300px;
+      flex-shrink: 1;
+      flex-basis: 50%;
+      max-height: calc(60vh - 120px);
+
+      @media (max-width: 1024px) {
+        flex-basis: 100%;
       }
     }
+  }
+
+  img {
+    display: inline-block;
+    margin: 0.1em 0.1em 0.1em 0;
+    max-width: 200px;
+    max-height: 300px;
+  }
+
+  .duration {
+    margin-top: 0em;
+  }
+
+  blockquote {
+    font-style: italic;
+    color: #666;
+    opacity: 0.9;
+    border-left: 2px solid #666 !important;
+    margin: 0.25em 0px 0px 0.8ex !important;
+    padding-left: 1ex !important;
+  }
+
+  .screenshots,
+  .attachments {
+    margin-top: 2em;
+    font-size: 0.8em;
+    color: #333;
+    line-height: 1em;
+    border-top: 1px solid #999;
+
+    h1 {
+      margin: 0;
+    }
+
     img {
-      display: inline-block;
-      margin: 0.1em 0.1em 0.1em 0;
+      margin-right: 1em;
       max-width: 200px;
       max-height: 300px;
     }
-    .duration {
-      margin-top: 0em;
-    }
-    blockquote {
-      font-style: italic;
-      color: #666;
-      opacity: 0.9;
-      border-left: 2px solid #666 !important;
-      margin: 0.25em 0px 0px 0.8ex !important;
-      padding-left: 1ex !important;
-    }
-    .screenshots,
-    .attachments {
-      margin-top: 2em;
-      font-size: 0.8em;
-      color: #333;
-      line-height: 1em;
-      border-top: 1px solid #999;
-      h1 {
-        margin: 0;
-      }
-      img {
-        margin-right: 1em;
-        max-width: 200px;
-        max-height: 300px;
-      }
-    }
-    .screenshots img {
-      max-width: 150px;
-      max-height: 150px;
-    }
+  }
+
+  .screenshots img {
+    max-width: 150px;
+    max-height: 150px;
   }
 }
