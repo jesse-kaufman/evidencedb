@@ -14,11 +14,14 @@ if item.direction === 'IN'
         else if item.type === 'social' && item.fromAddress.match(/^http/)
             - var uri = ""
 
+        if item.direction === "IN" && item.fromName !== process.env.OFFENDER_NAME
+            - var fromName = `"${item.fromName}" (${process.env.OFFENDER_NAME})`
+
         if uri != null
-            strong #{item.fromName} 
+            strong #{fromName} 
             | &lt;#[a(href=`${uri}${item.fromAddress}`) #{item.fromAddress}]&gt; 
         else
-            strong #{item.fromName} 
+            strong #{fromName} 
             | &lt;#[strong #{item.fromAddress}]&gt; 
 
         | to 
