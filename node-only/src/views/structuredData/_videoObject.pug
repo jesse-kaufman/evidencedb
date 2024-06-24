@@ -1,11 +1,12 @@
 include _contactInfo
+include ../_utils/_title.pug
 
 script(type="application/ld+json").
     {
         "@context": "https://schema.org/",
         "@type": "VideoObject",
         "contentUrl": "#{process.env.CDN}videos/#{`${encodeURIComponent(item.filename)}`}",
-        "name": "#{item.title}",
+        "name": "#{title}",
         "@id": "#{process.env.BASE_URL}/video/evidence-item/#{item._id}",
         "datePublished": "#{item.date_sent.toISOString()}",
         "uploadDate": "#{item.date_sent.toISOString()}",
