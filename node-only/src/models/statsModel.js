@@ -8,7 +8,7 @@ import { getCountAggregation } from "../services/queryService.js";
  * @returns
  */
 const buildTypeStatsPipeline = async (type, baseQuery, include) => {
-  const query = Object.assign({}, baseQuery);
+  const query = { ...baseQuery };
 
   const dateSentDate = query.date_sent_date;
   delete query.date_sent_date;
@@ -94,8 +94,7 @@ const getTypeStats = async (type, query, include) => {
 export const getStats = async (include, baseQuery) => {
   const stats = [];
   let types = [...validTypes, "total"];
-  const query = Object.assign({}, baseQuery);
-
+  const query = { ...baseQuery };
   // eslint-disable-next-line no-magic-numbers
   if (include?.length > 0 && include[0]) {
     // Default to all types if none are specified
