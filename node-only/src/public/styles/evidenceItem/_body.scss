@@ -23,11 +23,12 @@
       margin: 0 auto;
       min-width: 300px;
       flex-shrink: 1;
+      flex-grow: 1;
       flex-basis: 50%;
-      max-height: calc(60vh - 120px);
-
-      @media (max-width: 1024px) {
-        flex-basis: 100%;
+      max-height: none;
+      height: config.$video-height;
+      @media (max-width: config.$video-width-break) {
+        height: config.$horiz-video-height;
       }
     }
   }

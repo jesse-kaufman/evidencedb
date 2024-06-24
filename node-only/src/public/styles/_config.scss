@@ -4,4 +4,16 @@ $social-color: rgb(255, 111, 34);
 $email-color: rgba(2, 136, 209);
 $sent-color: rgb(139, 195, 74);
 $received-color: rgb(128, 128, 128);
+
+$video-width-break: 800px;
+
+$transcript-offset: 1.3em;
 $header-height: 120px;
+$footer-height: 74px;
+$height-offset: $header-height + $footer-height;
+
+$video-height: calc(70vh - $height-offset);
+$transcript-height: calc(70vh - $height-offset + $transcript-offset);
+
+$horiz-video-height: calc(50vh - $height-offset);
+$horiz-transcript-height: calc(40vh - $height-offset + $transcript-offset);
