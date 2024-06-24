@@ -45,6 +45,7 @@ const EvidenceItemSchema = new mongoose.Schema({
   filename: String,
   attachments: [AttachmentSchema],
   screenshots: Array,
+  video_filename: String,
 });
 
 // eslint-disable-next-line new-cap

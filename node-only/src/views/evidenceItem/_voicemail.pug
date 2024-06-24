@@ -8,9 +8,19 @@ p.duration
     strong Duration: 
     |  #{formatDuration(item.duration)}
 
-audio(preload=none, controls=true, src=`${process.env.CDN}voicemails/${item.filename}` type="audio/mp3")
+if item.video_filename != null
+    - var videoUrl = `${process.env.CDN}voicemails/${encodeURIComponent(item.video_filename)}`
 
-include _transcript
+    .video
+        video(preload="none" controls=true poster=`${videoUrl}.webp`)
+            source(src=videoUrl type="video/mp4")
+        include _transcript
+
+    include ../structuredData/_videoObject
+else
+    audio(preload=none, controls=true, src=`${process.env.CDN}voicemails/${item.filename}` type="audio/mp3")
+
+    include _transcript
 
 script(type="application/ld+json")
     +audioObject
