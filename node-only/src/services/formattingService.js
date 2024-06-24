@@ -98,7 +98,7 @@ export const formatDuration = (duration) => {
 
 export const linkify = (text) => {
   const urlRegex =
-    /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+    /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi;
 
   return text.replace(urlRegex, (url) => {
     return `<a href="${url.trim()}">${url}</a>`;
