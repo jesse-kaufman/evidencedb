@@ -23,7 +23,7 @@ import versionStrings from "../../build/versions.js";
  * Redirects to canonical evidence item page
  */
 const redirect = async (req, res) => {
-  let item = await EvidenceItemModel.findById(req.params.id);
+  const item = await EvidenceItemModel.findById(req.params.id);
   res.redirect(301, `/${item.type}/evidence-item/${item.id}`);
 };
 
