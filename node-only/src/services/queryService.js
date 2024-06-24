@@ -50,10 +50,10 @@ const getTypeFilter = (include) => {
   }
 };
 
-export const getCountAggregation = (direction) => ({
+export const getCountAggregation = async (direction) => ({
   $sum: {
     $cond: {
-      if: { $eq: ["$direction", direction.toUpperCase()] },
+      if: { $eq: ["$direction", await direction.toUpperCase()] },
       then: 1,
       else: 0,
     },
