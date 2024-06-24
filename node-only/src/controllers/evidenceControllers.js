@@ -67,14 +67,23 @@ const renderEvidenceItemList = (evidenceItems, isSingle) => {
  * @param {Object} res Response object
  */
 const render = async (req, res) => {
+  let types;
+  // Setup types array for filtering
+  if (
+    req.query?.include != null ||
+    (Array.isArray(req.query.include) && req.query?.include[0] != null)
+  ) {
+    types = req.query.include ? req.query.include : [req.params.type];
+  }
+
   // Build the query from the request object
   const query = await getQuery(mongoose, req);
 
   // Get stats for the query to display on frontend
-  const stats = await getStats(req.query.include, query);
+  const stats = await getStats(types, query);
 
   // Get dates for dropdown items
-  const dates = await getDates(req.query.include);
+  const dates = await getDates(types);
 
   // View is single item view
   const isSingle = "id" in req.params;
