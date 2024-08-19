@@ -3,6 +3,7 @@
 // 
 include ../structuredData/_contactInfo
 include ../structuredData/_audioObject
+include ../structuredData/_videoObject
 
 p.duration
     strong Duration: 
@@ -15,8 +16,9 @@ if item.video_filename != null
         video(preload="none" controls=true poster=`${videoUrl}.webp`)
             source(src=videoUrl type="video/mp4")
         include _transcript
-
-    include ../structuredData/_videoObject
+        
+    script(type="application/ld+json")
+        +videoObject
 else
     audio(preload=none, controls=true, src=`${process.env.CDN}voicemails/${item.filename}` type="audio/mp3")
 
