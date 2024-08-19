@@ -9,7 +9,7 @@ if !image
     - var imageFile = item?.attachments?.length != null ? item?.attachments[0]?.filename.replace(/\.(jpg|jpeg|png)/, ".webp") : ""
     if imageFile
         - var imageFile = encodeURIComponent(imageFile)
-        - var image = item?.attachments?.length != null ? `${process.env.CDN}opt/attachments/${imageIfle}` : ""
+        - var image = item?.attachments?.length != null ? `${process.env.CDN}opt/attachments/${imageFile}` : ""
 
 //- If no attachment existed, use the default
 if !image
