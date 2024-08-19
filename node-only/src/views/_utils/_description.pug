@@ -13,6 +13,6 @@ if !_item
 
 //- If item previously set or set in this file, generate a title
 if _item
-    - var description = _item.body.replace(/[\r]\n/ig, " ").replace(/ {2,}/g, " ").slice(0,160)
+    - var description = _item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ').replace(/ {2,}/g, " ").slice(0,160)
 
 
