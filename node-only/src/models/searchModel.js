@@ -24,7 +24,7 @@ const getGroupAggregationStage = async () => {
 };
 
 /**
- * Gets aggregat pipeline array to pull dates and counts from database
+ * Gets aggregate pipeline array to pull dates and counts from database
  *
  * @param {*} include
  * @returns
