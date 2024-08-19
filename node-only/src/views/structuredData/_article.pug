@@ -1,6 +1,7 @@
 include _contactInfo
 include ../_utils/_title
 include _audioObject
+include _videoObject
 
 - var datePublished = `${process.env.DEFAULT_DATE_PUBLISHED}`
 if item
@@ -18,6 +19,7 @@ script(type="application/ld+json").
             #[+contactInfo]
         },
         #[+audioObject]
+        #[+videoObject]
         "datePublished": "#{datePublished}",
         "description": "#{process.env.PAGE_DESCRIPTION}"
     }
