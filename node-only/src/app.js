@@ -13,9 +13,10 @@ expressApp.use(compression());
 // Use CORS
 expressApp.use(cors());
 
-// Use Pug for templating
+// Use Pug for templates
 expressApp.set("views", "src/views");
 expressApp.set("view engine", "pug");
+expressApp.locals.basedir = expressApp.get("views");
 
 // Static routes
 expressApp.use("/", staticRoutes);
