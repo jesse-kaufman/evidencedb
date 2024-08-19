@@ -10,9 +10,8 @@ connectDB(config.mongoUrl);
 
 // Start the server
 const server = app.listen(process.env.NODE_PORT, () => {
-  const host = server.address().address;
-  const port = server.address().port;
+  const { address, port } = server.address();
   console.log(
-    `Express running → http://[${host}]:${port} in ${process.env.NODE_ENV} mode`
+    `Express running → http://[${address}]:${port} in ${process.env.NODE_ENV} mode`
   );
 });
