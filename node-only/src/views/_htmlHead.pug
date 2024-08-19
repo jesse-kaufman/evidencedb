@@ -33,7 +33,10 @@ head
     meta(property="og:description" content=description)
     meta(name="description" content=description)
 
-    link(name="canonical" content=url)
+    script(src="/libs/jquery/jquery.min.js" defer=true)
+    script(src=`/public/js/gen.js?${versionStrings.js}` defer=true)
+    script(src="/libs/lightbox2/js/lightbox.min.js" defer=true)
+
 
     script.
         (function(w, d, s, l, i) {
