@@ -1,5 +1,12 @@
 include /_utils/_title
 include /_utils/_description
+
+if ["video","voicemail"].includes(item.type)
+    - var filename = item.filename
+
+    if item.video_filename
+        - var filename = item.video_filename
+
     video:video
         video:thumbnail_loc
             | #{cdn_url}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}.webp
