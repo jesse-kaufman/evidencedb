@@ -18,4 +18,3 @@ if ["video","voicemail"].includes(item.type)
             | #{cdn_url}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}
         video:duration
             | #{item.durationSeconds}
-        video:family_friendly no
