@@ -1,11 +1,12 @@
-if item.type === "video"
+include /_utils/_title
+include /_utils/_description
     video:video
         video:thumbnail_loc
             | #{process.env.CDN}videos/#{`${encodeURIComponent(item.filename)}`}.webp
         video:title
-            | #{item.title}
+            | #{title}
         video:description
-            | Video posted by #{process.env.OFFENDER_NAME} to YouTube on #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}
+            | #{description}
         video:content_loc
             | #{process.env.CDN}videos/#{`${encodeURIComponent(item.filename)}`}
         video:player_loc
