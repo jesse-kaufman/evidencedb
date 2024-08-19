@@ -3,6 +3,9 @@
 //
 - var videoUrl = `${cdn_url}videos/${encodeURIComponent(item.filename).replace("%2F", "/")}`
 
+include ../structuredData/_videoObject
+
+
 .title
     strong Original Title: 
     | #[em #{item.title}]
@@ -16,4 +19,5 @@
         source(src=videoUrl type="video/mp4")
     include _transcript
 
-include ../structuredData/_videoObject
+script(type="application/ld+json")
+    +videoObject
