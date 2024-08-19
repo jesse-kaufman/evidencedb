@@ -7,7 +7,7 @@ if item
 
 //- If _item still not set and it's a single view, try the first item in the array
 if !_item
-    if isSingle
+    if isSingle && evidenceItems && evidenceItems[0]
         - var _item = evidenceItems[0]
 
 
