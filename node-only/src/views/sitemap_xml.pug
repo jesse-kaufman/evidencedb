@@ -1,15 +1,15 @@
 doctype xml
 urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1")
     url
-        loc=`${process.env.BASE_URL}/`
+        lastmod=`${process.env.DEFAULT_DATE_PUBLISHED.replace(/T.*/, "")}`
     url
-        loc=`${process.env.BASE_URL}/video`
+        lastmod=`${process.env.DEFAULT_DATE_PUBLISHED.replace(/T.*/, "")}`
     url
-        loc=`${process.env.BASE_URL}/email`
+        lastmod=`${process.env.DEFAULT_DATE_PUBLISHED.replace(/T.*/, "")}`
     url
-        loc=`${process.env.BASE_URL}/text`
+        lastmod=`${process.env.DEFAULT_DATE_PUBLISHED.replace(/T.*/, "")}`
     url
-        loc=`${process.env.BASE_URL}/social`
+        lastmod=`${process.env.DEFAULT_DATE_PUBLISHED.replace(/T.*/, "")}`
     url
-        loc=`${process.env.BASE_URL}/voicemail`
+        lastmod=`${process.env.DEFAULT_DATE_PUBLISHED.replace(/T.*/, "")}`
     include sitemap/_evidenceItem
