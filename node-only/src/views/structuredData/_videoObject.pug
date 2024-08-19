@@ -1,23 +1,35 @@
 include _contactInfo
 include ../_utils/_title.pug
 
-script(type="application/ld+json").
-    {
-        "@context": "https://schema.org/",
-        "@type": "VideoObject",
-        "contentUrl": "#{process.env.CDN}videos/#{`${encodeURIComponent(item.filename)}`}",
-        "name": "#{title}",
-        "@id": "#{process.env.BASE_URL}/video/evidence-item/#{item._id}",
-        "datePublished": "#{item.date_sent.toISOString()}",
-        "uploadDate": "#{item.date_sent.toISOString()}",
-        "duration": "PT#{formatDuration(item.duration).toUpperCase().replaceAll(" ", "")}",
-        "encodingFormat": "video/mp4",
-        "author": {
-            "@type": "Person",
-            #[+contactInfo]
-        },
-        "image": "#{process.env.CDN}videos/#{`${encodeURIComponent(item.filename)}`}.webp",
-        "thumbnailURL": "#{process.env.CDN}videos/#{`${encodeURIComponent(item.filename)}`}.webp",
-        "description": "Video posted by #{process.env.OFFENDER_NAME} to YouTube on #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}",
-        "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ')}"
-    }
+mixin videoObject
+    if item && ['video','voicemail'].includes(item.type)
+        - var filename = item.filename
+
+        if pageMeta === true 
+            | "video":
+
+        if item.filename.includes(".mp3")
+            - var filename = item.video_filename
+
+        | {
+        |     "@context": "https://schema.org/",
+        |     "@type": "VideoObject",
+        |     "contentUrl": "#{process.env.CDN}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}",
+        |     "name": "#{title}",
+        |     "@id": "#{baseUrl}/#{item.type}/evidence-item/#{item._id}",
+        |     "datePublished": "#{item.date_sent.toISOString()}",
+        |     "uploadDate": "#{item.date_sent.toISOString()}",
+        |     "duration": "PT#{formatDuration(item.duration).toUpperCase().replaceAll(" ", "")}",
+        |     "encodingFormat": "video/mp4",
+        |     "author": {
+        |         "@type": "Person",
+        |         #[+contactInfo]
+        |     },
+        |     "image": "#{process.env.CDN}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}.webp",
+        |     "thumbnailURL": "#{process.env.CDN}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}.webp",
+        |     "description": "#{item.type.toTitle()} posted by #{process.env.OFFENDER_NAME} to YouTube on #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}",
+        |     "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ')}"
+        | }
+
+        if pageMeta === true
+            | ,
