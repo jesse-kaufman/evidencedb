@@ -96,6 +96,10 @@ const render = async (req, res) => {
   // Get matching evidence items
   const evidenceItems = await getEvidenceItems(query, req.query.date_sent_date);
 
+  if (evidenceItems.length === 0) {
+    res.status(404).end();
+  }
+
   // Render the evidence item list to a string
   const evidenceItemList = renderEvidenceItemList(evidenceItems, isSingle);
 
