@@ -1,6 +1,5 @@
-// Enviroment variables
-import dotenv from "dotenv";
-dotenv.config();
+// Environment variables
+
 
 process.env.BASE_URL = process.env.DEV_BASE_URL;
 
