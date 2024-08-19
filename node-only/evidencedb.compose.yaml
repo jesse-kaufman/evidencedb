@@ -47,7 +47,7 @@ services:
         limits:
           cpus: "10"
           pids: 300
-          memory: 1G
+          memory: 500M
     security_opt:
       - no-new-privileges=true
 
@@ -105,6 +105,6 @@ services:
         limits:
           cpus: "10"
           pids: 300
-          memory: 1G
+          memory: 750M
     security_opt:
       - no-new-privileges=true
