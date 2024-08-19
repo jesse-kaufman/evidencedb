@@ -1,7 +1,7 @@
 // 
 // Video Evidence Item
-// 
-- var videoUrl = `${cdn_url}videos/${encodeURIComponent(item.filename)}`
+//
+- var videoUrl = `${cdn_url}videos/${encodeURIComponent(item.filename).replace("%2F", "/")}`
 
 .title
     strong Original Title: 
