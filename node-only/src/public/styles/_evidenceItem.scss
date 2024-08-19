@@ -38,6 +38,17 @@
     line-height: 1.4em;
   }
 
+  .info {
+    h1,
+    h2 {
+      font-size: 0.8em;
+      margin: 0;
+      line-height: 1.1em;
+      margin-bottom: 0.2rem;
+      font-weight: normal;
+    }
+  }
+
   @media (max-width: 794px) {
     max-width: 90%;
   }
