@@ -12,6 +12,7 @@ import {
   formatTranscript,
   linkify,
 } from "../services/formattingService.js";
+import config from "../config/config.js";
 import { getDates } from "../models/searchModel.js";
 import { getQuery } from "../services/queryService.js";
 import { getStats } from "../models/statsModel.js";
@@ -122,6 +123,8 @@ const render = async (req, res) => {
     dates: dates,
     cdn_url: process.env.CDN,
     get: get,
+    baseUrl: config.baseUrl,
+    formatDuration: formatDuration,
   });
 };
 
