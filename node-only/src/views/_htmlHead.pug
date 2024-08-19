@@ -26,10 +26,10 @@ head
 
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    meta(property="og:type" content="article") 
+    meta(property="og:type" content=`${type}`)
     meta(property="og:url" content=`${url}`)
     meta(property="og:title" content=title)
-    meta(property="og:image" content=`${process.env.DEFAULT_IMAGE}`)
+    meta(property="og:image" content=`${filename ? filename : process.env.DEFAULT_IMAGE}`)
     meta(property="og:description" content=description)
     meta(name="description" content=description)
 
