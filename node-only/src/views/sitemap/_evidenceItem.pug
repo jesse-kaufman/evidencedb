@@ -1,6 +1,6 @@
 each item in evidenceItems
     url
-        loc=`${process.env.BASE_URL}/${item.type}/evidence-item/${item._id}`
+        loc=`${baseUrl}/${item.type}/evidence-item/${item._id}`
         lastmod=item.dateSentDate
 
         include _video
