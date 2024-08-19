@@ -20,6 +20,11 @@ script(type="application/ld+json").
         },
         #[+audioObject]
         #[+videoObject]
+        "publisher": {
+            "@type": "Organization",
+            "name": "#{process.env.DEFAULT_ORGANIZATION_NAME}",
+            "logo": "#{process.env.DEFAULT_ORGANIZATION_LOGO}"
+        },
         "datePublished": "#{datePublished}",
         "description": "#{process.env.PAGE_DESCRIPTION}"
     }
