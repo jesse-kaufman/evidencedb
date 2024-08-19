@@ -5,7 +5,7 @@ import { dest, parallel, series, src, task, watch } from "gulp";
 import { deleteAsync } from "del";
 import exec from "gulp-exec";
 import gulpSass from "gulp-sass";
-import nodemon from "gulp-nodemon";
+import nodemon from "gulp-nodemon-pro";
 import randomString from "randomstring";
 import { writeFile } from "fs";
 
