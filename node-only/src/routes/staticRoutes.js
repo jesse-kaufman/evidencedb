@@ -32,10 +32,7 @@ router.use(
 );
 router.use(
   "/robots.txt",
-  express.static("src/public/robots.txt", {
-    maxAge: "6h",
-    etag: false,
-  })
+  express.static("src/public/robots.txt", staticOptions)
 );
 
 export default router;
