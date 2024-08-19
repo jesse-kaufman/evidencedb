@@ -1,7 +1,7 @@
 each item in evidenceItems
     url
         loc=`${baseUrl}/${item.type}/evidence-item/${item._id}`
-        lastmod=item.dateSentDate
+        lastmod=`${process.env.DEFAULT_DATE_PUBLISHED.replace(/T.*/, "")}`
 
         include _video
         include _attachments
