@@ -4,7 +4,7 @@ footer
 
 include footer/_scripts
 
-if !item || !(["video"].includes(item.type))
+if !item || !(["video","voicemail"].includes(item.type))
     - var pageMeta = true
     include structuredData/_article
 include structuredData/_localBusiness
