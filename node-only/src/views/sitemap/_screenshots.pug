@@ -1,0 +1,7 @@
+if item.screenshots
+
+    each screenshot in item.screenshots 
+        - var imageUrl = `${process.env.CDN}opt/screenshots/${screenshot.replace(/\.(jpg|jpeg|png)/i, '.webp')}`
+
+        image:image
+            image:loc= imageUrl

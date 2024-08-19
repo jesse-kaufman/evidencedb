@@ -3,4 +3,6 @@ each item in evidenceItems
         loc=`${process.env.BASE_URL}/${item.type}/evidence-item/${item._id}`
         lastmod=item.dateSentDate
 
-        include _video.pug
+        include _video
+        include _attachments
+        include _screenshots
