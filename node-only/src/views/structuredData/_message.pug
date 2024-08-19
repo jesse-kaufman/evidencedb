@@ -10,7 +10,7 @@ mixin message(messageType)
         {
             "@context": "https://schema.org/",
             "@type": "Message",
-            "@id": "#{process.env.BASE_URL}/evidence-item/#{item._id}",
+            "@id": "#{baseUrl}/evidence-item/#{item._id}",
             "sender": {
                 "@type": "Person",
                 "name": "#{from}"
