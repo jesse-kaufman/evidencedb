@@ -9,12 +9,12 @@ if ["video","voicemail"].includes(item.type)
 
     video:video
         video:thumbnail_loc
-            | #{cdn_url}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}.webp
+            | #{cdnUrl}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}.webp
         video:title
             | #{title}
         video:description
             | #{description}
         video:content_loc
-            | #{cdn_url}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}
+            | #{cdnUrl}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}
         video:duration
             | #{item.durationSeconds}

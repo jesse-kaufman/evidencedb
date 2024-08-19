@@ -14,7 +14,7 @@ mixin videoObject
         | {
         |     "@context": "https://schema.org/",
         |     "@type": "VideoObject",
-        |     "contentUrl": "#{process.env.CDN}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}",
+        |     "contentUrl": "#{cdnUrl}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}",
         |     "name": "#{title}",
         |     "@id": "#{baseUrl}/#{item.type}/evidence-item/#{item._id}",
         |     "datePublished": "#{item.date_sent.toISOString()}",
@@ -25,8 +25,8 @@ mixin videoObject
         |         "@type": "Person",
         |         #[+contactInfo]
         |     },
-        |     "image": "#{process.env.CDN}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}.webp",
-        |     "thumbnailURL": "#{process.env.CDN}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}.webp",
+        |     "image": "#{cdnUrl}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}.webp",
+        |     "thumbnailURL": "#{cdnUrl}videos/#{`${encodeURIComponent(filename).replace("%2F", "/")}`}.webp",
         |     "description": "#{item.type.toTitle()} posted by #{process.env.OFFENDER_NAME} to YouTube on #{item.date_sent.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short', hour12: true })}",
         |     "transcript": "#{item.body.replace(/(\d)?\d:\d\d(:\d\d)?\n/g, '').replace(/\n/g, ' ')}"
         | }

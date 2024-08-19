@@ -52,7 +52,7 @@ const renderEvidenceItemList = (evidenceItems, isSingle) => {
   const evidenceItemList = pug.compileFile("src/views/_evidenceList.pug")({
     evidenceItems: evidenceItems,
     isSingle: isSingle,
-    cdn_url: process.env.CDN,
+    cdnUrl: process.env.CDN,
     formatVideoTranscript: formatTranscript,
     formatDuration: formatDuration,
     linkify: linkify,
@@ -125,7 +125,7 @@ const render = async (req, res) => {
     pageClass: isSingle === true ? "single" : "list",
     versionStrings: versionStrings,
     dates: dates,
-    cdn_url: process.env.CDN,
+    cdnUrl: process.env.CDN,
     get: get,
     baseUrl: config.baseUrl,
     formatDuration: formatDuration,

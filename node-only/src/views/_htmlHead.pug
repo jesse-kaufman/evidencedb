@@ -15,7 +15,7 @@ if isSingle
         - var filename = item.video_filename
 
   if filename
-    - var filename = `${process.env.CDN}videos/${encodeURIComponent(filename).replace("%2F","/")}.webp`
+    - var filename = `${cdnUrl}videos/${encodeURIComponent(filename).replace("%2F","/")}.webp`
 
 - var type = 'article'
 if get.type === 'video' || get.type === 'voicemail'

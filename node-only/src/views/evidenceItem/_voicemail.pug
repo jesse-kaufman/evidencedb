@@ -10,7 +10,7 @@ p.duration
     |  #{formatDuration(item.duration)}
 
 if item.video_filename != null
-    - var videoUrl = `${process.env.CDN}voicemails/${encodeURIComponent(item.video_filename)}`
+    - var videoUrl = `${cdnUrl}voicemails/${encodeURIComponent(item.video_filename)}`
 
     .video
         video(preload="none" controls=true poster=`${videoUrl}.webp`)
@@ -20,7 +20,7 @@ if item.video_filename != null
     script(type="application/ld+json")
         +videoObject
 else
-    audio(preload=none, controls=true, src=`${process.env.CDN}voicemails/${item.filename}` type="audio/mp3")
+    audio(preload=none, controls=true, src=`${cdnUrl}voicemails/${item.filename}` type="audio/mp3")
 
     include _transcript
 

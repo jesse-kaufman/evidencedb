@@ -5,7 +5,7 @@ if item.attachments
         if item.type === 'email'
             - var attachment_url = attachment.attachment_id + '/'
 
-        - var imageUrl = `${process.env.CDN}opt/attachments/${attachment_url}${encodeURIComponent(attachment.filename.replace(/\.(jpg|jpeg|png)/i, '.webp'))}`
+        - var imageUrl = `${cdnUrl}opt/attachments/${attachment_url}${encodeURIComponent(attachment.filename.replace(/\.(jpg|jpeg|png)/i, '.webp'))}`
 
         image:image
             image:loc= imageUrl
