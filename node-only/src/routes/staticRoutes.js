@@ -27,12 +27,12 @@ router.use(
 );
 // Route for favicon.ico
 router.use(
-  "/favicon.ico",
-  express.static("src/public/images/favicon.ico", staticOptions)
-);
+  '/robots.txt',
+  express.static('src/public/robots.txt', staticOptions),
+)
 router.use(
-  "/robots.txt",
-  express.static("src/public/robots.txt", staticOptions)
-);
+  '/site.webmanifest',
+  express.static('src/public/site.webmanifest', staticOptions),
+)
 
 export default router;
