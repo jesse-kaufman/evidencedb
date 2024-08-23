@@ -44,7 +44,6 @@ const getDateFilter = (dateSentDate) => {
 
 const getTypeFilter = (include) => {
   // Filter based on evidence item type
-  // eslint-disable-next-line no-magic-numbers
   if (include && include.length > 0) {
     return { type: { $in: fixIncludeTypes(include) } }
   }

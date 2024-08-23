@@ -72,7 +72,6 @@ const getTypeStats = async (type, query, include) => {
   // Get number of evidence items received/sent for type
   const typeStats = await EvidenceItem.aggregate(statsQuery)
 
-  // eslint-disable-next-line no-magic-numbers
   if (typeStats[0]?.in > 0 || typeStats[0]?.out > 0) {
     // Only add to stats if either count is > 0
 
@@ -96,7 +95,6 @@ export const getStats = async (include, baseQuery) => {
   const query = { ...baseQuery }
   let types = [...validTypes, 'total']
 
-  // eslint-disable-next-line no-magic-numbers
   if (include?.length > 0 && include[0]) {
     // Default to all types if none are specified
     types = [...include, 'total']
