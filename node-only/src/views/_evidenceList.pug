@@ -12,9 +12,12 @@
     if get.include != null
       - var type = `${get.include.map((i) => `${i.toTitle()}`).join(", ")}`
 
-  if type
-    - var type = type.replace('Social', 'Social Media')
-    h1= `${process.env.OFFENDER_NAME}'s Harassment via ${type}`
+        //- If type is set, output a custom title, otherwise use page title
+        if type
+            - var type = type.replace('Social', 'Social Media')
+            h1= `${process.env.OFFENDER_NAME}’s Harassment via ${type}`
+        else
+            h1= `${process.env.PAGE_TITLE}`
 
   each item in evidenceItems
     include dividers/_number
