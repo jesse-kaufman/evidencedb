@@ -5,24 +5,29 @@ include ../structuredData/_contactInfo
 include ../structuredData/_audioObject
 include ../structuredData/_videoObject
 
+//- Set video URL for video player
+- var videoUrl = `${cdnUrl}voicemails/${encodeURIComponent(item.video_filename).replace("%2F", "/")}`
+
+//- Show formatted duration of voicemail
 p.duration
     strong Duration: 
     |  #{formatDuration(item.duration)}
 
 if item.video_filename != null
-    - var videoUrl = `${cdnUrl}voicemails/${encodeURIComponent(item.video_filename)}`
 
     .video
         video(preload="none" controls=true poster=`${videoUrl}.webp`)
             source(src=videoUrl type="video/mp4")
-        include _transcript
-        
+
+    //- Include VideoObject structured data
     script(type="application/ld+json")
         +videoObject
 else
     audio(preload=none, controls=true, src=`${cdnUrl}voicemails/${item.filename}` type="audio/mp3")
 
-    include _transcript
+//- Include transcript on all voicemail evidence items
+include _transcript
 
-    script(type="application/ld+json")
-        +audioObject
+//- Include AudioObject structured data
+script(type="application/ld+json")
+    +audioObject
