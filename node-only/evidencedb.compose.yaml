@@ -35,6 +35,9 @@ services:
           memory: 500M
     security_opt:
       - no-new-privileges=true
+    depends_on:
+      mongodb:
+        condition: service_healthy
 
   evidencedb-dev:
     container_name: evidencedb-dev
@@ -72,3 +75,6 @@ services:
           memory: 500M
     security_opt:
       - no-new-privileges=true
+    depends_on:
+      mongodb:
+        condition: service_healthy
