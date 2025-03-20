@@ -1,8 +1,8 @@
-@use "config" as config;
-@use "mixins" as mixins;
-@use "dividers" as dividers;
-@use "header" as header;
-@use "evidenceItem" as evidenceItem;
+@use 'config' as config;
+@use 'mixins' as mixins;
+@use 'dividers' as dividers;
+@use 'header' as header;
+@use 'evidenceItem' as evidenceItem;
 
 body {
   font-family: Helvetica Neue, sans-serif;
