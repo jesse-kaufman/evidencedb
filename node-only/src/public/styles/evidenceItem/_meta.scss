@@ -14,6 +14,17 @@
     .info {
       vertical-align: middle;
       line-height: 1.5em;
+      line-height: normal;
+
+      h1,
+      h2 {
+        font-size: 0.8em;
+        margin: 0;
+        line-height: 1.1em;
+        margin-bottom: 0.2rem;
+        font-weight: normal;
+        text-align: left;
+      }
     }
     span.icon {
       margin-right: 0.5em;
