@@ -1,11 +1,12 @@
-@use "sass:color";
-@use "config" as config;
+@use 'sass:color';
+@use 'config' as config;
 
 ///
 /// Voicemail
 ///
 .evidenceItem.voicemail {
   background: color.adjust(config.$voicemail-color, $alpha: -0.82);
+  border-radius: 0 !important;
 
   .meta {
     background: color.adjust(config.$voicemail-color, $alpha: -0.75);
