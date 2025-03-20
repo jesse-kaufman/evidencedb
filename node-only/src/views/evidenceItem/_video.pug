@@ -10,15 +10,18 @@ include ../structuredData/_videoObject
 .title
     strong Original Title: 
     | #[em #{item.title}]
-    
+
+//- Show formatted duration of video
 .duration
     strong Duration: 
     | #{formatDuration(item.duration)}
 
+//- Show video player
 .video
     video(preload="none" controls=true poster=`${videoUrl}.webp`)
         source(src=videoUrl type="video/mp4")
     include _transcript
 
+//- Add VideoObject structured data
 script(type="application/ld+json")
     +videoObject
