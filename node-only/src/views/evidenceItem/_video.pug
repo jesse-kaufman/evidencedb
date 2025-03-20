@@ -1,11 +1,12 @@
 // 
 // Video Evidence Item
 //
-- var videoUrl = `${cdnUrl}videos/${encodeURIComponent(item.filename).replace("%2F", "/")}`
-
 include ../structuredData/_videoObject
 
+//- Setup video URL
+- var videoUrl = `${cdnUrl}videos/${encodeURIComponent(item.filename).replace("%2F", "/")}`
 
+//- Show original title of video
 .title
     strong Original Title: 
     | #[em #{item.title}]
