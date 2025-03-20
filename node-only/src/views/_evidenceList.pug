@@ -3,11 +3,13 @@
 - var lastDate = null
 
 #message_list
-  if !isSingle
-    if get.type != null
-      - var type = `${get.type.toTitle()}`
-    if get.include != null
-      - var type = `${get.include.map((i) => `${i.toTitle()}`).join(", ")}`
+    if !isSingle
+        //- First try to get type from URL
+        if get.type != null
+            - var type = `${get.type.toTitle()}`
+        //- Next, try to get type from include in GET request
+        if get.include != null
+            - var type = `${get.include.map((i) => `${i.toTitle()}`).join(", ")}`
 
         //- If type is set, output a custom title, otherwise use page title
         if type
@@ -16,11 +18,11 @@
         else
             h1= `${process.env.PAGE_TITLE}`
 
-  each item in evidenceItems
-    include dividers/_number
-    include dividers/_email
-    include dividers/_date
-    include _evidenceItem
+    each item in evidenceItems
+        include dividers/_number
+        include dividers/_email
+        include dividers/_date
+        include _evidenceItem
 
 
 
