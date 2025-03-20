@@ -30,11 +30,11 @@ if _item
 
         when 'email'
             if _item.subject
-                - var title=`"${_item.subject}"—${from}`
+                - var title=`"${_item.subject}"${headlineSuffix}`
             else
                 -var title=`[No subject]${headlineSuffix}`
                 
         when 'video'
-            - var title = `"${_item.title}"—${from}`
+            - var title = `"${_item.title}"${headlineSuffix}`
 
 
