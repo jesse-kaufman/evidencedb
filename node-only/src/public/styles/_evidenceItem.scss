@@ -1,20 +1,20 @@
-@use "sass:color";
-@use "config" as config;
+@use 'sass:color';
+@use 'config' as config;
 
 /* Include core evidence item styles */
-@use "evidenceItem/meta" as itemMeta;
-@use "evidenceItem/body" as itemBody;
-@use "evidenceItem/footer" as itemFooter;
+@use 'evidenceItem/meta' as itemMeta;
+@use 'evidenceItem/body' as itemBody;
+@use 'evidenceItem/footer' as itemFooter;
 
 /* Include evidence item type overrides */
-@use "evidenceItem/overrides/email" as itemEmail;
-@use "evidenceItem/overrides/offender" as itemOffender;
-@use "evidenceItem/overrides/video" as itemVideo;
-@use "evidenceItem/overrides/social" as itemSocial;
-@use "evidenceItem/overrides/voicemail" as itemVoicemail;
+@use 'evidenceItem/overrides/email' as itemEmail;
+@use 'evidenceItem/overrides/offender' as itemOffender;
+@use 'evidenceItem/overrides/video' as itemVideo;
+@use 'evidenceItem/overrides/social' as itemSocial;
+@use 'evidenceItem/overrides/voicemail' as itemVoicemail;
 
 /* Include sent evidence item styles */
-@use "evidenceItem/overrides/sent" as itemSent;
+@use 'evidenceItem/overrides/sent' as itemSent;
 
 ///
 /// Base evidence item styles
