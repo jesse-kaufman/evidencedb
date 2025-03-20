@@ -15,8 +15,12 @@ if item.direction === 'IN'
         else if item.type === 'social' && item.fromAddress.match(/^http/)
             - var uri = ""
 
-        if item.fromName !== process.env.OFFENDER_NAME
+        if !item.fromName.match('Brian')
             - var fromName = `"${item.fromName}" (${process.env.OFFENDER_NAME})`
+        else
+            - var fromName = process.env.OFFENDER_NAME
+
+
 
 
         if uri != null
