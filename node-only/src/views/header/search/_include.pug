@@ -1,16 +1,21 @@
 .search_field
     strong Show: 
-    input#display_texts(type="checkbox" name="include[]" value="text" checked=get.include && get.include.includes("text"))
+    - var checked = (get.include && get.include.includes("text")) || get.type == "text"
+    input#display_texts(type="checkbox" name="include[]" value="text" checked=checked)
     label(for="display_texts")  Texts 
 
-    input#display_emails(type="checkbox" name="include[]" value="email" checked=get.include && get.include.includes("email"))
+    - var checked = (get.include && get.include.includes("emails")) || get.type == "emails"
+    input#display_emails(type="checkbox" name="include[]" value="email" checked=checked)
     label(for="display_emails")  Emails 
 
-    input#display_voicemails(type="checkbox" name="include[]" value="voicemail" checked=get.include && get.include.includes("voicemail"))
+    - var checked = (get.include && get.include.includes("voicemail")) || get.type == "voicemail"
+    input#display_voicemails(type="checkbox" name="include[]" value="voicemail" checked=checked)
     label(for="display_voicemails")  Voicemails 
 
-    input#display_videos(type="checkbox" name="include[]" value="video" checked=get.include && get.include.includes("video"))
+    - var checked = (get.include && get.include.includes("video")) || get.type == "video"
+    input#display_videos(type="checkbox" name="include[]" value="video" checked=checked)
     label(for="display_videos")  Videos 
 
-    input#display_socials(type="checkbox" name="include[]" value="social" checked=get.include && get.include.includes("social"))
+    - var checked = (get.include && get.include.includes("social")) || get.type == "social"
+    input#display_socials(type="checkbox" name="include[]" value="social" checked=checked)
     label(for="display_socials")  Social Media 
