@@ -8,32 +8,17 @@ services:
     restart: always
     user: ${PUID}:${PGID}
     networks:
-      - evidencedb
-    environment:
-      - TZ=${TZ}
-      - MONGO_URL=${MONGO_URL}
-      - CDN=${CDN}
-      - NODE_PORT=${NODE_PORT}
-      - JS_VER=${JS_VER}
-      - CSS_VER=${CSS_VER}
-      - GTM_ID=${GTM_ID}
-      - DEFAULT_IMAGE=${DEFAULT_IMAGE}
-      - OFFENDER_NAME=${OFFENDER_NAME}
-      - PAGE_TITLE=${PAGE_TITLE}
-      - DEV_BASE_URL=${DEV_BASE_URL}
-      - PROD_BASE_URL=${PROD_BASE_URL}
-      - STATS_URL=${STATS_URL}
-      - PAGE_DESCRIPTION=${PAGE_DESCRIPTION}
-      - DEFAULT_DATE_PUBLISHED=${DEFAULT_DATE_PUBLISHED}
-      - OFFENDER_ADDRESS=${OFFENDER_ADDRESS}
-      - OFFENDER_CITY=${OFFENDER_CITY}
-      - OFFENDER_STATE=${OFFENDER_STATE}
-      - OFFENDER_ZIP=${OFFENDER_ZIP}
-      - OFFENDER_PHONES=${OFFENDER_PHONES}
-      - OFFENDER_URL=${OFFENDER_URL}
-      - OFFENDER_ALT_URLS=${OFFENDER_ALT_URLS}
-      - OFFENDER_ALT_NAMES=${OFFENDER_ALT_NAMES}
-      - OFFENDER_EMAILS=${OFFENDER_EMAILS}
+      - proxy
+      - mongodb
+    expose:
+      - ${NODE_PORT}
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.evidencedb.rule=Host(`texts.lloydnet.org`)
+      - traefik.http.routers.evidencedb.entrypoints=https
+      - traefik.http.routers.evidencedb.tls=true
+      - traefik.http.routers.evidencedb.middlewares=public@file
     tmpfs:
       - /tmp:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
     logging:
@@ -54,42 +39,26 @@ services:
   evidencedb-dev:
     container_name: evidencedb-dev
     read_only: true
+    env_file:
+      - ../.env
+      - .env
     build:
       context: ./
       target: development
       args:
         - NODE_ENV=development
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.evidencedb-dev.entrypoints=https
+      - traefik.http.routers.evidencedb-dev.tls=true
+      - traefik.http.routers.evidencedb-dev.middlewares=default@file
     restart: always
     user: ${PUID}:${PGID}
     networks:
       - evidencedb
     expose:
       - ${NODE_PORT}
-    environment:
-      - TZ=${TZ}
-      - MONGO_URL=${MONGO_URL}
-      - CDN=${CDN}
-      - NODE_PORT=${NODE_PORT}
-      - CSS_VER=${CSS_VER}
-      - JS_VER=${JS_VER}
-      - GTM_ID=${GTM_ID}
-      - DEFAULT_IMAGE=${DEFAULT_IMAGE}
-      - OFFENDER_NAME=${OFFENDER_NAME}
-      - PAGE_TITLE=${PAGE_TITLE}
-      - DEV_BASE_URL=${DEV_BASE_URL}
-      - PROD_BASE_URL=${PROD_BASE_URL}
-      - STATS_URL=${STATS_URL}
-      - PAGE_DESCRIPTION=${PAGE_DESCRIPTION}
-      - DEFAULT_DATE_PUBLISHED=${DEFAULT_DATE_PUBLISHED}
-      - OFFENDER_ADDRESS=${OFFENDER_ADDRESS}
-      - OFFENDER_CITY=${OFFENDER_CITY}
-      - OFFENDER_STATE=${OFFENDER_STATE}
-      - OFFENDER_ZIP=${OFFENDER_ZIP}
-      - OFFENDER_PHONES=${OFFENDER_PHONES}
-      - OFFENDER_URL=${OFFENDER_URL}
-      - OFFENDER_ALT_URLS=${OFFENDER_ALT_URLS}
-      - OFFENDER_ALT_NAMES=${OFFENDER_ALT_NAMES}
-      - OFFENDER_EMAILS=${OFFENDER_EMAILS}
     volumes:
       - ./:/app
     tmpfs:
