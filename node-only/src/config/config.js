@@ -1,11 +1,9 @@
 // Environment variables
 
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? process.env.BASE_URL
-    : process.env.DEV_BASE_URL;
-
 export default {
-  baseUrl,
+  baseUrl:
+    process.env.NODE_ENV === 'production'
+      ? process.env.PROD_BASE_URL
+      : process.env.DEV_BASE_URL,
   mongoUrl: process.env.MONGO_URL,
-};
+}
