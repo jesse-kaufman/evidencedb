@@ -63,12 +63,6 @@ services:
       - ./:/app
     tmpfs:
       - /tmp:rw,noexec,nosuid,uid=${PUID},gid=${PGID}
-    logging:
-      driver: syslog
-      options:
-        syslog-address: udp://192.168.22.11:514
-        tag: texts-nginx
-        syslog-format: rfc5424
     deploy:
       resources:
         limits:
