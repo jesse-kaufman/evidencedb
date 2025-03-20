@@ -53,6 +53,7 @@ const renderEvidenceItemList = (evidenceItems, isSingle, get) => {
     evidenceItems: evidenceItems,
     isSingle: isSingle,
     cdnUrl: process.env.CDN,
+    baseUrl: config.baseUrl,
     get: get,
     formatVideoTranscript: formatTranscript,
     formatDuration: formatDuration,
