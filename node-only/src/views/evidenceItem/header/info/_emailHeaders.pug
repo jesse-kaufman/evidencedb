@@ -1,10 +1,10 @@
-// 
+//
 // Evidence Item - Header Info - Additional email headers
-// 
+//
 
 div
-strong To: 
-| !{item.to.replace(/<.*?>/g, "&lt;<a href=\"mailto:redacted@redacted.com\">email_redacted</a>&gt;")}
+    strong To:
+    | !{item.to.replace(/<.*?>/g, "&lt;<a href=\"mailto:redacted@redacted.com\">email_redacted</a>&gt;")}
 div
-strong Subject: 
-| #{item.subject}
+    strong Subject:
+    | #{item.subject}
