@@ -13,8 +13,10 @@ p.duration
     strong Duration: 
     |  #{formatDuration(item.duration)}
 
+//- Video filename is set, show video player for evidence item
 if item.video_filename != null
 
+    //- Add video element and transcript to evidence item
     .video
         video(preload="none" controls=true poster=`${videoUrl}.webp`)
             source(src=videoUrl type="video/mp4")
@@ -22,6 +24,8 @@ if item.video_filename != null
     //- Include VideoObject structured data
     script(type="application/ld+json")
         +videoObject
+
+//- Video filename is NOT set, show audio player for evidence item
 else
     audio(preload=none, controls=true, src=`${cdnUrl}voicemails/${item.filename}` type="audio/mp3")
 
