@@ -56,7 +56,8 @@ services:
     restart: always
     user: ${PUID}:${PGID}
     networks:
-      - evidencedb
+      - proxy
+      - mongodb
     expose:
       - ${NODE_PORT}
     volumes:
