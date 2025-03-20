@@ -15,7 +15,7 @@ if !_item
 if _item
     - var from = _item.direction === 'IN' ? process.env.OFFENDER_NAME : _item.victim.toTitle()
     - var to = _item.direction === 'IN' ? _item.victim.toTitle() : process.env.OFFENDER_NAME
-    - var dateSuffix = `—${_item.date_sent.toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short', hour12: true }).replace(" AM", "am").replace(" PM", "pm")}`
+    - var dateSuffix = `—${_item.date_sent.toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'medium', hour12: true }).replace(" AM", "am").replace(" PM", "pm")}`
     - var headlineSuffix = `—${from}${dateSuffix}`
 
     case _item.type
