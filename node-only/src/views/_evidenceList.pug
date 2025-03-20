@@ -1,12 +1,26 @@
 - var last_number = null
 - var last_email = null
 - var lastDate = null
+
+
+
+
 #message_list
-    each item in evidenceItems
-        include dividers/_number
-        include dividers/_email
-        include dividers/_date
-        include _evidenceItem
+  if !isSingle
+    if get.type != null
+      - var type = `${get.type.toTitle()}`
+    if get.include != null
+      - var type = `${get.include.map((i) => `${i.toTitle()}`).join(", ")}`
+
+  if type
+    - var type = type.replace('Social', 'Social Media')
+    h1= `${process.env.OFFENDER_NAME}'s Harassment via ${type}`
+
+  each item in evidenceItems
+    include dividers/_number
+    include dividers/_email
+    include dividers/_date
+    include _evidenceItem
 
 
 
